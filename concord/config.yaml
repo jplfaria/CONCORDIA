@@ -1,0 +1,11 @@
+engine:
+  mode: hybrid
+  hybrid_thresholds:
+    lower: 0.60
+    upper: 0.85
+
+llm:
+  model: gpto3mini
+  env: prod
+  stream: false
+  user: ${ARGO_USER}
