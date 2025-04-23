@@ -10,7 +10,7 @@ CONCORDIA is a lightweight engine that compares **any two functional-annotation 
 ```bash
 git clone https://github.com/you/concordia.git
 cd concordia
-poetry install      # installs dependencies + CLI script
+poetry install      # install deps + CLI script
 poetry shell        # activate the virtual-env
 ```
 
@@ -21,12 +21,14 @@ poetry shell        # activate the virtual-env
 | Purpose | Command |
 |---------|---------|
 | Compare a CSV with **default LLM** (o3-mini → apps-dev) | `concord example_data/changes.subset.csv` |
-| Same CSV but **GPT-4o** (prod) | `concord example_data/changes.subset.csv --llm-model gpt4o` |
+| Same CSV with **GPT-4o** (prod) | `concord example_data/changes.subset.csv --llm-model gpt4o` |
 | **Embed-only**, no LLM | `concord example_data/changes.subset.csv --mode local` |
-| **Hybrid** (embed first; LLM only for ambiguous) | `concord example_data/changes.subset.csv --mode hybrid` |
+| **Hybrid** (embed first, LLM only for ambiguous pairs) | `concord example_data/changes.subset.csv --mode hybrid` |
 | Write to **custom file** | `concord example_data/changes.subset.csv --output results.csv` |
-| **Ad-hoc strings** (LLM default) | `concord --text-a "DNA repair protein RecA" --text-b "Recombinase A"` |
+| **Ad-hoc strings** (LLM) | `concord --text-a "DNA repair protein RecA" --text-b "Recombinase A"` |
 | Ad-hoc strings, **hybrid** | `concord --text-a "DNA ligase" --text-b "NAD-dependent ligase" --mode hybrid` |
+
+---
 
 ## Minimal sample CSV
 
@@ -34,6 +36,9 @@ poetry shell        # activate the virtual-env
 old_annotation,new_annotation
 DNA repair protein RecA,Recombinase A
 Hypothetical protein,Uncharacterized protein
+```
+
+Any extra columns are preserved in the output.
 
 ---
 
@@ -41,41 +46,42 @@ Hypothetical protein,Uncharacterized protein
 
 | Flag | Description |
 |------|-------------|
-| **`csv`** | Path to CSV with columns `gene_id,old_annotation,new_annotation`. |
-| `--text-a / --text-b` | Compare two standalone strings instead of a CSV file. |
+| **`csv`** | Path to CSV. If it contains columns `old_annotation` and `new_annotation` they’re used; otherwise the first two text columns are taken. |
+| `--text-a / --text-b` | Compare two free-text strings instead of a CSV. |
 | `--mode` | `llm` (default) | `local` | `hybrid` |
-| `--llm-model` | Override gateway model (`gpto3mini`, `gpt4o`, `gpt4`, …). |
+| `--llm-model` | Override gateway model (`gpto3mini`, `gpt4o`, …). |
 | `--output` | Destination CSV (file-mode only). |
 | `--cfg` | Alternate YAML config (default `concord/config.yaml`). |
+| `--col-a / --col-b` | Explicitly name the annotation columns in the CSV. |
 
 ---
-
 
 ## Output fields
 
 | Column | Meaning |
 |--------|---------|
-| `gene_id` | Copied from input CSV (blank for ad-hoc). |
+| All original columns | Carried through unchanged. |
 | `similarity` | Cosine similarity of PubMedBERT embeddings (`null` in pure LLM mode). |
-| `label` | One-word relation (see definitions below). |
+| `label` | One-word relation (see table below). |
+| `note` | Very short reason returned by the LLM (blank in local mode). |
 
 ### Label definitions
 
-| Label | Meaning | Typical use-case |
-|-------|---------|------------------|
-| **Identical** | Descriptions convey **exactly** the same function; mostly wording differences (“ATP synthase subunit beta” vs “ATP synthase β subunit”). |
-| **Synonym** | Same functional meaning with clear alternative phrasing or recognised synonym, but not identical strings (“RecA protein” vs “DNA recombinase A”). |
-| **Partial** | Overlap in meaning but one description contains extra qualifiers or missing context (“ABC transporter” vs “ABC transporter, maltose specific”). |
-| **New** | Functions are unrelated or mutually exclusive; represents a genuine change in annotation. |
-| **Unknown** | LLM returned an empty string (rare). Investigate or retry. |
+| Label | Meaning |
+|-------|---------|
+| **Identical** | Function descriptions are effectively the same (minor wording differences). |
+| **Synonym** | Same meaning via clear synonym / alternative phrasing. |
+| **Partial** | Overlap in meaning; one description is broader/narrower. |
+| **New** | Descriptions represent different or unrelated functions. |
+| **Unknown** | LLM returned an empty reply (rare). |
 
 ### Label logic
 
-* **local** – heuristic on `similarity`  
+* **local** – heuristic on similarity  
   * > 0.90 → Identical  
-  * 0.60–0.90 → Partial  
+  * 0.60 – 0.90 → Partial  
   * < 0.60 → New
-* **llm** – first word from Argo Gateway response (o-series or GPT-4*).  
+* **llm** – first token from Argo Gateway response.  
 * **hybrid** – local rule when similarity outside gray zone; otherwise LLM.
 
 ---
@@ -90,9 +96,9 @@ engine:
     upper: 0.85
 
 llm:
-  model: gpto3mini      # auto-routes to apps-dev
+  model: gpto3mini          # auto-routes to apps-dev
   stream: false
-  user: ${ARGO_USER}    # export ARGO_USER=<your-login>
+  user: ${ARGO_USER}        # export ARGO_USER=<your-login>
 
 local:
   model_id: NeuML/pubmedbert-base-embeddings
@@ -110,7 +116,7 @@ During embedding phases (local/hybrid) you’ll see a **tqdm** bar:
 Processing  73%|██████████████▋   | 730/1000 [00:14<00:05, 49.2it/s]
 ```
 
-o3-mini calls take ~100–150 ms per pair on the lab network; GPT-4o is similar.
+o3-mini calls take roughly 100–150 ms per pair on the lab network; GPT-4o is similar.
 
 ---
 
@@ -118,10 +124,10 @@ o3-mini calls take ~100–150 ms per pair on the lab network; GPT-4o is similar.
 
 | Q | A |
 |---|---|
-| **Why keep `similarity` in `llm` mode?** | It’s almost free (~2 ms) and helps QA the LLM label (e.g., LLM says **New** but similarity > 0.9). |
+| **Why keep `similarity` in `llm` mode?** | It’s nearly free (~2 ms) and helps QA the LLM label. |
 | **What does `Unknown` mean?** | Gateway returned an empty string—retry or switch model. |
 | **How do I tune thresholds?** | Edit `hybrid_thresholds` in `config.yaml` or pass a custom file via `--cfg`. |
-| **Where are the model weights?** | Not in the repo—sentence-transformers downloads them on first run to `~/Library/Caches/huggingface` (macOS) or `~/.cache/huggingface`. |
+| **Where are the model weights?** | Not in the repo—sentence-transformers downloads them on first run to your Hugging Face cache. |
 
 ---
 
