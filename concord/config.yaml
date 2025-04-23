@@ -1,25 +1,27 @@
+# -------------------------------------------------------------
+# Default engine behaviour
+# -------------------------------------------------------------
 engine:
-  # Choose: local | llm | hybrid
-  mode: hybrid
+  # llm | local | hybrid | dual
+  # llm is now the default
+  mode: llm
 
-  # Used only when mode = hybrid
+  # Grey zone for *hybrid* mode
+  # (Gateway is called when lower ≤ sim ≤ upper)
   hybrid_thresholds:
-    lower: 0.60    # similarity < lower  -> label from local embedding only
-    upper: 0.85    # similarity > upper  -> label from local embedding only
+    lower: 0.30
+    upper: 0.85
 
+# -------------------------------------------------------------
+# Argo-gateway LLM settings
+# -------------------------------------------------------------
 llm:
-  # Argo Gateway model (o-series)
-  model: gpto3mini     # o3-mini
-
-  # Leave env unset to let the client auto-route (o-series → apps-dev)
-  # env: dev
-
-  # true → use /streamchat/ endpoint
+  model: gpto3mini        # auto-routes to apps-dev
   stream: false
+  user: ${ARGO_USER}      # export ARGO_USER=<your-login>
 
-  # Username is picked from $ARGO_USER or your shell login
-  user: ${ARGO_USER}
-
+# -------------------------------------------------------------
+# Local embedding model
+# -------------------------------------------------------------
 local:
-  # Sentence-transformers checkpoint for cosine similarity
   model_id: NeuML/pubmedbert-base-embeddings

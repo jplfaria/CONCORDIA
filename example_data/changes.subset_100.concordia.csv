@@ -15,23 +15,23 @@ fig|330398.6.peg.13,gp13,Phage P35 gp13 protein homolog,0.4778677225112915,New,
 fig|330398.6.peg.12,gp12,Phage P35 gp12 protein homolog,0.5094035863876343,New,
 fig|330398.6.peg.11,gp11,Phage P35 gp11 protein homolog,0.48572272062301636,New,
 fig|157924.1.peg.34,Phage portal (connector) protein,Phage portal (connector) protein; Phage capsid and scaffold,0.8910801410675049,Partial,
-fig|157924.1.peg.32,Phage integrase: site-specific recombinase,Phage integrase,0.7258449196815491,Partial,
+fig|157924.1.peg.32,Phage integrase: site-specific recombinase,Phage integrase,0.7258449196815491,Partial,one includes additional functional detail
 fig|157924.1.peg.33,Phage-associated HNH homing endonuclease,Phage homing endonuclease,0.8908136487007141,Partial,
 fig|157924.1.peg.31,"LmaC, associated with virulence in Listeria",Phage protein LmaC,0.5150819420814514,New,
-fig|157924.1.peg.49,Phage tail tape measure,"Phage tail, tail length tape-measure protein",0.8484548330307007,Synonym,both annotations refer to the same tape-measure protein.
+fig|157924.1.peg.49,Phage tail tape measure,"Phage tail, tail length tape-measure protein",0.8484548330307007,Unknown,
 fig|157924.1.peg.45,FIG018217: Phage-associated protein,Phage protein,0.7360153198242188,Unknown,
-fig|157924.1.peg.43,Phage major capsid protein of Caudovirales,Phage protein,0.6748369932174683,Partial,one annotation is much broader than the specific major capsid function.
+fig|157924.1.peg.43,Phage major capsid protein of Caudovirales,Phage protein,0.6748369932174683,Partial,A specifies a capsid protein while B is a general phage protein.
 fig|157924.1.peg.44,FIG020717: Phage-associated protein,Phage protein,0.7337583303451538,Unknown,
-fig|157924.1.peg.42,FIG017897: Phage protein,Phage protein,0.7549810409545898,Unknown,
+fig|157924.1.peg.42,FIG017897: Phage protein,Phage protein,0.7549810409545898,Identical,annotation function is identical apart from an extra identifier prefix
 fig|157924.1.peg.40,Phage major capsid protein of Caudovirales,Phage major capsid protein,0.8650511503219604,Partial,
 fig|157924.1.peg.19,Phage replication initiation protein,Phage DNA replication protein O,0.8023266196250916,Unknown,
 fig|157924.1.peg.56,"Phage lysin, N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28)",Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),0.9645532369613647,Identical,
 fig|157924.1.peg.51,platelet binding protein; structural protein,"Phage endopeptidase, exfoliative toxin A",0.039338111877441406,New,
 fig|157924.1.peg.26,Phage protein,Phage homing endonuclease,0.49649861454963684,New,
 fig|157924.1.peg.21,Phage DNA helicase loader,Phage DNA helicase loader # ACLAME 19,0.8608023524284363,Partial,
-fig|1852629.3.peg.34,tyrosine family integrase,Phage integrase,0.6146939992904663,Partial,one specifies the integrase family while the other emphasizes phage origin
+fig|1852629.3.peg.34,tyrosine family integrase,Phage integrase,0.6146939992904663,Unknown,
 fig|1852629.3.peg.33,hypothetical protein,Phage protein,0.4584181308746338,New,
-fig|1852629.3.peg.35,putative excisionase,Phage excisionase,0.6538771986961365,Partial,"B specifies a phage excisionase while A is a generic, putative excisionase."
+fig|1852629.3.peg.35,putative excisionase,Phage excisionase,0.6538771986961365,Partial,"A is generic and putative, while B specifies a phage excisionase."
 fig|1852629.3.peg.30,hypothetical protein,Phage tailspike,0.15668326616287231,New,
 fig|1852629.3.peg.32,putative endolysin,Phage lysozyme R (EC 3.2.1.17),0.2783173620700836,New,
 fig|1852629.3.peg.31,putative class I holin,Phage holin,0.514620840549469,New,
@@ -41,7 +41,7 @@ fig|1852629.3.peg.22,hypothetical protein,Phage protein,0.4584181308746338,New,
 fig|1852629.3.peg.24,putative tape measure protein,"Phage tail, tail length tape-measure protein",0.5147026181221008,New,
 fig|1852629.3.peg.27,protein of unknown function DUF1833,Phage protein,0.2561023533344269,New,
 fig|1852629.3.peg.26,putative minor tail protein,"Phage tail tip, assembly protein M",0.5212699770927429,New,
-fig|1852629.3.peg.29,putative tail tip protein,"Phage tail tip, host specificity protein J",0.6277151107788086,Partial,B is more detailed by indicating phage and host specificity features
+fig|1852629.3.peg.29,putative tail tip protein,"Phage tail tip, host specificity protein J",0.6277151107788086,Partial,"B specifies phage host specificity, making it more detailed."
 fig|1852629.3.peg.28,putative tail-associated peptidoglycanhydrolase,Phage protein,0.395307332277298,New,
 fig|1852629.3.peg.12,putative tail terminator protein,Phage protein,0.47303733229637146,New,
 fig|1852629.3.peg.55,hypothetical protein,Phage AB1 protein gp57 homolog,0.37420737743377686,New,
@@ -52,27 +52,27 @@ fig|1852629.3.peg.13,hypothetical protein,Phage protein,0.4584181308746338,New,
 fig|1852629.3.peg.52,putative DNA replication initator protein O,Phage protein,0.39640355110168457,New,
 fig|1852629.3.peg.10,putative head-tail joining protein,Phage protein,0.4170633554458618,New,
 fig|1852629.3.peg.53,putative DnaB-like replicative helicase,Phage DNA helicase (EC 3.6.4.12),0.5547658205032349,New,
-fig|1852629.3.peg.19,putative tail assembly chaperone,Phage tail assembly chaperone,0.7737821340560913,Partial,one annotation specifies phage origin while the other is a generic putative label.
+fig|1852629.3.peg.19,putative tail assembly chaperone,Phage tail assembly chaperone,0.7737821340560913,Partial,"B explicitly indicates phage origin, making it more specific than A."
 fig|1852629.3.peg.18,putative tail assembly chaperone,Phage tail assembly chaperone,0.7737821340560913,Unknown,
-fig|1852629.3.peg.17,putative major tail protein,"Phage tail, major tail protein V",0.6753653287887573,Partial,"B is more specific, adding phage context and explicit designation ""V"" not present in A."
-fig|1852629.3.peg.1,putative small terminase subunit,"Phage terminase, small subunit",0.8288611173629761,Unknown,
+fig|1852629.3.peg.17,putative major tail protein,"Phage tail, major tail protein V",0.6753653287887573,Unknown,
+fig|1852629.3.peg.1,putative small terminase subunit,"Phage terminase, small subunit",0.8288611173629761,Partial,one specifies phage origin while the other does not.
 fig|1852629.3.peg.3,putative portal vertex protein,Phage 62kDa structural protein,0.3899414837360382,New,
-fig|1852629.3.peg.46,putative lipoprotein,Lipoprotein,0.7883371710777283,Unknown,
+fig|1852629.3.peg.46,putative lipoprotein,Lipoprotein,0.7883371710777283,Partial,"A's ""putative"" qualifier indicates a predicted function, making it less definitive than B."
 fig|1852629.3.peg.2,putative large terminase subunit,"Phage terminase, large subunit",0.8453178405761719,Unknown,
 fig|1852629.3.peg.42,hypothetical protein,Phage AB1 protein gp47 homolog,0.379214882850647,New,
 fig|1852629.3.peg.48,cI regulatory protein,Phage repressor protein cI,0.6663738489151001,Unknown,
-fig|1852629.3.peg.9,putative head-tail joining protein,Phage head-tail joining protein,0.8124710321426392,Unknown,
+fig|1852629.3.peg.9,putative head-tail joining protein,Phage head-tail joining protein,0.8124710321426392,Partial,B specifies phage origin while A is tentative.
 fig|1852629.3.peg.4,putative head morphogenesis protein,Phage minor capsid protein,0.3615633547306061,New,
-fig|1852629.3.peg.7,putative major capsid protein,Phage major capsid protein,0.7934730648994446,Partial,one
+fig|1852629.3.peg.7,putative major capsid protein,Phage major capsid protein,0.7934730648994446,Unknown,
 fig|1852629.3.peg.6,putative scaffold protein,Phage capsid and scaffold,0.39044439792633057,New,
-fig|10702.1.peg.8,FIG01132609: hypothetical protein,hypothetical protein,0.7684248685836792,Identical,both annotations indicate a hypothetical protein
-fig|10702.1.peg.9,FIG01125089: hypothetical protein,hypothetical protein,0.740138053894043,Unknown,
+fig|10702.1.peg.8,FIG01132609: hypothetical protein,hypothetical protein,0.7684248685836792,Unknown,
+fig|10702.1.peg.9,FIG01125089: hypothetical protein,hypothetical protein,0.740138053894043,Identical,both annotations denote a hypothetical protein despite the extra identifier.
 fig|10702.1.peg.34,FIG01128974: hypothetical protein,Phage capsid and scaffold,0.16694912314414978,New,
 fig|10702.1.peg.32,FIG01136270: hypothetical protein,hypothetical protein,0.7497630715370178,Unknown,
 fig|10702.1.peg.30,FIG01131266: hypothetical protein,hypothetical protein,0.7539713978767395,Unknown,
 fig|10702.1.peg.47,Phage tail tape measure,"Phage tail, tail length tape-measure protein",0.8484548330307007,Unknown,
-fig|273133.2.peg.117,Phage baseplate,Phage baseplate assembly protein,0.8492790460586548,Partial,second string specifies an assembly protein rather than the baseplate structure itself.
-fig|273133.2.peg.25,HNH homing endonuclease,Phage homing endonuclease,0.7827796339988708,Unknown,
+fig|273133.2.peg.117,Phage baseplate,Phage baseplate assembly protein,0.8492790460586548,Unknown,
+fig|273133.2.peg.25,HNH homing endonuclease,Phage homing endonuclease,0.7827796339988708,Partial,different qualifiers specify distinct aspects
 fig|273133.2.peg.122,"DNA ligase, phage-associated",Phage DNA ligase,0.8853874206542969,Partial,
 fig|273133.2.peg.31,Phage head-tail adaptor,Phage head-tail adapter,0.9402408599853516,Identical,
 fig|273133.2.peg.39,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",1.0,Identical,
@@ -80,22 +80,22 @@ fig|273133.2.peg.40,"Phage terminase, large subunit @ intein-containing","Phage 
 fig|273133.2.peg.157,Phage tail fiber,Phage tail fiber protein,0.9441295266151428,Identical,
 fig|273133.2.peg.54,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",0.951859176158905,Identical,
 fig|273133.2.peg.156,Phage tail fiber,Phage tail fiber protein,0.9441295266151428,Identical,
-fig|273133.2.peg.166,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),0.7155349254608154,Partial,second string includes additional enzyme classification information
-fig|273133.2.peg.76,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),0.7155349254608154,Partial,second annotation provides specific EC number detail
+fig|273133.2.peg.166,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),0.7155349254608154,Partial,B provides additional enzyme classification detail via EC number
+fig|273133.2.peg.76,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),0.7155349254608154,Partial,second includes enzyme classification detail
 fig|273133.2.peg.183,Phage endolysin,Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),0.5764116048812866,New,
-fig|273133.2.peg.185,HNH homing endonuclease,Phage homing endonuclease,0.7827796339988708,Unknown,
+fig|273133.2.peg.185,HNH homing endonuclease,Phage homing endonuclease,0.7827796339988708,Partial,one specifies the HNH motif while the other indicates phage origin.
 fig|273133.2.peg.188,"Phage lysin, N-acetylmuramoyl-L-alanine amidase",Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),0.8669185638427734,Partial,
 fig|273133.2.peg.1,Phage repressor,Phage repressor protein,0.9255464673042297,Identical,
 fig|273133.2.peg.193,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",0.951859176158905,Identical,
 fig|374463.4.peg.296,Glucose-6-phosphate 1-dehydrogenase (EC 1.1.1.49),Glucose-6-phosphate 1-dehydrogenase (NADP+) (EC 1.1.1.49),0.9673671722412109,Identical,
-fig|374463.4.peg.298,Manganese transport protein MntH,"Mn(II) and Fe(II) import protein MntH, proton-dependent",0.665088415145874,Partial,B specifies additional substrate (Fe(II)) and proton-dependent transport.
+fig|374463.4.peg.298,Manganese transport protein MntH,"Mn(II) and Fe(II) import protein MntH, proton-dependent",0.665088415145874,Partial,B includes additional substrate (Fe) and mechanism details beyond manganese transport.
 fig|374463.4.peg.181,hypothetical protein,Outer membrane beta-barrel assembly protein BamD,0.39434078335762024,New,
 fig|374463.4.peg.282,Enoyl-[acyl-carrier-protein] reductase [NADH] (EC 1.3.1.9),Enoyl-[acyl-carrier-protein] reductase (NADH) (EC 1.3.1.9),0.9986387491226196,Identical,
-fig|374463.4.peg.161,Sulfate-binding protein Sbp,"Sulfate/thiosulfate ABC transporter, sulfate-binding protein Spb",0.7599909901618958,Partial,B adds transporter context beyond simple sulfate binding.
+fig|374463.4.peg.161,Sulfate-binding protein Sbp,"Sulfate/thiosulfate ABC transporter, sulfate-binding protein Spb",0.7599909901618958,Partial,second annotation adds transporter context not found in the first.
 fig|374463.4.peg.166,Glutaredoxin 3 (Grx3),Glutaredoxin 3,0.8643108010292053,Partial,
 fig|374463.4.peg.288,Cys regulon transcriptional activator CysB,"Cys regulon transcriptional activator CysB, LysR family",0.9010777473449707,Identical,
 fig|374463.4.peg.289,DNA topoisomerase I (EC 5.99.1.2),DNA topoisomerase I (EC 5.6.2.1),0.965355634689331,Identical,
-fig|374463.4.peg.291,YciL protein,YciI protein,0.8348191976547241,New,different gene symbols indicate distinct proteins.
+fig|374463.4.peg.291,YciL protein,YciI protein,0.8348191976547241,Unknown,
 fig|374463.4.peg.170,Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23),Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23) (EC 4.2.99.18),0.9632173776626587,Identical,
 fig|374463.4.peg.182,LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23),LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23) ## RluD,0.9364515542984009,Identical,
 fig|374463.4.peg.185,tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228),tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228) ## TrmD,0.9415144920349121,Identical,

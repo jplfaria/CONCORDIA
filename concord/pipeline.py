@@ -1,8 +1,15 @@
 """
 concord.pipeline
 ----------------
-File-mode:  stream results row-by-row (safe resume)
-Pair-mode :  instant label/similarity for two strings
+File-mode:   streams results row-by-row (safe resume)
+Pair-mode:   one-off comparison for two strings
+
+Modes
+-----
+local   : cosine similarity + heuristic label
+llm     : gateway label only
+hybrid  : cosine; gateway in grey zone
+dual    : cosine label *and* LLM label for every pair
 """
 
 from __future__ import annotations
@@ -12,9 +19,9 @@ from typing import Optional
 import pandas as pd
 from tqdm import tqdm
 
-from concord.io.loader import load_table
-from concord.local.embeddings    import similarity
-from concord.llm.argo_gateway    import ArgoGatewayClient, llm_label
+from concord.io.loader    import load_table
+from concord.local.embeddings import similarity
+from concord.llm.argo_gateway import ArgoGatewayClient, llm_label
 
 
 # ----------------------------------------------------------------------
@@ -22,6 +29,7 @@ class Mode(str, enum.Enum):
     LOCAL  = "local"
     LLM    = "llm"
     HYBRID = "hybrid"
+    DUAL   = "dual"
 
 
 def _local_rule(sim: float) -> str:
@@ -32,9 +40,8 @@ def _local_rule(sim: float) -> str:
     return "New"
 
 
-# ---------- column utility ------------------------------------------------
-def _infer_cols(df: pd.DataFrame, col_a: Optional[str], col_b: Optional[str]):
-    """Find two annotation columns if user didn’t specify."""
+# ---------- column detection ------------------------------------------
+def _infer_cols(df: pd.DataFrame, col_a: str | None, col_b: str | None):
     if col_a and col_b:
         return col_a, col_b
 
@@ -42,22 +49,20 @@ def _infer_cols(df: pd.DataFrame, col_a: Optional[str], col_b: Optional[str]):
         return "old_annotation", "new_annotation"
 
     text_cols = [
-        c
-        for c in df.columns
+        c for c in df.columns
         if df[c].dtype == object and not re.search(r"id$", c, re.I)
     ]
     if len(text_cols) < 2:
-        raise ValueError("Could not infer annotation columns "
-                         "(need at least two text columns).")
+        raise ValueError("Need at least two text columns "
+                         "(or specify --col-a / --col-b).")
     return text_cols[0], text_cols[1]
 
 
 def _row_key(row: dict, col_a: str, col_b: str):
-    """Unique key to know if a row has been processed before."""
     return (row.get("gene_id"), row[col_a], row[col_b])
 
 
-# ---------- file-mode ------------------------------------------------------
+# ---------- FILE-MODE --------------------------------------------------
 def run_file(
     file_path: P.Path,
     cfg_path: P.Path,
@@ -67,103 +72,110 @@ def run_file(
     out_path: P.Path | None = None,
     sep: str | None = None,
 ) -> P.Path:
-    """
-    Compare two annotation columns in a table (CSV/TSV/JSON).
 
-    Results are appended incrementally; reruns skip completed pairs.
-    """
     cfg  = yaml.safe_load(open(cfg_path))
     mode = Mode(cfg.get("engine", {}).get("mode", "llm"))
 
     df = load_table(file_path, sep=sep)
     col_a, col_b = _infer_cols(df, col_a, col_b)
 
-    # ------------------------------------------------------------------ output
+    # ---------- output setup ------------------------------------------
     out_file      = out_path or file_path.with_suffix(".concordia.csv")
-    header_needed = not out_file.exists()
-
+    first_write   = not out_file.exists()
     done: set[tuple] = set()
-    if not header_needed:
+    if not first_write:
         prev = pd.read_csv(out_file)
         done = {_row_key(r, col_a, col_b) for _, r in prev.iterrows()}
 
     fout   = out_file.open("a", newline="")
-    writer = csv.DictWriter(fout,
-                            fieldnames=list(df.columns) + ["similarity",
-                                                           "label",
-                                                           "note"])
-    if header_needed:
+    writer = csv.DictWriter(
+        fout,
+        fieldnames=list(df.columns) +
+        ["similarity", "cosine_label", "label", "note"]
+    )
+    if first_write:
         writer.writeheader()
 
-    # ------------------------------------------------------------------ prep
-    if mode in (Mode.LLM, Mode.HYBRID):
+    # ---------- helpers ----------------------------------------------
+    if mode in (Mode.LLM, Mode.HYBRID, Mode.DUAL):
         llm = ArgoGatewayClient(**cfg.get("llm", {}))
 
-    lo, hi = cfg.get("engine", {}).get("hybrid_thresholds",
-                                       {"lower": 0.60, "upper": 0.85}
-                                      ).values()
+    lo, hi = cfg.get("engine", {}).get(
+        "hybrid_thresholds", {"lower": 0.30, "upper": 0.85}).values()
 
-    # ------------------------------------------------------------------ loop
+    # ---------- main loop --------------------------------------------
     for row in tqdm(df.to_dict(orient="records"), desc="Processing"):
         if _row_key(row, col_a, col_b) in done:
             continue
 
         text1, text2 = row[col_a], row[col_b]
+        record = row.copy()
         try:
             sim = None if mode == Mode.LLM else similarity(text1, text2)
+            record["similarity"] = sim
 
-            if mode == Mode.LLM:
-                label, note = llm_label(text1, text2, llm, with_note=True)
+            # ------------- local label --------------------------------
+            if mode != Mode.LLM:
+                cosine_label = _local_rule(sim)
+                record["cosine_label"] = cosine_label
 
-            elif mode == Mode.LOCAL:
-                label, note = _local_rule(sim), ""
+            # ------------- choose final label -------------------------
+            if mode == Mode.LOCAL:
+                record["label"], record["note"] = cosine_label, ""
 
-            else:  # hybrid
+            elif mode == Mode.LLM:
+                llm_lbl, note = llm_label(text1, text2, llm, with_note=True)
+                record.update(label=llm_lbl, note=note)
+
+            elif mode == Mode.DUAL:
+                llm_lbl, note = llm_label(text1, text2, llm, with_note=True)
+                record.update(label=llm_lbl, note=note)
+
+            else:   # HYBRID
                 if sim < lo or sim > hi:
-                    label, note = _local_rule(sim), ""
+                    record.update(label=cosine_label, note="")
                 else:
-                    label, note = llm_label(text1, text2, llm, with_note=True)
+                    llm_lbl, note = llm_label(text1, text2, llm, with_note=True)
+                    record.update(label=llm_lbl, note=note)
 
         except Exception as exc:
-            label, note, sim = "Error", f"{type(exc).__name__}: {exc}", None
+            record.update(similarity=None,
+                          label="Error",
+                          note=f"{type(exc).__name__}: {exc}")
             traceback.print_exc()
 
-        writer.writerow({**row,
-                         "similarity": sim,
-                         "label": label,
-                         "note": note})
-        fout.flush()            # durability per row
+        writer.writerow(record)
+        fout.flush()
 
     fout.close()
     return out_file
 
 
-# ---------- pair-mode ------------------------------------------------------
+# ---------- PAIR-MODE --------------------------------------------------
 def run_pair(text1: str, text2: str, cfg_path: P.Path):
-    """
-    Fast path for CLI --text-a / --text-b.
-    Returns (label, similarity, note)
-    """
     cfg  = yaml.safe_load(open(cfg_path))
     mode = Mode(cfg.get("engine", {}).get("mode", "llm"))
 
     sim = None if mode == Mode.LLM else similarity(text1, text2)
 
+    if mode == Mode.LOCAL:
+        return _local_rule(sim), sim, ""
+
+    client = ArgoGatewayClient(**cfg.get("llm", {}))
+
     if mode == Mode.LLM:
-        client = ArgoGatewayClient(**cfg.get("llm", {}))
-        label, note = llm_label(text1, text2, client, with_note=True)
+        lbl, note = llm_label(text1, text2, client, with_note=True)
+        return lbl, sim, note
 
-    elif mode == Mode.LOCAL:
-        label, note = _local_rule(sim), ""
+    if mode == Mode.DUAL:
+        cosine_lbl = _local_rule(sim)
+        llm_lbl, note = llm_label(text1, text2, client, with_note=True)
+        return f"{llm_lbl} (cos={cosine_lbl})", sim, note
 
-    else:  # hybrid
-        lo, hi = cfg.get("engine", {}).get("hybrid_thresholds",
-                                           {"lower": 0.60, "upper": 0.85}
-                                          ).values()
-        if sim < lo or sim > hi:
-            label, note = _local_rule(sim), ""
-        else:
-            client = ArgoGatewayClient(**cfg.get("llm", {}))
-            label, note = llm_label(text1, text2, client, with_note=True)
-
-    return label, sim, note
+    # hybrid
+    lo, hi = cfg.get("engine", {}).get(
+        "hybrid_thresholds", {"lower": 0.30, "upper": 0.85}).values()
+    if sim < lo or sim > hi:
+        return _local_rule(sim), sim, ""
+    llm_lbl, note = llm_label(text1, text2, client, with_note=True)
+    return llm_lbl, sim, note
