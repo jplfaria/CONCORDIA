@@ -1,27 +1,39 @@
-# --- Python / Poetry ---
+# ------------------------------------------------------------------
+# Core Python / Poetry
+# ------------------------------------------------------------------
 *.py[cod]
 __pycache__/
-.concordia*/        # pytest tmp, etc.
-*.log
-
-# Poetry / venv
 .venv/
 .env/
-# (if you use `poetry config virtualenvs.in-project true`)
 
-# --- macOS & editors ---
+# Poetry virtual-envs created outside the project (safety)
+# (uncomment if you keep them in-project)
+# .venv/
+
+# ------------------------------------------------------------------
+# macOS & Editor junk
+# ------------------------------------------------------------------
 .DS_Store
-*.swp
+.Spotlight-V100
+.Trashes
+.idea/                 # JetBrains / PyCharm
+.vscode/               # VS Code settings
+*.swp                  # Vim swap files
 *.swo
 *.sublime-*
-.idea/
-.vscode/
 
-# --- Hugging Face cache (large) ---
-huggingface/
+# ------------------------------------------------------------------
+# Build / runtime artefacts
+# ------------------------------------------------------------------
+*.log
+*.concordia.csv        # result files regenerated each run
+
+# Hugging Face cache (weights are huge; re-downloaded on demand)
 .cache/
 Library/Caches/huggingface/
 
-# --- data outputs ---
-*.concordia.csv
-results/
+# ------------------------------------------------------------------
+# KEEP these (do NOT ignore)
+# ------------------------------------------------------------------
+# example_data/            ← we DO commit sample CSVs
+# poetry.lock              ← keep for deterministic installs

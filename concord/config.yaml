@@ -1,11 +1,25 @@
 engine:
+  # Choose: local | llm | hybrid
   mode: hybrid
+
+  # Used only when mode = hybrid
   hybrid_thresholds:
-    lower: 0.60
-    upper: 0.85
+    lower: 0.60    # similarity < lower  -> label from local embedding only
+    upper: 0.85    # similarity > upper  -> label from local embedding only
 
 llm:
-  model: gpto3mini
-  env: prod
+  # Argo Gateway model (o-series)
+  model: gpto3mini     # o3-mini
+
+  # Leave env unset to let the client auto-route (o-series → apps-dev)
+  # env: dev
+
+  # true → use /streamchat/ endpoint
   stream: false
+
+  # Username is picked from $ARGO_USER or your shell login
   user: ${ARGO_USER}
+
+local:
+  # Sentence-transformers checkpoint for cosine similarity
+  model_id: NeuML/pubmedbert-base-embeddings
