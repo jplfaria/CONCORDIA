@@ -1,6 +1,6 @@
 from sentence_transformers import SentenceTransformer, util
 
-_MODEL_ID = "pritamdeka/biobert-base-cased-v1-simcse"  # ✅ public
+_MODEL_ID = "NeuML/pubmedbert-base-embeddings"   # ← final choice
 _model = None
 
 def get_model():
