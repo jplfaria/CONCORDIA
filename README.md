@@ -28,6 +28,13 @@ poetry shell        # activate the virtual-env
 | **Ad-hoc strings** (LLM default) | `concord --text-a "DNA repair protein RecA" --text-b "Recombinase A"` |
 | Ad-hoc strings, **hybrid** | `concord --text-a "DNA ligase" --text-b "NAD-dependent ligase" --mode hybrid` |
 
+## Minimal sample CSV
+
+```csv
+old_annotation,new_annotation
+DNA repair protein RecA,Recombinase A
+Hypothetical protein,Uncharacterized protein
+
 ---
 
 ## CLI options
@@ -42,6 +49,7 @@ poetry shell        # activate the virtual-env
 | `--cfg` | Alternate YAML config (default `concord/config.yaml`). |
 
 ---
+
 
 ## Output fields
 

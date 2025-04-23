@@ -1,43 +1,31 @@
 """
 concord.llm.argo_gateway
 ------------------------
-Resilient Argo Gateway client (April-2025 spec).
-
-Highlights
-~~~~~~~~~~
-• Auto-routes o-series models (gpto*) to **apps-dev**; GPT-3.5/4/4o to **prod**.  
-• Correct payloads
-    – o-series : {user, model, system, prompt:[...], max_completion_tokens}  
-    – GPT-style: OpenAI messages schema
-• Robust extractor works with either OpenAI JSON (choices) **or**
-  simple {"response": "..."} gateway replies.
-• Graceful handling of empty responses → returns "Unknown".
-• `ping()` helper prints **Ready to work!** when connected.
+Robust client for Argonne’s Argo Gateway + helper to classify annotation pairs.
 """
 
 from __future__ import annotations
-import os
-from typing import Optional
-
-import httpx
+import os, httpx, re
+from typing import Optional, Tuple
 
 __all__ = ["ArgoGatewayClient", "llm_label"]
 
-
 # ======================================================================
 class ArgoGatewayClient:
-    """Thin wrapper around Argo Gateway chat & streamchat endpoints."""
+    """
+    Thin wrapper around Argo Gateway chat endpoints.
+    Auto-routes: gpto* models → apps-dev ; GPT-3.5/4* → prod
+    """
 
     def __init__(
         self,
         model: str = "gpto3mini",
-        env: Optional[str] = None,         # auto-select if None
+        env: Optional[str] = None,
         stream: bool = False,
         user: Optional[str] = None,
         api_key: Optional[str] = None,
         timeout: float = 30.0,
     ):
-        # ---------------- choose environment ---------------------------
         if env is None:
             env = "dev" if model.startswith("gpto") else "prod"
 
@@ -45,87 +33,95 @@ class ArgoGatewayClient:
             f"https://apps{'-'+env if env!='prod' else ''}.inside.anl.gov/"
             "argoapi/api/v1/resource/"
         )
-        endpoint = "streamchat/" if stream else "chat/"
-        self.url = f"{base}{endpoint}"          # …/resource/chat/
+        self.url = base + ("streamchat/" if stream else "chat/")
 
-        # ---------------- common fields -------------------------------
         self.model = model
-        self.stream = stream
-        self.user = user or os.getenv("ARGO_USER") or os.getlogin()
-
+        self.user  = user or os.getenv("ARGO_USER") or os.getlogin()
         self.headers = {"Content-Type": "application/json"}
         if api_key or os.getenv("ARGO_API_KEY"):
             self.headers["x-api-key"] = api_key or os.getenv("ARGO_API_KEY")
 
         self.cli = httpx.Client(timeout=timeout, follow_redirects=True)
 
-    # ------------------------------------------------------------------
-    def _build_payload(self, prompt: str, system: str) -> dict:
-        """Return request dict for given model family."""
-        if self.model.startswith("gpto"):          # o-series
-            return {
+    # ------------- core request -------------------
+    def chat(self, prompt: str, system: str = "") -> str:
+        payload = (
+            {  # o-series format
                 "user": self.user,
                 "model": self.model,
                 "system": system,
                 "prompt": [prompt],
-                "max_completion_tokens": 1024
+                "max_completion_tokens": 512,
             }
-        # GPT-3.5 / 4 / 4o
-        return {
-            "user": self.user,
-            "model": self.model,
-            "messages": [
-                {"role": "system", "content": system},
-                {"role": "user",   "content": prompt},
-            ],
-            "temperature": 0.0
-        }
+            if self.model.startswith("gpto")
+            else {  # OpenAI messages format
+                "user": self.user,
+                "model": self.model,
+                "messages": [
+                    {"role": "system", "content": system},
+                    {"role": "user",   "content": prompt},
+                ],
+                "temperature": 0.0,
+            }
+        )
 
-    def _extract_content(self, data: dict) -> str:
-        """Return assistant text from gateway JSON (handles two formats)."""
-        if "choices" in data:  # OpenAI style
-            return data["choices"][0]["message"]["content"].strip()
-        for key in ("response", "content", "text"):
-            val = data.get(key)
-            if isinstance(val, str):
-                return val.strip()
-        return ""  # empty / unrecognised format
-
-    # ------------------------------------------------------------------
-    def chat(self, prompt: str, system: str = "You are a precise bio-curator.") -> str:
-        payload = self._build_payload(prompt, system)
         r = self.cli.post(self.url, json=payload, headers=self.headers)
         r.raise_for_status()
-        return self._extract_content(r.json())
+        data = r.json()
+        # openai-style
+        if "choices" in data:
+            return data["choices"][0]["message"]["content"].strip()
+        # simple field
+        for k in ("response", "content", "text"):
+            if k in data and isinstance(data[k], str):
+                return data[k].strip()
+        return ""
 
-    # ------------------------------------------------------------------
+    # ------------- health check -------------------
     def ping(self) -> bool:
-        """Health-check; prints gateway reply; returns True/False."""
         try:
-            reply = self.chat("Say: Ready to work!", system="")
-            print(reply or "<empty reply>")
+            reply = self.chat("Say: Ready to work!")
+            print(reply or "<empty>")
             return "ready" in reply.lower()
-        except Exception as exc:
-            print("Ping failed:", exc)
+        except Exception as e:
+            print("Ping failed:", e)
             return False
 
 
 # ======================================================================
-def llm_label(a: str, b: str, client: ArgoGatewayClient) -> str:
+DASH_RE = re.compile(r"\s*[–—-]\s*")    # match em/en/normal dash with spaces
+
+def llm_label(
+    ann_a: str,
+    ann_b: str,
+    client: ArgoGatewayClient,
+    *,
+    with_note: bool = False
+) -> Tuple[str, str] | str:
     """
-    Ask the LLM to classify a pair of annotations.
-    Returns: Identical | Synonym | Partial | New | Unknown
+    Ask the LLM for a one-word relationship + a brief reason.
+
+    Returns:
+        • (label, note)  when with_note=True
+        • label          when with_note=False
     """
     prompt = (
         "Classify the relationship between these two gene/protein function "
-        "annotations. Respond with ONE word only from "
-        "[Identical, Synonym, Partial, New].\n"
-        f"A: {a}\nB: {b}"
+        "annotations. Respond **on a single line** exactly as:\n"
+        "<Label> — <very short reason>\n"
+        "Allowed labels: Identical, Synonym, Partial, New.\n\n"
+        f"A: {ann_a}\nB: {ann_b}"
     )
+
     reply = client.chat(prompt).strip()
-
-    # Graceful fallback for blank / unexpected replies
     if not reply:
-        return "Unknown"
+        return ("Unknown", "") if with_note else "Unknown"
 
-    return reply.split()[0].capitalize()
+    # Split on first dash
+    parts = DASH_RE.split(reply, maxsplit=1)
+    label = parts[0].strip().capitalize()
+    note  = parts[1].strip() if len(parts) > 1 else ""
+
+    if with_note:
+        return label, note
+    return label
