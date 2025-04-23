@@ -1,5 +1,6 @@
 # concord/cli.py
 import typer, pathlib as P, yaml, tempfile
+from typing import Optional
 from .pipeline import run
 
 app = typer.Typer(add_completion=False)
@@ -8,8 +9,8 @@ app = typer.Typer(add_completion=False)
 def main(
     csv: P.Path,
     cfg: P.Path = "concord/config.yaml",
-    mode: str | None = typer.Option(None, help="local | llm | hybrid"),
-    llm_model: str | None = typer.Option(None, help="override LLM model")
+    mode: Optional[str] = typer.Option(None, help="local | llm | hybrid"),
+    llm_model: Optional[str] = typer.Option(None, help="override LLM model")
 ):
     cfg_dict = yaml.safe_load(open(cfg))
 
