@@ -1,1 +1,27 @@
-<above text>
+# --- Python / Poetry ---
+*.py[cod]
+__pycache__/
+.concordia*/        # pytest tmp, etc.
+*.log
+
+# Poetry / venv
+.venv/
+.env/
+# (if you use `poetry config virtualenvs.in-project true`)
+
+# --- macOS & editors ---
+.DS_Store
+*.swp
+*.swo
+*.sublime-*
+.idea/
+.vscode/
+
+# --- Hugging Face cache (large) ---
+huggingface/
+.cache/
+Library/Caches/huggingface/
+
+# --- data outputs ---
+*.concordia.csv
+results/
