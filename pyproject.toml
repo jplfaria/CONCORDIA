@@ -24,6 +24,7 @@ pyyaml                 = "^6.0"
 
 # Optional GPU / scientific stack (already brought in by sentence-transformers)
 torch                  = { version = "^2.2", optional = true }
+rich = "^14.0.0"
 
 [tool.poetry.extras]
 gpu = ["torch"]
