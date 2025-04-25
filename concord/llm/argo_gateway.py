@@ -9,6 +9,7 @@ Networking layer + prompt helper.
 """
 
 from __future__ import annotations
+
 import os, httpx, re
 from typing import Optional, Tuple
 
@@ -37,11 +38,10 @@ class ArgoGatewayClient:
     ):
         env = env or ("dev" if model.startswith("gpto") else "prod")
         base = (
-            f"https://apps{'-' + env if env != 'prod' else ''}."
-            "inside.anl.gov/argoapi/api/v1/resource/"
+            f"https://apps{'-' + env if env != 'prod' else ''}"
+            ".inside.anl.gov/argoapi/api/v1/resource/"
         )
         self.url = base + ("streamchat/" if stream else "chat/")
-
         self.model = model
         self.user = user or os.getenv("ARGO_USER") or os.getlogin()
 
@@ -79,9 +79,9 @@ class ArgoGatewayClient:
         data = r.json()
 
         # extract assistant text
-        if "choices" in data:  # OpenAI style
+        if "choices" in data:                    # OpenAI style
             return data["choices"][0]["message"]["content"].strip()
-        for k in ("response", "content", "text"):
+        for k in ("response", "content", "text"):  # o-series style
             if k in data and isinstance(data[k], str):
                 return data[k].strip()
         return ""
@@ -98,7 +98,15 @@ class ArgoGatewayClient:
 
 
 # ======================================================================
-_DASH = re.compile(r"\s*[—–-]\s*")  # em-dash, en-dash, or hyphen with spaces
+_DASH = re.compile(r"\s*[—–-]\s*")  # em-dash, en-dash, or hyphen w/ spaces
+
+# Legacy → new-set alias map to kill most “Unknown”
+_ALIAS = {
+    "Identical": "Exact",
+    "Partial":   "Related",
+    "Same":      "Exact",
+    "Equivalent": "Synonym",
+}
 
 
 def llm_label(
@@ -106,14 +114,15 @@ def llm_label(
     ann_b: str,
     client: ArgoGatewayClient,
     *,
-    with_note: bool = False
+    with_note: bool = False,
 ) -> Tuple[str, str] | str:
     """
     Build prompt, send to LLM, parse "<Label> — <reason>".
 
-    Returns:
-        • (label, note)  when with_note=True
-        • label          when with_note=False
+    Returns
+    -------
+    (label, note)  if with_note=True
+    label          otherwise
     """
     prompt = build_annotation_prompt(ann_a, ann_b)
     reply  = client.chat(prompt).strip()
@@ -121,12 +130,12 @@ def llm_label(
     if not reply:
         return ("Unknown", "") if with_note else "Unknown"
 
-    # Split on first dash; ensure we always have at least label + note str
     parts = _DASH.split(reply, maxsplit=1)
     label = parts[0].strip().capitalize()
+    label = _ALIAS.get(label, label)            # map old words → new
     note  = parts[1].strip() if len(parts) > 1 else ""
 
-    if label not in LABEL_SET:   # fall-back if LLM drifted
-        label, note = "Unknown", reply
+    if label not in LABEL_SET:
+        label, note = "Unknown", reply          # fall-back
 
     return (label, note) if with_note else label
