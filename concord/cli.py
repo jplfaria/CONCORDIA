@@ -1,61 +1,87 @@
+"""
+concord.cli
+===========
+Thin Typer wrapper around pipeline.run_file / run_pair
+"""
+
+from __future__ import annotations
 import pathlib as P, tempfile, yaml, typer
 from typing import Optional
 
+from rich import print as echo          # nice colours
+
 from .pipeline import run_file, run_pair
 
-echo = typer.echo
 app = typer.Typer(add_completion=False,
-                  help="Concordia – annotation concordance engine (7-label)")
+                  help="Concordia – annotation concordance engine")
 
-MODE_CHOICES = ["llm", "local", "dual"]
 
 @app.command()
-def concord(
-    file: Optional[P.Path] = typer.Argument(
-        None, exists=True, readable=True, help="CSV/TSV/JSON table of pairs"
-    ),
-    text_a: Optional[str] = typer.Option(None, help="Free-text string A"),
-    text_b: Optional[str] = typer.Option(None, help="Free-text string B"),
-    col_a: Optional[str] = typer.Option(None, help="Column with annotation A"),
-    col_b: Optional[str] = typer.Option(None, help="Column with annotation B"),
-    sep: Optional[str] = typer.Option(None, help="Custom delimiter for text files"),
-    cfg: P.Path = typer.Option("concord/config.yaml", help="YAML config"),
-    mode: str = typer.Option(None, help="llm | local | dual", show_default=False),
-    llm_model: str = typer.Option(None, help="Override LLM model"),
-    output: Optional[P.Path] = typer.Option(None, help="Output path"),
+def concord(                                            # noqa: C901  (CLI only)
+    file: Optional[str] = typer.Argument(               # table path (.csv/.tsv/.json)
+        None, help="Input table with two annotation columns"),
+    text_a: Optional[str] = typer.Option(
+        None, help="Free-text annotation A"),
+    text_b: Optional[str] = typer.Option(
+        None, help="Free-text annotation B"),
+    col_a: Optional[str] = typer.Option(
+        None, help="Name of column holding annotation A"),
+    col_b: Optional[str] = typer.Option(
+        None, help="Name of column holding annotation B"),
+    cfg: str = typer.Option(
+        "concord/config.yaml", help="Path to YAML config"),
+    mode: str = typer.Option(
+        None, help="llm | local | dual  (overrides config)"),
+    llm_model: str = typer.Option(
+        None, help="Override gateway model – e.g. gpt4o"),
+    output: Optional[str] = typer.Option(
+        None, help="Destination CSV path"),
+    sep: Optional[str] = typer.Option(
+        None, help="Custom delimiter for text files (e.g. '\\t')"),
 ):
-    """Compare a file *or* two ad-hoc strings."""
+    """
+    • Give a FILE to process a whole table  **or**
+    • Give --text-a + --text-b to compare a single pair.
+    """
+    # ------------------------------------------------------------------ sanity
     if file and (text_a or text_b):
-        echo("[red]Choose either a file or two strings, not both.[/red]")
+        echo("[red]Provide either FILE *or* --text-a/--text-b, not both.[/red]")
         raise typer.Exit(1)
     if not file and not (text_a and text_b):
-        echo("[red]Need a file or --text-a + --text-b.[/red]")
-        raise typer.Exit(1)
-    if mode and mode not in MODE_CHOICES:
-        echo(f"[red]Mode must be one of {MODE_CHOICES}.[/red]")
+        echo("[red]Need FILE *or* --text-a + --text-b.[/red]")
         raise typer.Exit(1)
 
+    # ------------------------------------------------------------------ config
     cfg_dict = yaml.safe_load(open(cfg))
     if mode:
         cfg_dict.setdefault("engine", {})["mode"] = mode
     if llm_model:
         cfg_dict.setdefault("llm", {})["model"] = llm_model
+
     with tempfile.NamedTemporaryFile("w", delete=False, suffix=".yml") as tmp:
         yaml.safe_dump(cfg_dict, tmp)
         cfg_path = P.Path(tmp.name)
 
+    # ------------------------------------------------------------------ run
     if file:
-        out = run_file(file, cfg_path, col_a, col_b, out_path=output, sep=sep)
+        out = run_file(
+            P.Path(file),
+            cfg_path,
+            col_a, col_b,
+            out_path=P.Path(output) if output else None,
+            sep=sep,
+        )
         echo(f"[green]✓ wrote {out}[/green]")
-    else:
+
+    else:  # ad-hoc
         label, sim, note = run_pair(text_a, text_b, cfg_path)
-        bits = [f"label={label}"]
+        msg = f"label={label}"
         if sim is not None:
-            bits.append(f"{_SIM_COL}={sim:.3f}")
+            msg += f"   similarity={sim:.3f}"
         if note:
-            bits.append(f"note={note}")
-        echo("   ".join(bits))
+            msg += f"   note={note}"
+        echo(msg)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":   # python -m concord.cli
     app()

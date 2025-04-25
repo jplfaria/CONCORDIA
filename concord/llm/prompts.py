@@ -1,41 +1,69 @@
 """
 concord.llm.prompts
 -------------------
-All prompt templates live here.
-
-Edit these functions (or add new ones) to experiment with different
-instruction styles, few-shot examples, JSON schemas, etc.  The pipeline
-code never needs to change.
-
-Current task: classify the relationship between two annotation strings.
+Prompt templates live here.
+Task: classify the relationship between two gene-function annotations.
 """
 
-# Allowed labels for the classification task
-LABEL_SET = ["Identical", "Synonym", "Partial", "New"]
+PROMPT_VER = "v2025-04-24"          # <= 🆕  keep a changelog-friendly tag
 
-# Optional few-shot examples (keep it short; models with >128k ctx not needed here)
+LABEL_SET = [
+    "Exact",
+    "Synonym",
+    "Broader",
+    "Narrower",
+    "Related",
+    "Uninformative",
+    "Different",
+]
+
+# ----------------------------------------------------------------------
 _FEW_SHOT = """\
 A: ATP synthase subunit beta
 B: ATP synthase β subunit
-Identical — wording difference only
+Exact — wording difference only
 
 A: DNA ligase
 B: NAD-dependent DNA ligase
-Partial — second string is more specific
+Narrower — second is more specific
+
+A: RecA protein
+B: DNA recombinase A
+Synonym — alternative name
+
+A: ABC transporter
+B: ABC transporter, maltose specific
+Broader — first is more general
+
+A: DNA gyrase A subunit
+B: DNA topoisomerase IV subunit A
+Related — same pathway but not parent–child
+
+A: Hypothetical protein
+B: Hypothetical protein
+Uninformative — placeholder
+
+A: RNA polymerase sigma-70 factor
+B: Flagellar motor protein MotA
+Different — unrelated functions
+"""
+
+_DEFINITIONS = """
+Definitions:
+• Exact — wording/formatting differs only, identical specific function.
+• Synonym — biologically the same function, alternative naming.
+• Broader — first description is more general than second (A ⊃ B).
+• Narrower — first description is more specific than second (A ⊂ B).
+• Related — same pathway / complex / family but not parent–child.
+• Uninformative — placeholder or extremely generic description.
+• Different — no functional overlap.
 """
 
 
 def build_annotation_prompt(a: str, b: str) -> str:
-    """
-    Return a single prompt string instructing the LLM to emit:
-
-        <Label> — <very short reason>
-
-    • <Label> must be exactly one of LABEL_SET
-    • Reason should be under ~10 words.
-    """
+    """Return one prompt string → LLM must emit '<Label> — <reason>'."""
     return (
-        f"{_FEW_SHOT}\n\n"
+        f"{_FEW_SHOT}\n\n{_DEFINITIONS}\n\n"
         "Classify the relationship between these two gene/protein "
         "function annotations.\n"
         f"A: {a}\nB: {b}\n\n"

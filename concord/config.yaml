@@ -1,27 +1,23 @@
-# -------------------------------------------------------------
-# Default engine behaviour
-# -------------------------------------------------------------
+# ╭─────────────────────────────────────────────────────────────╮
+# │  Concordia – baseline configuration (July 2025)            │
+# ╰─────────────────────────────────────────────────────────────╯
+
 engine:
-  # llm | local | hybrid | dual
-  # llm is now the default
+  # Allowed: llm | local
+  #
+  # • llm   – every pair goes to the Gateway LLM (cosine still logged)
+  # • local – cosine-only heuristic, no Gateway calls
+  #
   mode: llm
 
-  # Grey zone for *hybrid* mode
-  # (Gateway is called when lower ≤ sim ≤ upper)
-  hybrid_thresholds:
-    lower: 0.30
-    upper: 0.85
+# ──────────────────────────────────────────────────────────────
+llm:                      # Argo Gateway settings
+  model: gpto3mini        # o-series ⇒ auto-env = apps-dev
+  stream: false           # set true to use /streamchat/ endpoint
+  user: ${ARGO_USER}      # export ARGO_USER=<anl-login>
 
-# -------------------------------------------------------------
-# Argo-gateway LLM settings
-# -------------------------------------------------------------
-llm:
-  model: gpto3mini        # auto-routes to apps-dev
-  stream: false
-  user: ${ARGO_USER}      # export ARGO_USER=<your-login>
-
-# -------------------------------------------------------------
-# Local embedding model
-# -------------------------------------------------------------
-local:
+# ──────────────────────────────────────────────────────────────
+local:                    # Local embedding model
   model_id: NeuML/pubmedbert-base-embeddings
+  # If you want SPECTER2 instead, flip the id and run once so it downloads:
+  # model_id: allenai/specter2
