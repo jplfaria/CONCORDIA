@@ -2,10 +2,10 @@
 concord.llm.prompts
 -------------------
 Prompt templates live here.
-Task: classify the relationship between two gene-function annotations.
+Task: classify relationship between two gene-function annotations
+into the 7-label ontology.
 """
-
-PROMPT_VER = "v2025-04-24"          # <= 🆕  keep a changelog-friendly tag
+PROMPT_VER = "v1.0"
 
 LABEL_SET = [
     "Exact",
@@ -17,7 +17,7 @@ LABEL_SET = [
     "Different",
 ]
 
-# ----------------------------------------------------------------------
+# ─ few-shot (one per label) ─
 _FEW_SHOT = """\
 A: ATP synthase subunit beta
 B: ATP synthase β subunit
@@ -43,15 +43,15 @@ A: Hypothetical protein
 B: Hypothetical protein
 Uninformative — placeholder
 
-A: RNA polymerase sigma-70 factor
+A: Sigma-70 factor
 B: Flagellar motor protein MotA
 Different — unrelated functions
 """
 
 _DEFINITIONS = """
 Definitions:
-• Exact — wording/formatting differs only, identical specific function.
-• Synonym — biologically the same function, alternative naming.
+• Exact — wording/formatting differs only; identical specific function.
+• Synonym — biologically the same function; alternative naming.
 • Broader — first description is more general than second (A ⊃ B).
 • Narrower — first description is more specific than second (A ⊂ B).
 • Related — same pathway / complex / family but not parent–child.
@@ -59,13 +59,33 @@ Definitions:
 • Different — no functional overlap.
 """
 
+SYSTEM_MSG = (
+    "You are Concordia, a precise bioinformatics assistant. "
+    "Output MUST start with one of these labels: "
+    + ", ".join(LABEL_SET)
+    + ". Keep the reason under 10 words."
+)
 
-def build_annotation_prompt(a: str, b: str) -> str:
-    """Return one prompt string → LLM must emit '<Label> — <reason>'."""
+
+# ----------------------------------------------------------------------
+def build_annotation_prompt(a: str, b: str, similarity: float | None = None) -> str:
+    """
+    Build prompt.  If `similarity` provided (simhint mode) append a soft
+    prior line, making clear the model may override.
+    """
+    sim_hint = (
+        f"\nCosine similarity ≈ {similarity:.3f} "
+        "(weak prior—override if biology disagrees)."
+        if similarity is not None
+        else ""
+    )
+
     return (
-        f"{_FEW_SHOT}\n\n{_DEFINITIONS}\n\n"
-        "Classify the relationship between these two gene/protein "
-        "function annotations.\n"
+        _FEW_SHOT
+        + "\n\n"
+        + _DEFINITIONS
+        + sim_hint
+        + "\n\nClassify the relationship between these two annotations.\n"
         f"A: {a}\nB: {b}\n\n"
         "Respond on **one line** exactly as:\n"
         "<Label> — <very short reason>\n\n"
