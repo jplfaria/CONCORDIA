@@ -37,7 +37,7 @@ def concord(                                                     # noqa: C901
     col_a: str = typer.Option(None, help="Column name for annotation A"),
     col_b: str = typer.Option(None, help="Column name for annotation B"),
     cfg: str = typer.Option("concord/config.yaml", help="YAML config"),
-    mode: str = typer.Option(None, help="llm | local | simhint | bucket | dual | duo"),
+    mode: str = typer.Option(None, help="llm | local | simhint | dual | duo"),
     llm_model: str = typer.Option(None, help="Override gateway model"),
     prompt_ver: str = typer.Option(None, help="Freeze a prompt version"),
     output: str = typer.Option(None, help="Destination CSV"),

@@ -39,7 +39,7 @@ LABEL_SET: set[str] = {
 # -------------------------------------------------------------------
 # default baseline template version
 # -------------------------------------------------------------------
-PROMPT_VER = "v1.0"
+PROMPT_VER = "v1.3-test"  # Default to our newest external template with detailed output
 
 # -------------------------------------------------------------------
 # Template validation
@@ -111,11 +111,19 @@ def _load_external_templates() -> None:
     global _TEMPLATES
     
     if not _TEMPLATE_DIR.exists():
-        logger.info(f"Template directory {_TEMPLATE_DIR} does not exist. Using built-in templates only.")
+        logger.info(f"Template directory {_TEMPLATE_DIR} does not exist. Creating it...")
+        _TEMPLATE_DIR.mkdir(exist_ok=True, parents=True)
+        # Create a default template if none exists
+        _create_default_template()
         return
         
     try:
         template_files = list(_TEMPLATE_DIR.glob("template_*.txt"))
+        if not template_files:
+            logger.warning("No template files found in template directory. Creating default template.")
+            _create_default_template()
+            template_files = list(_TEMPLATE_DIR.glob("template_*.txt"))
+            
         for file_path in template_files:
             try:
                 # Extract version from filename
@@ -125,18 +133,67 @@ def _load_external_templates() -> None:
                 with open(file_path, "r") as f:
                     content = f.read().strip()
                 
-                # Validate template
-                if not _validate_template(content):
-                    logger.warning(f"Template in {file_path} is invalid. Skipping.")
+                # Debug template content
+                logger.debug(f"Loading template '{version}', content starts with: {content[:30]}...")
+                
+                # Check for required placeholders
+                if "{A}" not in content or "{B}" not in content:
+                    logger.warning(f"Template '{version}' missing required {{A}} or {{B}} placeholders. Skipping.")
                     continue
                     
-                # Add to templates dictionary
+                # Validate template
+                try:
+                    if not _validate_template(content):
+                        logger.warning(f"Template '{version}' failed validation. Skipping.")
+                        continue
+                except Exception as e:
+                    logger.error(f"Error validating template '{version}': {e}")
+                    continue
+                    
+                # Add to templates dictionary - add BOTH with and without template_ prefix
+                # This ensures templates can be found regardless of how they're referenced
                 _TEMPLATES[version] = content
+                
+                # Also add with template_ prefix for more flexible lookup
+                prefixed_version = f"template_{version}"
+                if prefixed_version not in _TEMPLATES:
+                    _TEMPLATES[prefixed_version] = content
+                    
                 logger.info(f"Loaded external template: {version}")
             except Exception as e:
                 logger.error(f"Error loading template from {file_path}: {e}")
     except Exception as e:
         logger.error(f"Error loading external templates: {e}")
+
+def _create_default_template() -> None:
+    """Create a default template file if none exists."""
+    default_template = """You are a biomedical entity relationship expert.
+
+Your task is to classify the relationship between two biomedical entities:
+
+A: {A}
+B: {B}
+
+Classify their relationship using one of the following labels:
+- Exact: Entities are identical or functionally equivalent
+- Synonym: Different terms for the same concept
+- Broader: A is a broader concept than B
+- Narrower: A is a narrower concept than B
+- Related: Entities are related but don't fit the above categories
+- Uninformative: Not enough information to determine relationship
+- Different: Entities are completely different concepts
+
+Analyze carefully. Return your answer as: **<Label> — <brief explanation>**
+"""
+    try:
+        _TEMPLATE_DIR.mkdir(exist_ok=True, parents=True)
+        
+        file_path = _TEMPLATE_DIR / f"template_{PROMPT_VER}.txt"
+        with open(file_path, "w") as f:
+            f.write(default_template)
+        logger.info(f"Created default template: {file_path}")
+    except Exception as e:
+        logger.error(f"Failed to create default template: {e}")
 
 # Load external templates when module is imported
 try:
@@ -314,14 +371,16 @@ def build_annotation_prompt(a: str, b: str, template: str) -> str:
         ValueError: If template is missing required placeholders
     """
     try:
-        # Validate before formatting
+        # Verify template has both placeholders
         if "{A}" not in template or "{B}" not in template:
-            raise ValueError(f"Template missing required {{A}} or {{B}} placeholders")
+            logger.error(f"Template missing required {{A}} or {{B}} placeholders: {template[:50]}...")
+            raise ValueError("Template missing required {A} or {B} placeholders")
             
+        # Replace placeholders
         return template.format(A=a, B=b)
     except KeyError as e:
         logger.error(f"Template missing required placeholders: {e}")
-        raise ValueError(f"Invalid template: missing {e} placeholder") from e
+        raise ValueError(f"Template missing required placeholders: {e}") from e
     except Exception as e:
         logger.error(f"Error building annotation prompt: {e}")
         raise ValueError(f"Failed to build annotation prompt: {e}") from e
@@ -360,6 +419,12 @@ def save_template(version: str, content: str) -> bool:
             
         # Add to in-memory templates
         _TEMPLATES[version] = content
+        
+        # Also add with template_ prefix for more flexible lookup
+        prefixed_version = f"template_{version}"
+        if prefixed_version not in _TEMPLATES:
+            _TEMPLATES[prefixed_version] = content
+            
         logger.info(f"Saved template: {version}")
         return True
     except Exception as e:

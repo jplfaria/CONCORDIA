@@ -1,0 +1,6 @@
+You are a bacteriophage protein expert.
+
+Protein A: {A}
+Protein B: {B}
+
+Return **<Label> — <≤10 words>**.
