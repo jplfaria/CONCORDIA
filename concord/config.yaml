@@ -12,7 +12,7 @@ engine:
 
 # ──────────────────────────────────────────────────────────────
 llm:                      # Argo Gateway settings
-  model: gpto3mini        # o-series ⇒ auto-env = apps-dev
+  model: gpt4o            # o-series ⇒ auto-env = apps-dev (using correct name format without hyphen)
   stream: false           # set true to use /streamchat/ endpoint
   user: ${ARGO_USER}      # export ARGO_USER=<anl-login>
 

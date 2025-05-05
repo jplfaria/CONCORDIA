@@ -1,82 +1,67 @@
-# concord/llm/argo_gateway.py
 """
-Networking layer for Concordia → Argo Gateway.
+Networking helper + LLM label parser.
 
-• ArgoGatewayClient.chat()      → one-shot prompt with heavy-duty retry
-• llm_label()                   → convenience helper returning <label, note>
+* ArgoGatewayClient  – simple JSON POST wrapper with retries
+* llm_label          – build prompt (template may be injected) & parse
 """
 
 from __future__ import annotations
-
-import os
-import random
-import re
-import time
+import os, time, random, httpx, re, logging
 from typing import Optional, Tuple
 
-import httpx
+from .prompts import (
+    build_annotation_prompt,
+    LABEL_SET,
+    get_prompt_template,
+)
 
-from .prompts import build_annotation_prompt, LABEL_SET
-
-# ──────────────────────────────────────────
-_SYSTEM_MSG = (
-    "You are a bioinformatics assistant. "
-    "Reply **only** with '<Label> — <very short reason>'."
+SYSTEM_MSG = (
+    "You are a bioinformatics assistant specializing in entity relationships. "
+    "Respond with '<Label> — <detailed explanation of the relationship with specific evidence>'. "
+    "Provide sufficient context to justify your classification."
 )
 
 _ALIAS = {
-    "Identical":  "Exact",
-    "Same":       "Exact",
-    "Equivalent": "Synonym",
-    "Similar":    "Synonym",
-    "Partial":    "Related",
+    "Identical": "Exact", "Same": "Exact",
+    "Equivalent": "Synonym", "Similar": "Synonym",
+    "Partial": "Related",
 }
 _DASH = re.compile(r"\s*[—–-]\s*")
 
 __all__ = ["ArgoGatewayClient", "llm_label"]
 
-# ──────────────────────────────────────────
+
+# ─────────────────────────────────────────────────────────────────────
 class ArgoGatewayClient:
-    """
-    Tiny wrapper around the ANL Argo Gateway.
-
-    • `model` — gateway model name, e.g. **gpto3mini**, **gpt4o** …
-    • `env`   — "dev" or "prod" (default: auto ⇒ dev for o-series, prod otherwise)
-    • `stream`— if True route to `/streamchat/`
-    • `retries`— how many times to retry on blank reply, 5xx or time-out
-    """
-
     def __init__(
         self,
         model: str = "gpto3mini",
-        *,
-        env: str | None = None,
+        env: Optional[str] = None,
         stream: bool = False,
-        user: str | None = None,
-        api_key: str | None = None,
+        user: Optional[str] = None,
+        api_key: Optional[str] = None,
         timeout: float = 30.0,
         retries: int = 5,
-    ) -> None:
+    ):
         env = env or ("dev" if model.startswith("gpto") else "prod")
-        root = (
+        base = (
             f"https://apps{'-' + env if env != 'prod' else ''}"
             ".inside.anl.gov/argoapi/api/v1/resource/"
         )
-        self.url = root + ("streamchat/" if stream else "chat/")
+        self.url = base + ("streamchat/" if stream else "chat/")
         self.model = model
-        self.user = user or os.getenv("ARGO_USER") or os.getlogin()
+        self.user  = user or os.getenv("ARGO_USER") or os.getlogin()
         self.retries = retries
 
-        self.headers: dict[str, str] = {"Content-Type": "application/json"}
+        self.headers = {"Content-Type": "application/json"}
         if api_key or os.getenv("ARGO_API_KEY"):
             self.headers["x-api-key"] = api_key or os.getenv("ARGO_API_KEY")
 
         self.cli = httpx.Client(timeout=timeout, follow_redirects=True)
 
-    # ────────────────────────────────────────
+    # ------------------------------------------------------------------
     def _payload(self, prompt: str, system: str) -> dict:
-        """Return the JSON body expected by each model family."""
-        if self.model.startswith("gpto"):          # o-series
+        if self.model.startswith("gpto"):                # o-series
             return {
                 "user":   self.user,
                 "model":  self.model,
@@ -84,10 +69,9 @@ class ArgoGatewayClient:
                 "prompt": [prompt],
                 "max_completion_tokens": 512,
             }
-        # OpenAI-style models
-        return {
-            "user":  self.user,
-            "model": self.model,
+        return {                                         # GPT-style
+            "user":   self.user,
+            "model":  self.model,
             "messages": [
                 {"role": "system", "content": system},
                 {"role": "user",   "content": prompt},
@@ -95,92 +79,110 @@ class ArgoGatewayClient:
             "temperature": 0.0,
         }
 
-    # ────────────────────────────────────────
+    # ------------------------------------------------------------------
     def chat(self, prompt: str, *, system: str = "") -> str:
-        """
-        Send one prompt and return assistant text (stripped).
-
-        Retries up to `self.retries` when:
-        • HTTP 5xx        • network timeout        • blank/empty reply
-        """
         payload = self._payload(prompt, system)
-
         for att in range(self.retries + 1):
-            try:
-                r = self.cli.post(self.url, json=payload, headers=self.headers)
-                # treat 5xx as retryable
-                if r.status_code >= 500:
-                    raise httpx.HTTPStatusError("5xx", request=r.request, response=r)
-
+            r = self.cli.post(self.url, json=payload, headers=self.headers)
+            # treat 5xx as retry-able (transient upstream errors)
+            if r.status_code >= 500:
+                reason = "StatusError"
+            else:
                 r.raise_for_status()
-                data = r.json()
-            except (httpx.ReadTimeout, httpx.ConnectTimeout, httpx.HTTPStatusError):
-                reason = "Timeout" if isinstance(_, (httpx.ReadTimeout, httpx.ConnectTimeout)) else "StatusError"
-                if att < self.retries:
-                    delay = 1.5 * 2 ** att + random.random()
-                    print(f"[retry {att+1}/{self.retries}] {reason}; sleeping {delay:.1f}s")
-                    time.sleep(delay)
-                    continue
-                return ""            # exhausted retries
+                reason = ""
 
-            # ─ extract assistant text ─
-            txt = ""
-            if "choices" in data:                                    # OpenAI schema
-                txt = data["choices"][0]["message"]["content"].strip()
-            else:                                                    # o-series
-                for k in ("response", "content", "text"):
-                    if isinstance(data.get(k), str):
-                        txt = data[k].strip()
-                        break
+            if not reason:
+                j = r.json()
+                txt = (
+                    j["choices"][0]["message"]["content"].strip()
+                    if "choices" in j
+                    else next(
+                        (j[k].strip() for k in ("response", "content", "text")
+                         if isinstance(j.get(k), str)), ""
+                    )
+                )
+                if txt:
+                    return txt
+                reason = "blank reply"
 
-            if txt:
-                return txt                                           # success
-
-            # blank — retry
             if att < self.retries:
-                delay = 1.5 * 2 ** att + random.random()
-                print(f"[retry {att+1}/{self.retries}] blank reply; sleeping {delay:.1f}s")
+                delay = 1.5 * 2**att + random.random()
+                print(f"[retry {att+1}/{self.retries}] {reason}; sleeping {delay:.1f}s")
                 time.sleep(delay)
+        return ""                                       # gave up
 
-        return ""  # still blank after all tries
-
-    # ────────────────────────────────────────
+    # ------------------------------------------------------------------
     def ping(self) -> bool:
-        """Return True if gateway answers at all (case-insensitive 'ready')."""
         try:
-            return "ready" in self.chat("Say: Ready to work!").lower()
+            msg = self.chat("Say: Ready to work!")
+            return "ready" in msg.lower()
         except Exception:
             return False
 
 
-# ════════════════════════════════════════════════════════════════════
+# ─────────────────────────────────────────────────────────────────────
 def _parse(raw: str) -> tuple[str, str]:
-    """Parse '<Label> — <reason>', including legacy-token rescue."""
     if not raw:
         return "Unknown", ""
-
     raw = raw.strip().rstrip(".")
+    
+    # Log the raw response for debugging
+    logging.debug(f"Raw LLM response: {raw}")
+    
+    # More robust splitting that handles different formats
     parts = _DASH.split(raw, maxsplit=1)
-
-    lbl  = parts[0].split()[0].capitalize()
+    
+    # Get the label, removing any markdown formatting
+    label_part = parts[0].strip()
+    label_part = label_part.replace('*', '').strip()
+    
+    # Extract the first word as the label
+    label = label_part.split()[0].capitalize()
+    
+    # Get the evidence part after the dash
     note = parts[1].strip() if len(parts) > 1 else ""
-
-    lbl = _ALIAS.get(lbl, lbl)
-    if lbl not in LABEL_SET:
+    
+    # Apply any label aliases
+    label = _ALIAS.get(label, label)
+    
+    if label not in LABEL_SET:
+        logging.warning(f"Unknown label: {label} from response: {raw}")
         return "Unknown", raw
-    return lbl, note
+    
+    return label, note
 
 
-def llm_label(
+def llm_label(                          # noqa: C901  (assist wrapper)
     ann_a: str,
     ann_b: str,
     client: ArgoGatewayClient,
     *,
+    cfg: dict | None = None,           # pass full cfg to honour prompt_ver
+    template: str | None = None,
     with_note: bool = False,
 ) -> Tuple[str, str] | str:
-    """Helper: build prompt → ask gateway → parse answer."""
-    prompt = build_annotation_prompt(ann_a, ann_b)
-    sysmsg = "" if client.model.startswith("gpto") else _SYSTEM_MSG
+    """
+    Build prompt (optionally overriding the template) → call LLM → parse.
 
-    label, note = _parse(client.chat(prompt, system=sysmsg))
+    If *template* is None we fall back to cfg["prompt_ver"] or default.
+    """
+    if template is None:
+        template = get_prompt_template(cfg or {})
+    prompt = build_annotation_prompt(ann_a, ann_b, template)
+
+    # Always use the system message regardless of model type
+    sysmsg = SYSTEM_MSG
+    
+    # Log the prompt and system message
+    logging.debug(f"Prompt: {prompt}")
+    logging.debug(f"System: {sysmsg}")
+    
+    # Get the raw response and parse it
+    raw_response = client.chat(prompt, system=sysmsg)
+    logging.debug(f"Raw LLM response: {raw_response}")
+    
+    # Parse the response
+    label, note = _parse(raw_response)
+    
+    # For pipeline.py, always include the full label (not abbreviated)
     return (label, note) if with_note else label

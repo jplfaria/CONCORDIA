@@ -1,0 +1,25 @@
+gene_id,annotation_a,annotation_b,similarity_Pubmedbert,label,note
+fig|273133.2.peg.39,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",1.0,Exact,Same protein description and intein presence
+fig|273133.2.peg.40,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",1.0,Unknown,Match — Identical protein descriptions
+fig|273133.2.peg.157,Phage tail fiber,Phage tail fiber protein,0.9441295266151428,Different,Naming convention suggests distinct proteins
+fig|273133.2.peg.54,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",0.951859176158905,Unknown,Duplicate — Both describe the same protein function
+fig|273133.2.peg.156,Phage tail fiber,Phage tail fiber protein,0.9441295266151428,Different,Naming convention suggests distinct proteins
+fig|273133.2.peg.166,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),0.7155349254608154,Exact,Identical function and EC number
+fig|273133.2.peg.76,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),0.7155349254608154,Exact,Identical function and EC number
+fig|273133.2.peg.183,Phage endolysin,Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),0.5764116048812866,Synonym,Both are phage endolysins with amidase activity
+fig|273133.2.peg.185,HNH homing endonuclease,Phage homing endonuclease,0.7827796339988708,Synonym,Both are types of homing endonucleases
+fig|273133.2.peg.188,"Phage lysin, N-acetylmuramoyl-L-alanine amidase",Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),0.8669185638427734,Exact,Both are phage lysins with same function
+fig|273133.2.peg.1,Phage repressor,Phage repressor protein,0.9255464673042297,Unknown,Protein B — More specific naming convention
+fig|273133.2.peg.193,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",0.951859176158905,Unknown,Duplicate — Both describe the same protein function
+fig|374463.4.peg.296,Glucose-6-phosphate 1-dehydrogenase (EC 1.1.1.49),Glucose-6-phosphate 1-dehydrogenase (NADP+) (EC 1.1.1.49),0.9673671722412109,Exact,Same EC number and function
+fig|374463.4.peg.298,Manganese transport protein MntH,"Mn(II) and Fe(II) import protein MntH, proton-dependent",0.665088415145874,Unknown,B — More specific function description
+fig|374463.4.peg.181,hypothetical protein,Outer membrane beta-barrel assembly protein BamD,0.39434078335762024,Unknown,B — Known function and structure
+fig|374463.4.peg.282,Enoyl-[acyl-carrier-protein] reductase [NADH] (EC 1.3.1.9),Enoyl-[acyl-carrier-protein] reductase (NADH) (EC 1.3.1.9),0.9986387491226196,Unknown,**Exact — Identical EC numbers and names.**
+fig|374463.4.peg.161,Sulfate-binding protein Sbp,"Sulfate/thiosulfate ABC transporter, sulfate-binding protein Spb",0.7599909901618958,Unknown,B — More specific functional description
+fig|374463.4.peg.166,Glutaredoxin 3 (Grx3),Glutaredoxin 3,0.8643108010292053,Unknown,B — Matches standard protein naming conventions
+fig|374463.4.peg.288,Cys regulon transcriptional activator CysB,"Cys regulon transcriptional activator CysB, LysR family",0.9010777473449707,Unknown,B — More specific protein family information
+fig|374463.4.peg.289,DNA topoisomerase I (EC 5.99.1.2),DNA topoisomerase I (EC 5.6.2.1),0.965355634689331,Different,Different EC numbers indicate distinct functions
+fig|374463.4.peg.291,YciL protein,YciI protein,0.8348191976547241,Unknown,A — More common in microbial genome annotations
+fig|374463.4.peg.170,Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23),Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23) (EC 4.2.99.18),0.9632173776626587,Narrower,Enzyme B has additional EC number
+fig|374463.4.peg.182,LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23),LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23) ## RluD,0.9364515542984009,Exact,Same EC number and function
+fig|374463.4.peg.185,tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228),tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228) ## TrmD,0.9415144920349121,Exact,Same EC number and function
