@@ -18,7 +18,7 @@ from dataclasses import dataclass
 from tqdm import tqdm
 
 from .embedding         import embed_sentence, cosine_sim, batch_embed          # local model
-from .llm.prompts       import build_annotation_prompt, choose_bucket, get_prompt_template
+from .llm.prompts       import build_annotation_prompt, choose_bucket, get_prompt_template, _validate_template
 from .llm.argo_gateway  import ArgoGatewayClient, llm_label
 
 # Configure logging
@@ -104,6 +104,10 @@ def _call_llm(a: str, b: str, prompt: str, cfg: Config) -> Tuple[str, str]:
 def _duo_vote(a: str, b: str, template: str, cfg: Config
              ) -> Tuple[str, str, bool]:
     """Return (label, evidence, conflict_flag) with proper error handling."""
+    # Validate template before using it
+    if not _validate_template(template):
+        raise ValueError("Template missing required {A} or {B} placeholders")
+        
     def _one(temp: float) -> Tuple[str, str]:
         tcfg   = {**cfg, "llm": {**cfg["llm"], "temperature": temp}}
         prompt = build_annotation_prompt(a, b, template)
