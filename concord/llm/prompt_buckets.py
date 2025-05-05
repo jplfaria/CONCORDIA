@@ -11,6 +11,7 @@ Author: Concordia dev team – 2025-05-01
 """
 
 from __future__ import annotations
+
 from textwrap import dedent
 
 # -------------------------------------------------------------------
@@ -20,47 +21,49 @@ from textwrap import dedent
 EXAMPLES: dict[str, list[tuple[str, str, str]]] = {
     # --------------  bacteriophage bucket  -------------------------
     "v1.1-phage": [
-        ("Phage major capsid protein",
-         "Phage major capsid protein",
-         "Exact — identical names"),
-
-        ("Phage tail fiber",
-         "Phage tail fiber protein",
-         "Synonym — same function + “protein” suffix"),
-
-        ("Phage portal protein",
-         "Hypothetical protein",
-         "Uninformative — generic second term"),
+        (
+            "Phage major capsid protein",
+            "Phage major capsid protein",
+            "Exact — identical names",
+        ),
+        (
+            "Phage tail fiber",
+            "Phage tail fiber protein",
+            "Synonym — same function + “protein” suffix",
+        ),
+        (
+            "Phage portal protein",
+            "Hypothetical protein",
+            "Uninformative — generic second term",
+        ),
     ],
-
     # --------------  enzyme bucket  -------------------------------
     "v1.1-enzyme": [
-        ("Beta-galactosidase (EC 3.2.1.23)",
-         "LacZ beta-galactosidase",
-         "Synonym — same enzyme"),
-
-        ("Alcohol dehydrogenase (EC 1.1.1.1)",
-         "Short-chain dehydrogenase",
-         "Broader — B is super-family"),
-
-        ("Glucose-6-phosphate isomerase",
-         "Phosphoglucose isomerase",
-         "Exact — alternative name"),
+        (
+            "Beta-galactosidase (EC 3.2.1.23)",
+            "LacZ beta-galactosidase",
+            "Synonym — same enzyme",
+        ),
+        (
+            "Alcohol dehydrogenase (EC 1.1.1.1)",
+            "Short-chain dehydrogenase",
+            "Broader — B is super-family",
+        ),
+        (
+            "Glucose-6-phosphate isomerase",
+            "Phosphoglucose isomerase",
+            "Exact — alternative name",
+        ),
     ],
-
     # --------------  general bucket  ------------------------------
     "v1.1-general": [
-        ("DNA repair protein RecA",
-         "Recombinase A",
-         "Synonym — same protein"),
-
-        ("Hypothetical protein",
-         "Uncharacterised protein",
-         "Uninformative — both generic"),
-
-        ("DNA ligase",
-         "RNA polymerase",
-         "Different — distinct functions"),
+        ("DNA repair protein RecA", "Recombinase A", "Synonym — same protein"),
+        (
+            "Hypothetical protein",
+            "Uncharacterised protein",
+            "Uninformative — both generic",
+        ),
+        ("DNA ligase", "RNA polymerase", "Different — distinct functions"),
     ],
 }
 

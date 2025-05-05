@@ -6,14 +6,17 @@ Networking helper + LLM label parser.
 """
 
 from __future__ import annotations
-import os, time, random, httpx, re, logging
+
+import logging
+import os
+import random
+import re
+import time
 from typing import Optional, Tuple
 
-from .prompts import (
-    build_annotation_prompt,
-    LABEL_SET,
-    get_prompt_template,
-)
+import httpx
+
+from .prompts import LABEL_SET, build_annotation_prompt, get_prompt_template
 
 SYSTEM_MSG = (
     "You are a bioinformatics assistant specializing in entity relationships. "
@@ -22,8 +25,10 @@ SYSTEM_MSG = (
 )
 
 _ALIAS = {
-    "Identical": "Exact", "Same": "Exact",
-    "Equivalent": "Synonym", "Similar": "Synonym",
+    "Identical": "Exact",
+    "Same": "Exact",
+    "Equivalent": "Synonym",
+    "Similar": "Synonym",
     "Partial": "Related",
 }
 _DASH = re.compile(r"\s*[—–-]\s*")
@@ -42,6 +47,7 @@ class ArgoGatewayClient:
         api_key: Optional[str] = None,
         timeout: float = 30.0,
         retries: int = 5,
+        **kwargs,
     ):
         env = env or ("dev" if model.startswith("gpto") else "prod")
         base = (
@@ -50,8 +56,10 @@ class ArgoGatewayClient:
         )
         self.url = base + ("streamchat/" if stream else "chat/")
         self.model = model
-        self.user  = user or os.getenv("ARGO_USER") or os.getlogin()
+        self.user = user or os.getenv("ARGO_USER") or os.getlogin()
         self.retries = retries
+        # Accept extra kwargs (e.g., 'temperature') for vote mode
+        self.temperature = kwargs.get("temperature")
 
         self.headers = {"Content-Type": "application/json"}
         if api_key or os.getenv("ARGO_API_KEY"):
@@ -61,20 +69,20 @@ class ArgoGatewayClient:
 
     # ------------------------------------------------------------------
     def _payload(self, prompt: str, system: str) -> dict:
-        if self.model.startswith("gpto"):                # o-series
+        if self.model.startswith("gpto"):  # o-series
             return {
-                "user":   self.user,
-                "model":  self.model,
+                "user": self.user,
+                "model": self.model,
                 "system": system,
                 "prompt": [prompt],
                 "max_completion_tokens": 512,
             }
-        return {                                         # GPT-style
-            "user":   self.user,
-            "model":  self.model,
+        return {  # GPT-style
+            "user": self.user,
+            "model": self.model,
             "messages": [
                 {"role": "system", "content": system},
-                {"role": "user",   "content": prompt},
+                {"role": "user", "content": prompt},
             ],
             "temperature": 0.0,
         }
@@ -97,8 +105,12 @@ class ArgoGatewayClient:
                     j["choices"][0]["message"]["content"].strip()
                     if "choices" in j
                     else next(
-                        (j[k].strip() for k in ("response", "content", "text")
-                         if isinstance(j.get(k), str)), ""
+                        (
+                            j[k].strip()
+                            for k in ("response", "content", "text")
+                            if isinstance(j.get(k), str)
+                        ),
+                        "",
                     )
                 )
                 if txt:
@@ -109,7 +121,7 @@ class ArgoGatewayClient:
                 delay = 1.5 * 2**att + random.random()
                 print(f"[retry {att+1}/{self.retries}] {reason}; sleeping {delay:.1f}s")
                 time.sleep(delay)
-        return ""                                       # gave up
+        return ""  # gave up
 
     # ------------------------------------------------------------------
     def ping(self) -> bool:
@@ -125,39 +137,39 @@ def _parse(raw: str) -> tuple[str, str]:
     if not raw:
         return "Unknown", ""
     raw = raw.strip().rstrip(".")
-    
+
     # Log the raw response for debugging
     logging.debug(f"Raw LLM response: {raw}")
-    
+
     # More robust splitting that handles different formats
     parts = _DASH.split(raw, maxsplit=1)
-    
+
     # Get the label, removing any markdown formatting
     label_part = parts[0].strip()
-    label_part = label_part.replace('*', '').strip()
-    
+    label_part = label_part.replace("*", "").strip()
+
     # Extract the first word as the label
     label = label_part.split()[0].capitalize()
-    
+
     # Get the evidence part after the dash
     note = parts[1].strip() if len(parts) > 1 else ""
-    
+
     # Apply any label aliases
     label = _ALIAS.get(label, label)
-    
+
     if label not in LABEL_SET:
         logging.warning(f"Unknown label: {label} from response: {raw}")
         return "Unknown", raw
-    
+
     return label, note
 
 
-def llm_label(                          # noqa: C901  (assist wrapper)
+def llm_label(  # noqa: C901  (assist wrapper)
     ann_a: str,
     ann_b: str,
     client: ArgoGatewayClient,
     *,
-    cfg: dict | None = None,           # pass full cfg to honour prompt_ver
+    cfg: dict | None = None,  # pass full cfg to honour prompt_ver
     template: str | None = None,
     with_note: bool = False,
 ) -> Tuple[str, str] | str:
@@ -172,17 +184,17 @@ def llm_label(                          # noqa: C901  (assist wrapper)
 
     # Always use the system message regardless of model type
     sysmsg = SYSTEM_MSG
-    
+
     # Log the prompt and system message
     logging.debug(f"Prompt: {prompt}")
     logging.debug(f"System: {sysmsg}")
-    
+
     # Get the raw response and parse it
     raw_response = client.chat(prompt, system=sysmsg)
     logging.debug(f"Raw LLM response: {raw_response}")
-    
+
     # Parse the response
     label, note = _parse(raw_response)
-    
+
     # For pipeline.py, always include the full label (not abbreviated)
     return (label, note) if with_note else label

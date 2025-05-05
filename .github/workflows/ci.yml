@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.10, 3.11]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install black isort flake8 mypy pytest mkdocs mkdocs-material
+      - name: Black check
+        run: black --check .
+      - name: isort check
+        run: isort --check-only .
+      - name: flake8 lint
+        run: flake8 .
+      - name: mypy type check
+        run: mypy .
+      - name: pytest
+        run: pytest -q
+      - name: Build docs
+        run: mkdocs build --strict

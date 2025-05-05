@@ -10,21 +10,21 @@ v1.2 (2025-05-02)
 """
 
 from __future__ import annotations
+
 import logging
 import logging.config
-from typing import Dict, Any, Optional
-from importlib.metadata import version
 
 # Constants moved from pipeline.py
 EVIDENCE_FIELD = "evidence"
 SIM_FIELD = "similarity_Pubmedbert"
 CONFLICT_FIELD = "duo_conflict"
 
+
 # Setup logging
-def setup_logging(level: str = "INFO", log_file: Optional[str] = None) -> None:
+def setup_logging(level: str = "INFO", log_file: str = None) -> None:
     """
     Configure logging for the entire package.
-    
+
     Args:
         level: Logging level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
         log_file: Optional path to log file
@@ -33,9 +33,7 @@ def setup_logging(level: str = "INFO", log_file: Optional[str] = None) -> None:
         "version": 1,
         "disable_existing_loggers": False,
         "formatters": {
-            "standard": {
-                "format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s"
-            },
+            "standard": {"format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s"},
         },
         "handlers": {
             "console": {
@@ -46,14 +44,10 @@ def setup_logging(level: str = "INFO", log_file: Optional[str] = None) -> None:
             },
         },
         "loggers": {
-            "concord": {
-                "level": level,
-                "handlers": ["console"],
-                "propagate": False
-            }
-        }
+            "concord": {"level": level, "handlers": ["console"], "propagate": False}
+        },
     }
-    
+
     # Add file handler if log_file is specified
     if log_file:
         log_config["handlers"]["file"] = {
@@ -64,8 +58,9 @@ def setup_logging(level: str = "INFO", log_file: Optional[str] = None) -> None:
             "mode": "a",
         }
         log_config["loggers"]["concord"]["handlers"].append("file")
-    
+
     logging.config.dictConfig(log_config)
+
 
 # Setup default logging
 setup_logging()

@@ -1,6 +1,8 @@
 import pytest
+
 from concord.llm.argo_gateway import ArgoGatewayClient, llm_label
 from concord.llm.prompts import LABEL_SET
+
 
 @pytest.mark.integration
 def test_llm_roundtrip():

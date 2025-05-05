@@ -7,7 +7,8 @@ This module contains shared constants used throughout the codebase.
 """
 
 from __future__ import annotations
-from typing import Set, Dict, Any, List, Final
+
+from typing import Final, List, Set
 
 # Output field names
 EVIDENCE_FIELD: Final[str] = "evidence"
@@ -29,13 +30,23 @@ EXACT_SIMILARITY_THRESHOLD: Final[float] = 0.98
 
 # Label set
 LABEL_SET: Final[Set[str]] = {
-    "Exact", "Synonym", "Broader", "Narrower",
-    "Related", "Uninformative", "Different",
+    "Exact",
+    "Synonym",
+    "Broader",
+    "Narrower",
+    "Related",
+    "Uninformative",
+    "Different",
 }
 
 # Engine modes
 VALID_ENGINE_MODES: Final[List[str]] = [
-    "local", "llm", "dual", "simhint", "bucket", "duo"
+    "local",
+    "llm",
+    "dual",
+    "simhint",
+    "bucket",
+    "duo",
 ]
 
 # Default configuration paths

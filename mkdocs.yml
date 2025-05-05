@@ -1,0 +1,15 @@
+site_name: "CONCORDIA"
+nav:
+  - Home: index.md
+  - Usage: usage.md
+  - API Reference: api.md
+
+theme:
+  name: material
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - codehilite
