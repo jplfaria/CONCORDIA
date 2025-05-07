@@ -2,6 +2,7 @@
 Dummy sentence_transformers module for testing purposes.
 Provides a stub SentenceTransformer class and util.pytorch_cos_sim function.
 """
+
 import torch
 
 
