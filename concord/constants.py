@@ -44,7 +44,6 @@ VALID_ENGINE_MODES: Final[List[str]] = [
     "local",
     "llm",
     "dual",
-    "simhint",
     "bucket",
     "duo",
 ]

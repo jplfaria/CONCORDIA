@@ -1,46 +1,72 @@
 # API Reference
+# CONCORDIA Codebase Structure
 
-## concord.cli
+## Core Modules
 
-`concord` – CLI entrypoint for file and pair annotation.
+- **cli.py**: Command-line interface with Typer app
+- **pipeline.py**: File and pair annotation pipeline
+- **modes.py**: Different annotation modes (local, zero-shot, vote)
+- **embedding.py**: Embedding model loading and similarity calculation
+- **constants.py**: Global constants and configuration defaults
 
-## concord.pipeline
+## LLM Modules
 
-- `run_pair(a: str, b: str, cfg_path: Path)` – Annotate single pair via CLI.
-- `run_file(file_path: Path, cfg_path: Path, ...)` – Annotate file in batch.
+- **llm/argo_gateway.py**: Client for Argo Gateway API
+- **llm/prompts.py**: Prompt template management
+- **llm/template_store.py**: Template loading and storage
+- **llm/prompt_builder.py**: Builds prompts with placeholders
+- **llm/prompt_buckets.py**: Bucket management for targeted templates
 
-## concord.modes
+## I/O Modules
 
-- `annotate_local(a, b, cfg)`
-- `annotate_zero_shot(a, b, cfg)`
-- `annotate_sim_hint(a, b, cfg)`
-- `annotate_vote(a, b, cfg)`
-- `annotate_fallback(a, b, cfg, err)`
+- **io/loader.py**: Data loading utilities
 
-## concord.embedding
+## API Reference
 
-- `embed_sentence(text, cfg)`
-- `batch_embed(texts, cfg, batch_size)`
-- `cosine_sim(vec1, vec2)`
-- `similarity(text1, text2, cfg)`
-- `preload_model(cfg)`
-- `clear_cache()`
+### concord.cli
 
-## concord.llm.template_store
+`concord` – Single command CLI entrypoint for all annotation tasks.
 
-- `get_prompt_template(cfg, ver=None, bucket_pair=None)`
-- `list_available_templates()`
+### concord.pipeline
 
-## concord.llm.prompt_builder
+- `run_pair(a: str, b: str, cfg_path: Path)` – Annotate single pair, returns (label, similarity, evidence)
+- `run_file(file_path: Path, cfg_path: Path, ...)` – Annotate file in batch, returns output file path
 
-- `build_annotation_prompt(a, b, template)`
+### concord.modes
 
-## concord.llm.argo_gateway
+- `annotate_local(a, b, cfg)` – Similarity-only mode using embeddings
+- `annotate_zero_shot(a, b, cfg)` – Single LLM call with optional similarity hint
+- `annotate_vote(a, b, cfg)` – Multiple LLM calls with majority vote
+- `annotate_fallback(a, b, cfg, err)` – Fallback to similarity on errors
 
-- `ArgoGatewayClient` – client for Argo Gateway API
-- `ArgoGatewayClient.ping()` – check if the Argo Gateway API is reachable (returns bool)
-- `llm_label(a, b, client, cfg=None, template=None, with_note=False)` – wrapper to build prompt, call LLM, and parse the response
+Each mode returns a dict with:
+- `label`: The classification result
+- `similarity`: Cosine similarity value (if calculated)
+- `evidence`: Explanation for the result
+- `conflict`: Boolean indicating if there was disagreement
+- `votes`: List of individual votes (vote mode only)
 
-## concord.utils
+### concord.embedding
 
-Utility functions and helpers.
+- `embed_sentence(text, cfg)` – Get vector embedding for text
+- `batch_embed(texts, cfg, batch_size)` – Batch embed multiple texts
+- `cosine_sim(vec1, vec2)` – Calculate cosine similarity
+- `similarity(text1, text2, cfg)` – One-step similarity between texts
+- `preload_model(cfg)` – Preload model to reduce first-call latency
+- `clear_cache()` – Free memory from cached model
+
+### concord.llm.template_store
+
+- `get_prompt_template(cfg, ver=None, bucket_pair=None)` – Get prompt template
+- `list_available_templates()` – List all available templates
+
+## Templates
+
+Available prompt templates:
+- `v1.0`, `v1.1-general`, etc. – Original templates
+- `v2` – Updated template with required labels and markers
+- `v2.1` – Further improved template with better validation
+
+## Configuration Files
+
+- **config.yaml**: Main configuration file containing engine settings, LLM parameters, and local model configuration.

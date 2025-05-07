@@ -26,8 +26,8 @@ from tqdm import tqdm
 from .embedding import cosine_sim, embed_sentence  # local model
 from .llm.argo_gateway import ArgoGatewayClient, llm_label
 from .llm.prompt_builder import build_annotation_prompt
-from .modes import (annotate_fallback, annotate_local, annotate_sim_hint,
-                    annotate_vote, annotate_zero_shot)
+from .modes import (annotate_fallback, annotate_local, annotate_vote,
+                    annotate_zero_shot)
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -38,9 +38,10 @@ SIM_FIELD = "similarity_Pubmedbert"
 CONFLICT_FIELD = "duo_conflict"
 
 # Define types for better annotation
-EngineMode = Literal["local", "zero-shot", "sim-hint", "vote"]
+EngineMode = Literal["local", "zero-shot", "vote"]
 
 
+# ──────────────────────────── types ───────────────────────────────
 class AnnotationResult(TypedDict):
     """Result of an annotation operation."""
 
@@ -82,7 +83,6 @@ def _write(out: P.Path, rec: dict[str, Any], *, header: bool) -> None:
 # ───────────────────────── dispatcher ─────────────────────────────
 _LEGACY_MODE_MAP: dict[str, str] = {
     "llm": "zero-shot",
-    "simhint": "sim-hint",
     "duo": "vote",
     "dual": "vote",
 }
@@ -90,7 +90,6 @@ _LEGACY_MODE_MAP: dict[str, str] = {
 _ENGINE_MAP: dict[str, Any] = {
     "local": annotate_local,
     "zero-shot": annotate_zero_shot,
-    "sim-hint": annotate_sim_hint,
     "vote": annotate_vote,
 }
 
@@ -284,8 +283,11 @@ def run_file(
 
                 rec[EVIDENCE_FIELD] = result["evidence"]
 
-                if mode == "duo":
+                # For vote mode (alias 'duo'), record conflict and individual votes
+                if mode in ("duo", "vote"):
                     rec[CONFLICT_FIELD] = result["conflict"]
+                    # join votes into a string for CSV output
+                    rec["votes"] = ";".join(result.get("votes", []))
 
                 # Write the result to output file
                 _write(out_path, rec, header=write_header)

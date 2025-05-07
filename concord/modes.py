@@ -23,31 +23,35 @@ def annotate_local(a: str, b: str, cfg: Any) -> dict[str, Any]:
 
 
 def annotate_zero_shot(a: str, b: str, cfg: Any) -> dict[str, Any]:
-    """Pure zero-shot LLM: one LLM call without similarity hint"""
-    prompt = get_prompt_template(cfg)
+    """Pure zero-shot LLM: single LLM call, optionally prefix similarity hint."""
     from .pipeline import _call_llm
 
-    label, evidence = _call_llm(a, b, prompt, cfg)
-    return {"label": label, "similarity": None, "evidence": evidence, "conflict": False}
-
-
-def annotate_sim_hint(a: str, b: str, cfg: Any) -> dict[str, Any]:
-    """LLM call with similarity hint prepended"""
-    sim = cosine_sim(embed_sentence(a, cfg), embed_sentence(b, cfg))
-    hint = f"Cosine similarity ≈ {sim:.3f}"
-    base = get_prompt_template(cfg)
-    prompt = f"{hint}\n\n{base}"
-    from .pipeline import _call_llm
-
+    sim = None
+    base_prompt = get_prompt_template(cfg)
+    if cfg["engine"].get("sim_hint", False):
+        sim = cosine_sim(embed_sentence(a, cfg), embed_sentence(b, cfg))
+        hint = f"Cosine similarity ≈ {sim:.3f}"
+        prompt = f"{hint}\n\n{base_prompt}"
+    else:
+        prompt = base_prompt
     label, evidence = _call_llm(a, b, prompt, cfg)
     return {"label": label, "similarity": sim, "evidence": evidence, "conflict": False}
 
 
 def annotate_vote(a: str, b: str, cfg: Any) -> dict[str, Any]:
-    """Vote mode: three LLM calls at different temps with fallback template"""
+    """Vote mode: three LLM calls at different temps with optional similarity hint"""
+    # Compute similarity hint once if enabled
+    sim = None
+    if cfg["engine"].get("sim_hint", False):
+        sim = cosine_sim(embed_sentence(a, cfg), embed_sentence(b, cfg))
 
     def get_vote(temp: float) -> Tuple[str, str]:
-        prompt = build_annotation_prompt(a, b, FALLBACK_TEMPLATE)
+        base = build_annotation_prompt(a, b, FALLBACK_TEMPLATE)
+        if sim is not None:
+            hint = f"Cosine similarity ≈ {sim:.3f}"
+            prompt = f"{hint}\n\n{base}"
+        else:
+            prompt = base
         # Filter LLM config and set temperature
         client_cfg = {
             k: v for k, v in cfg["llm"].items() if k not in {"top_p", "max_tokens"}
@@ -72,9 +76,10 @@ def annotate_vote(a: str, b: str, cfg: Any) -> dict[str, Any]:
         if l1 == l2:
             return {
                 "label": l1,
-                "similarity": None,
+                "similarity": sim,
                 "evidence": e1 or e2,
                 "conflict": False,
+                "votes": [l1, l2],
             }
         l3, e3 = get_vote(0.0)
         votes = [l1, l2, l3]
@@ -82,9 +87,10 @@ def annotate_vote(a: str, b: str, cfg: Any) -> dict[str, Any]:
         evidence = {l1: e1, l2: e2, l3: e3}[winner]
         return {
             "label": winner,
-            "similarity": None,
+            "similarity": sim,
             "evidence": evidence,
             "conflict": True,
+            "votes": votes,
         }
     except Exception as err:
         logger.error(f"Voting mode failed: {err}")

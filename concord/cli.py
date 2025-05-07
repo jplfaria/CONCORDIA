@@ -31,11 +31,14 @@ from .pipeline import run_file, run_pair
 console = Console()
 
 app = typer.Typer(
-    add_completion=False, help="Concordia – annotation concordance engine"
+    add_completion=False,
+    help="Concordia – annotation concordance engine",
+    invoke_without_command=True,
+    context_settings={"allow_interspersed_args": True},
 )
 
 
-@app.command()
+@app.callback(invoke_without_command=True)
 def concord(  # noqa: C901
     file: str = typer.Argument(
         None, metavar="[FILE]", help="Input table (.csv/.tsv/.json)"
@@ -45,7 +48,7 @@ def concord(  # noqa: C901
     col_a: str = typer.Option(None, help="Column name for annotation A"),
     col_b: str = typer.Option(None, help="Column name for annotation B"),
     cfg: str = typer.Option("config.yaml", help="YAML config at repo root"),
-    mode: str = typer.Option(None, help="local | zero-shot | sim-hint | vote"),
+    mode: str = typer.Option(None, help="local | zero-shot | vote"),
     llm_model: str = typer.Option(None, help="Override gateway model"),
     prompt_ver: str = typer.Option(None, help="Freeze a prompt version"),
     output: str = typer.Option(None, help="Destination CSV"),
@@ -61,6 +64,9 @@ def concord(  # noqa: C901
     list_templates: bool = typer.Option(False, help="List available prompt templates"),
     verbose: bool = typer.Option(
         False, "--verbose", "-v", help="Show detailed evidence and explanations"
+    ),
+    sim_hint: bool = typer.Option(
+        False, "--sim-hint", help="Prefix similarity hint to LLM prompt"
     ),
 ):
     """
@@ -111,6 +117,9 @@ def concord(  # noqa: C901
             cfg_dict.setdefault("llm", {})["model"] = llm_model
         if prompt_ver:
             cfg_dict["prompt_ver"] = prompt_ver
+
+        # Add sim_hint flag to engine config
+        cfg_dict.setdefault("engine", {})["sim_hint"] = sim_hint
 
         # Add embedding options
         cfg_dict.setdefault("embedding", {})["device"] = device

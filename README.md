@@ -1,16 +1,15 @@
 # CONCORDIA
 *CONcordance of Curated & Original Raw Descriptions In Annotations*
 
-A toolkit for biomedical entity-relationship classification using embeddings and LLMs.
+A toolkit for annotation concordance and entity relationship classification using embeddings and LLMs.
 
 ## Features
 - **gateway-check**: Argo Gateway API connectivity check on startup
 - **local**: PubMedBERT embeddings → cosine similarity → heuristic labels
-- **zero-shot**: Single LLM call without similarity hints
-- **sim-hint**: Prefix similarity hint to LLM prompt
-- **vote**: Three LLM calls at different temperatures, majority vote
+- **zero-shot**: Single LLM call with optional similarity hints
+- **vote**: Multiple LLM calls with majority vote (with vote tracking)
 - **fallback**: Safe local fallback on errors
-- Template-driven prompt management with versioned external templates
+- Template-driven prompt management with versioned external templates (v1.x, v2, v2.1)
 - **list-templates**: List available prompt templates
 - **verbose**: Show detailed evidence and explanations
 
@@ -26,9 +25,9 @@ pip install -e .
 ## Quickstart
 **CLI**
 ```bash
+# Simplified command structure (single invocation)
 concord data/pairs.csv --mode zero-shot --output results.csv
 concord data/pairs.csv --mode local --output local.csv
-concord data/pairs.csv --mode sim-hint --output results_simhint.csv
 concord data/pairs.csv --mode vote --output results_vote.csv
 concord --list-templates
 ```
@@ -44,9 +43,10 @@ print(label, sim, evidence)
 ```yaml
 engine:
   mode: zero-shot
+  sim_hint: false      # Optional: prefix similarity hint to prompts
 
 llm:
-  model: gpt4o       # use without hyphens
+  model: gpt4o        # use without hyphens
   stream: false
   user: ${ARGO_USER}
 
@@ -55,7 +55,9 @@ local:
 ```
 
 ### Configuration Fields
-- `engine.mode`: select mode (`local`, `zero-shot`, `sim-hint`, `vote`, `fallback`)
+- `engine.mode`: select mode (`local`, `zero-shot`, `vote`)
+- `engine.sim_hint`: boolean flag to prefix cosine similarity hint to LLM prompts (default: false)
+- `engine.sim_threshold`: similarity threshold for local mode (default: 0.98)
 - `llm.model`: Gateway model name (e.g. `gpt4o`)
 - `llm.stream`: `true` to use streaming `/streamchat/` endpoint
 - `llm.user`: Argo Gateway username (via `ARGO_USER`)
