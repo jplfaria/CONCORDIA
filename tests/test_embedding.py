@@ -7,8 +7,14 @@ from unittest import mock
 
 import torch
 
-from concord.embedding import (batch_embed, clear_cache, cosine_sim,
-                               embed_sentence, preload_model, similarity)
+from concord.embedding import (
+    batch_embed,
+    clear_cache,
+    cosine_sim,
+    embed_sentence,
+    preload_model,
+    similarity,
+)
 
 
 class TestEmbedding(unittest.TestCase):

@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import functools
 import logging
+import threading
 import time
 from typing import Any, Callable, Dict, List, Optional
 
@@ -26,6 +27,7 @@ _MODEL_ID = "NeuML/pubmedbert-base-embeddings"
 _model: SentenceTransformer | None = None
 _embedding_cache: Dict[str, torch.Tensor] = {}
 _MAX_CACHE_SIZE = 10000  # Maximum number of cached embeddings
+_cache_lock = threading.RLock()  # Lock for thread safety
 
 try:
     from sentence_transformers import SentenceTransformer, util
@@ -91,15 +93,17 @@ def _get_model(device: Optional[str] = None) -> SentenceTransformer:
 def _manage_cache() -> None:
     """
     Manage the embedding cache size, removing least recently used items if needed.
+    Thread-safe with lock protection.
     """
     global _embedding_cache
-    if len(_embedding_cache) > _MAX_CACHE_SIZE:
-        # Remove 20% of the cache (the oldest entries)
-        remove_count = int(0.2 * len(_embedding_cache))
-        keys_to_remove = list(_embedding_cache.keys())[:remove_count]
-        for key in keys_to_remove:
-            del _embedding_cache[key]
-        logger.debug(f"Cache cleaned: removed {remove_count} entries")
+    with _cache_lock:
+        if len(_embedding_cache) > _MAX_CACHE_SIZE:
+            # Remove 20% of the cache (the oldest entries)
+            remove_count = int(0.2 * len(_embedding_cache))
+            keys_to_remove = list(_embedding_cache.keys())[:remove_count]
+            for key in keys_to_remove:
+                del _embedding_cache[key]
+            logger.debug(f"Cache cleaned: removed {remove_count} entries")
 
 
 def with_retries(max_retries: int = 3, backoff_factor: float = 0.5) -> Callable:
@@ -141,9 +145,10 @@ def embed_sentence(text: str, cfg: Dict[str, Any] | None = None) -> torch.Tensor
     Returns:
         Tensor embedding of the text
     """
-    # Check if embedding is already in cache
-    if text in _embedding_cache:
-        return _embedding_cache[text]
+    # Check if embedding is already in cache (thread-safe)
+    with _cache_lock:
+        if text in _embedding_cache:
+            return _embedding_cache[text]
 
     # Extract device from config or use default
     device = "cpu"
@@ -154,9 +159,10 @@ def embed_sentence(text: str, cfg: Dict[str, Any] | None = None) -> torch.Tensor
         model = _get_model(device)
         embedding = model.encode(text, convert_to_tensor=True, device=device)
 
-        # Cache the result
-        _embedding_cache[text] = embedding
-        _manage_cache()
+        # Cache the result (thread-safe)
+        with _cache_lock:
+            _embedding_cache[text] = embedding
+            _manage_cache()
 
         return embedding
     except Exception as e:
@@ -183,17 +189,18 @@ def batch_embed(
     if cfg and "embedding" in cfg:
         device = cfg.get("embedding", {}).get("device", "cpu")
 
-    # Filter texts that are already cached
+    # Filter texts that are already cached (thread-safe)
     new_texts = []
     new_indices = []
     results = [None] * len(texts)
 
-    for i, text in enumerate(texts):
-        if text in _embedding_cache:
-            results[i] = _embedding_cache[text]
-        else:
-            new_texts.append(text)
-            new_indices.append(i)
+    with _cache_lock:
+        for i, text in enumerate(texts):
+            if text in _embedding_cache:
+                results[i] = _embedding_cache[text]
+            else:
+                new_texts.append(text)
+                new_indices.append(i)
 
     # If all embeddings were cached, return early
     if not new_texts:
@@ -211,14 +218,35 @@ def batch_embed(
             embeddings = model.encode(batch, convert_to_tensor=True, device=device)
             elapsed = time.time() - start_time
 
+            # Fix #5: Check for unexpected batch length from model
+            if len(embeddings) != len(batch):
+                logger.warning(
+                    f"Model returned {len(embeddings)} embeddings for {len(batch)} texts"
+                )
+                # Handle mismatch by padding or truncating as needed
+                if len(embeddings) < len(batch):
+                    # Pad with zeros if we got fewer embeddings than expected
+                    logger.warning("Padding missing embeddings with zeros")
+                    zeros = torch.zeros_like(
+                        embeddings[0] if len(embeddings) > 0 else torch.zeros(768)
+                    )
+                    embeddings = list(embeddings) + [zeros] * (
+                        len(batch) - len(embeddings)
+                    )
+                else:
+                    # Truncate if we got more embeddings than expected
+                    logger.warning("Truncating extra embeddings")
+                    embeddings = embeddings[: len(batch)]
+
             logger.debug(f"Embedded batch of {len(batch)} texts in {elapsed:.2f}s")
 
-            # Store results and update cache
-            for j, embedding in enumerate(embeddings):
-                idx = batch_indices[j]
-                text = new_texts[j - i]
-                results[idx] = embedding
-                _embedding_cache[text] = embedding
+            # Store results and update cache (thread-safe)
+            with _cache_lock:
+                for j, embedding in enumerate(embeddings):
+                    idx = batch_indices[j]
+                    text = new_texts[j - i]
+                    results[idx] = embedding
+                    _embedding_cache[text] = embedding
 
         _manage_cache()
         return results

@@ -19,6 +19,14 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any, Callable, Dict, List, Optional, TypeVar, Union
 
+import numpy as np
+import pandas as pd
+from sklearn.metrics import (
+    accuracy_score,
+    confusion_matrix,
+    precision_recall_fscore_support,
+)
+
 logger = logging.getLogger(__name__)
 
 # Type variables
@@ -221,3 +229,187 @@ def timed(name: Optional[str] = None) -> Callable:
         return decorator(func)
 
     return decorator
+
+
+def evaluate_gold_standard(
+    predictions_path: Union[str, P.Path],
+    gold_standard_path: Union[str, P.Path],
+    relationship_column: str = "relationship",
+    pred_column1: str = "original_annotation",
+    pred_column2: str = "new_annotation",
+    output_path: Optional[Union[str, P.Path]] = None,
+) -> Dict[str, Any]:
+    """
+    Evaluate predictions against a gold standard dataset.
+
+    Args:
+        predictions_path: Path to the predictions CSV
+        gold_standard_path: Path to the gold standard CSV
+        relationship_column: Column containing relationship labels
+        pred_column1: First column used in predictions
+        pred_column2: Second column used in predictions
+        output_path: Optional path to save evaluation results
+
+    Returns:
+        Dictionary with evaluation metrics
+    """
+    logger.info(f"Evaluating predictions against gold standard: {gold_standard_path}")
+
+    # Load data
+    try:
+        gold_df = pd.read_csv(gold_standard_path)
+        pred_df = pd.read_csv(predictions_path)
+    except Exception as e:
+        logger.error(f"Failed to load data: {e}")
+        raise
+
+    # Fallback: if predictions use 'label' instead of the expected relationship_column
+    if relationship_column not in pred_df.columns and "label" in pred_df.columns:
+        logger.warning(
+            f"Prediction file missing '{relationship_column}', using 'label' column instead."
+        )
+        pred_df[relationship_column] = pred_df["label"]
+
+    # Extract true and predicted labels
+    y_true = gold_df[relationship_column].values
+
+    # Ensure prediction dataframe has the same structure
+    required_columns = [pred_column1, pred_column2, relationship_column]
+    if not all(col in pred_df.columns for col in required_columns):
+        missing = [col for col in required_columns if col not in pred_df.columns]
+        raise ValueError(f"Prediction file missing required columns: {missing}")
+
+    y_pred = pred_df[relationship_column].values
+
+    # Calculate metrics
+    metrics_dict = calculate_classification_metrics(y_true, y_pred)
+
+    # Save results if requested
+    if output_path:
+        try:
+            with open(output_path, "w") as f:
+                json.dump(metrics_dict, f, indent=2)
+            logger.info(f"Evaluation metrics saved to {output_path}")
+        except IOError as e:
+            logger.error(f"Failed to save evaluation metrics to {output_path}: {e}")
+
+    return metrics_dict
+
+
+def calculate_classification_metrics(
+    y_true: np.ndarray, y_pred: np.ndarray
+) -> Dict[str, Any]:
+    """
+    Calculate classification metrics.
+
+    Args:
+        y_true: Array of true labels
+        y_pred: Array of predicted labels
+
+    Returns:
+        Dictionary with evaluation metrics
+    """
+    # Get unique classes
+    classes = np.unique(np.concatenate([y_true, y_pred]))
+
+    # Calculate overall accuracy
+    accuracy = accuracy_score(y_true, y_pred)
+
+    # Calculate precision, recall, and F1 score for each category
+    precision, recall, f1, support = precision_recall_fscore_support(
+        y_true, y_pred, labels=classes, zero_division=0
+    )
+
+    # Calculate weighted F1-score
+    weighted_f1 = np.sum(f1 * support) / np.sum(support) if np.sum(support) > 0 else 0
+
+    # Create confusion matrix
+    cm = confusion_matrix(y_true, y_pred, labels=classes)
+
+    # Build results dictionary
+    metrics_dict = {
+        "overall": {"accuracy": float(accuracy), "weighted_f1": float(weighted_f1)},
+        "per_class": {},
+        "confusion_matrix": {"matrix": cm.tolist(), "classes": classes.tolist()},
+    }
+
+    # Add per-class metrics
+    for i, cls in enumerate(classes):
+        metrics_dict["per_class"][str(cls)] = {
+            "precision": float(precision[i]),
+            "recall": float(recall[i]),
+            "f1": float(f1[i]),
+            "support": int(support[i]),
+        }
+
+    return metrics_dict
+
+
+def print_evaluation_summary(metrics_dict: Dict[str, Any]) -> None:
+    """
+    Print a human-readable summary of evaluation metrics.
+
+    Args:
+        metrics_dict: Dictionary with evaluation metrics
+    """
+    print("\n===== EVALUATION METRICS =====")
+    print(f"Overall Accuracy: {metrics_dict['overall']['accuracy']:.4f}")
+    print(f"Weighted F1-Score: {metrics_dict['overall']['weighted_f1']:.4f}")
+
+    print("\nPer-Class Metrics:")
+    for cls, metrics in metrics_dict["per_class"].items():
+        print(f"  {cls}:")
+        print(f"    Precision: {metrics['precision']:.4f}")
+        print(f"    Recall: {metrics['recall']:.4f}")
+        print(f"    F1-Score: {metrics['f1']:.4f}")
+        print(f"    Support: {metrics['support']}")
+
+    # Print confusion matrix
+    print("\nConfusion Matrix:")
+    classes = metrics_dict["confusion_matrix"]["classes"]
+    matrix = metrics_dict["confusion_matrix"]["matrix"]
+
+    # Format confusion matrix for display
+    cm_df = pd.DataFrame(matrix, index=classes, columns=classes)
+    print(cm_df)
+
+
+def plot_confusion_matrix(
+    metrics_dict: Dict[str, Any], output_path: Optional[Union[str, P.Path]] = None
+) -> None:
+    """
+    Plot confusion matrix and save to file.
+
+    Args:
+        metrics_dict: Dictionary with evaluation metrics
+        output_path: Path to save the plot (if None, will display instead)
+    """
+    try:
+        import matplotlib.pyplot as plt
+        import seaborn as sns
+
+        classes = metrics_dict["confusion_matrix"]["classes"]
+        matrix = metrics_dict["confusion_matrix"]["matrix"]
+
+        plt.figure(figsize=(10, 8))
+        sns.heatmap(
+            matrix,
+            annot=True,
+            fmt="d",
+            cmap="Blues",
+            xticklabels=classes,
+            yticklabels=classes,
+        )
+        plt.xlabel("Predicted Label")
+        plt.ylabel("True Label")
+        plt.title("Confusion Matrix")
+
+        if output_path:
+            plt.savefig(output_path, bbox_inches="tight")
+            logger.info(f"Confusion matrix plot saved to {output_path}")
+        else:
+            plt.show()
+    except ImportError:
+        logger.warning(
+            "Matplotlib and/or seaborn not available. Cannot plot confusion matrix."
+        )

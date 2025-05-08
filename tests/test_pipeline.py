@@ -10,8 +10,16 @@ from unittest import mock
 import pandas as pd
 import yaml
 
-from concord.pipeline import (_annotate_pair, _duo_vote, _load_cfg, run_file,
-                              run_pair)
+from concord.constants import EVIDENCE_FIELD
+from concord.llm.argo_gateway import ArgoGatewayClient
+from concord.pipeline import (
+    _annotate_batch_chunk,
+    _annotate_pair,
+    _duo_vote,
+    _load_cfg,
+    run_file,
+    run_pair,
+)
 
 
 class TestPipeline(unittest.TestCase):
@@ -212,6 +220,52 @@ class TestPipeline(unittest.TestCase):
         # The suffix method in pathlib only returns the last extension (.csv)
         # So we need to check the full path string ends with .llm.csv
         self.assertTrue(str(output_path).endswith(".llm.csv"))
+
+    def test_annotate_batch_chunk(self, monkeypatch):
+        # Stub LLM chat to return two numbered responses
+        dummy = "1) Exact — reason one\n2) Different — reason two"
+        monkeypatch.setattr(
+            ArgoGatewayClient, "chat", lambda self, prompt, system=None: dummy
+        )
+        rows = [{"X": "alpha", "Y": "beta"}, {"X": "gamma", "Y": "delta"}]
+        res = _annotate_batch_chunk(
+            rows, {"llm": {"model": "dummy"}}, col_a="X", col_b="Y"
+        )
+        assert res == [
+            {
+                "label": "Exact",
+                "similarity": None,
+                "evidence": "reason one",
+                "conflict": False,
+            },
+            {
+                "label": "Different",
+                "similarity": None,
+                "evidence": "reason two",
+                "conflict": False,
+            },
+        ]
+
+    def test_run_file_batches(self, monkeypatch, tmp_path):
+        # Create input CSV
+        df = pd.DataFrame({"A": ["a1", "a2"], "B": ["b1", "b2"]})
+        in_file = tmp_path / "in.csv"
+        df.to_csv(in_file, index=False)
+        # Write config YAML
+        cfg = {"engine": {"mode": "zero-shot"}, "llm": {"model": "dummy"}}
+        cfg_file = tmp_path / "cfg.yml"
+        cfg_file.write_text(yaml.safe_dump(cfg))
+        # Stub chat to return two responses
+        dummy = "1) Exact — r1\n2) Synonym — r2"
+        monkeypatch.setattr(
+            ArgoGatewayClient, "chat", lambda self, prompt, system=None: dummy
+        )
+        # Run with llm_batch_size=2
+        out_path = run_file(in_file, cfg_file, col_a="A", col_b="B", llm_batch_size=2)
+        out_df = pd.read_csv(out_path)
+        # Verify relationships and evidence
+        assert out_df["relationship"].tolist() == ["Exact", "Synonym"]
+        assert out_df[EVIDENCE_FIELD].tolist() == ["r1", "r2"]
 
 
 if __name__ == "__main__":

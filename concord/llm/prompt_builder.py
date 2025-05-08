@@ -1,6 +1,8 @@
 # concord/llm/prompt_builder.py
 import logging
 
+from ..utils import validate_template
+
 logger = logging.getLogger(__name__)
 
 # Hardcoded fallback template for vote mode
@@ -28,9 +30,8 @@ def build_annotation_prompt(a: str, b: str, template: str = FALLBACK_TEMPLATE) -
     Fill {A}/{B} placeholders in the given template.
     Raises ValueError if placeholders are missing.
     """
-    if "{A}" not in template or "{B}" not in template:
-        logger.error(f"Template missing required placeholders: {template[:50]}...")
-        raise ValueError("Template missing required {A} or {B} placeholders")
+    # Use centralized validation function
+    validate_template(template)
     try:
         return template.format(A=a, B=b)
     except Exception as e:

@@ -5,10 +5,15 @@ Tests for the prompts module.
 import unittest
 from unittest import mock
 
-from concord.llm.prompts import (BucketPrompt, _validate_template,
-                                 build_annotation_prompt, choose_bucket,
-                                 get_prompt_template, list_available_templates,
-                                 save_template)
+from concord.llm.prompts import (
+    BucketPrompt,
+    _validate_template,
+    build_annotation_prompt,
+    choose_bucket,
+    get_prompt_template,
+    list_available_templates,
+    save_template,
+)
 
 
 class TestPrompts(unittest.TestCase):

@@ -22,6 +22,17 @@ concord data/pairs.csv --mode vote --prompt-ver v2.1 --output vote_results.csv
 concord data/pairs.tsv --mode zero-shot --col-a term1 --col-b term2 --sep '\t'
 ```
 
+## Evaluation
+
+After generating predictions, evaluate them against the gold standard:
+```bash
+python eval/evaluate_gold_standard.py \
+  --gold-standard eval/synthetic_gold_standard_v1.csv \
+  --predictions example_data/results_v2_zero.csv \
+  --relationship-column relationship \
+  --plot
+```
+
 ### Global Options
 
 ```
@@ -43,7 +54,7 @@ concord data/pairs.tsv --mode zero-shot --col-a term1 --col-b term2 --sep '\t'
 ### Output Files
 
 Vote mode outputs include:
-- `label`: The classification result
+- `relationship`: The classification result
 - `evidence`: Explanation for the result 
 - `duo_conflict`: Boolean indicating if there was disagreement
 - `votes`: Semicolon-separated list of individual votes

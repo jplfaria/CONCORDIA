@@ -24,6 +24,8 @@ import pathlib as P
 import re
 from typing import Any, Dict, List
 
+from ..utils import validate_template
+
 # Configure logging
 logger = logging.getLogger(__name__)
 
@@ -145,22 +147,9 @@ def _load_external_templates() -> None:
                     f"Loading template '{version}', content starts with: {content[:30]}..."
                 )
 
-                # Check for required placeholders
-                if "{A}" not in content or "{B}" not in content:
-                    logger.warning(
-                        f"Template '{version}' missing required {{A}} or {{B}} placeholders. Skipping."
-                    )
-                    continue
-
-                # Validate template
-                try:
-                    if not _validate_template(content):
-                        logger.warning(
-                            f"Template '{version}' failed validation. Skipping."
-                        )
-                        continue
-                except Exception as e:
-                    logger.error(f"Error validating template '{version}': {e}")
+                # Validate template using centralized function (no error raise)
+                if not validate_template(content, raise_error=False):
+                    logger.warning(f"Template '{version}' failed validation. Skipping.")
                     continue
 
                 # Add to templates dictionary - add BOTH with and without template_ prefix
@@ -388,13 +377,16 @@ def get_prompt_template(
                 # Fall back to header only
                 if key in _TEMPLATES:
                     logger.warning(f"Using header-only for {key} (no few-shots)")
-                    return _TEMPLATES[key]
+                    template = _TEMPLATES[key]
+                    validate_template(template)
+                    return template
                 raise ValueError(f"Prompt version '{key}' not found") from e
 
         # non-bucket, just return header
         if key in _TEMPLATES:
-            return _TEMPLATES[key]
-
+            template = _TEMPLATES[key]
+            validate_template(template)
+            return template
         raise ValueError(f"Prompt version '{key}' not found")
     except Exception as e:
         logger.error(f"Error getting prompt template: {e}")
@@ -453,7 +445,7 @@ def save_template(version: str, content: str) -> bool:
     Returns:
         True if save was successful, False otherwise
     """
-    if not _validate_template(content):
+    if not validate_template(content, raise_error=False):
         logger.warning(f"Cannot save invalid template: {version}")
         return False
 
@@ -505,5 +497,7 @@ class BucketPrompt:
 
         # Otherwise return a reasonable default
         if key in _TEMPLATES:
-            return _TEMPLATES[key] + "\n\n[Examples would be included here]"
+            template = _TEMPLATES[key]
+            validate_template(template)
+            return template + "\n\n[Examples would be included here]"
         raise ValueError(f"Unknown bucket key: {key}")

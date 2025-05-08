@@ -1,0 +1,25 @@
+gene_id,annotation_a,annotation_b,relationship,evidence
+fig|273133.2.peg.39,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,"Capitalization difference only, same meaning"
+fig|273133.2.peg.40,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,"Capitalization difference only, same meaning"
+fig|273133.2.peg.157,Phage tail fiber,Phage tail fiber protein,Narrower,"""Protein"" specifies the type of fiber, making it more specific"
+fig|273133.2.peg.54,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Different,Order and structure imply different emphasis or categorization
+fig|273133.2.peg.156,Phage tail fiber,Phage tail fiber protein,Narrower,"""Protein"" specifies the type of fiber, making it more specific"
+fig|273133.2.peg.166,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,EC number provides specific enzymatic classification
+fig|273133.2.peg.76,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,EC number provides specific enzymatic classification
+fig|273133.2.peg.183,Phage endolysin,Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,EC number and specific activity provide more detailed classification
+fig|273133.2.peg.185,HNH homing endonuclease,Phage homing endonuclease,Different,"Different types of endonucleases, one specific to phages"
+fig|273133.2.peg.188,"Phage lysin, N-acetylmuramoyl-L-alanine amidase",Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Synonym,Both terms describe the same enzyme activity with slight variation in naming
+fig|273133.2.peg.1,Phage repressor,Phage repressor protein,Synonym,"Both terms refer to the same entity, with ""protein"" being implied in the context of gene products"
+fig|273133.2.peg.193,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Synonym,"Both terms describe the same protein, with slight variation in phrasing"
+fig|374463.4.peg.296,Glucose-6-phosphate 1-dehydrogenase (EC 1.1.1.49),Glucose-6-phosphate 1-dehydrogenase (NADP+) (EC 1.1.1.49),Synonym,"Both terms refer to the same enzyme, with NADP+ specified in one but implied in the EC number"
+fig|374463.4.peg.298,Manganese transport protein MntH,"Mn(II) and Fe(II) import protein MntH, proton-dependent",Related,"Both terms refer to MntH, but the second specifies additional substrates and mechanism"
+fig|374463.4.peg.181,hypothetical protein,Outer membrane beta-barrel assembly protein BamD,Different,"""Hypothetical protein"" is a generic term, while ""BamD"" specifies a known protein"
+fig|374463.4.peg.282,Enoyl-[acyl-carrier-protein] reductase [NADH] (EC 1.3.1.9),Enoyl-[acyl-carrier-protein] reductase (NADH) (EC 1.3.1.9),Synonym,"Both terms refer to the same enzyme, with slight variation in phrasing"
+fig|374463.4.peg.161,Sulfate-binding protein Sbp,"Sulfate/thiosulfate ABC transporter, sulfate-binding protein Spb",Related,"Both terms refer to a sulfate-binding protein, but the second specifies additional function in thiosulfate transport"
+fig|374463.4.peg.166,Glutaredoxin 3 (Grx3),Glutaredoxin 3,Exact,"Both terms refer to the same protein, with ""Grx3"" being an abbreviation"
+fig|374463.4.peg.288,Cys regulon transcriptional activator CysB,"Cys regulon transcriptional activator CysB, LysR family",Related,"Both terms refer to CysB, but the second specifies its family classification"
+fig|374463.4.peg.289,DNA topoisomerase I (EC 5.99.1.2),DNA topoisomerase I (EC 5.6.2.1),Different,The EC numbers indicate different enzyme classifications
+fig|374463.4.peg.291,YciL protein,YciI protein,Different,YciL and YciI are distinct proteins with different functions or roles
+fig|374463.4.peg.170,Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23),Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23) (EC 4.2.99.18),Broader,"The second term includes an additional EC number, indicating a broader enzymatic activity"
+fig|374463.4.peg.182,LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23),LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23) ## RluD,Synonym,The second term includes an alternative name (RluD) for the same enzyme
+fig|374463.4.peg.185,tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228),tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228) ## TrmD,Synonym,The second term includes an alternative name (TrmD) for the same enzyme

@@ -55,6 +55,9 @@ def concord(  # noqa: C901
     overwrite: bool = typer.Option(False, help="Overwrite existing output file"),
     sep: str = typer.Option(None, help="Custom delimiter (e.g. '\\t')"),
     batch_size: int = typer.Option(32, help="Batch size for processing"),
+    llm_batch_size: int = typer.Option(
+        1, "--llm-batch-size", help="Aggregate N pairs into a single LLM request"
+    ),
     device: str = typer.Option("cpu", help="Device for embedding model (cpu/cuda)"),
     preload: bool = typer.Option(False, help="Preload embedding model"),
     log_level: str = typer.Option(
@@ -160,6 +163,7 @@ def concord(  # noqa: C901
                     overwrite=overwrite,
                     sep=sep,
                     batch_size=batch_size,
+                    llm_batch_size=llm_batch_size,
                 )
                 echo(f"[green]✓ wrote {out}[/green]")
             except Exception as e:

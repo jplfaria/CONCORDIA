@@ -139,30 +139,31 @@ class ArgoGatewayClient:
 def _parse(raw: str) -> tuple[str, str]:
     if not raw:
         return "Unknown", ""
+    # Remove leading/trailing whitespace and trailing period
     raw = raw.strip().rstrip(".")
 
-    # Log the raw response for debugging
+    # Debug raw response
     logging.debug(f"Raw LLM response: {raw}")
 
-    # More robust splitting that handles different formats
+    # Split on dash separators
     parts = _DASH.split(raw, maxsplit=1)
 
-    # Get the label, removing any markdown formatting
-    label_part = parts[0].strip()
-    label_part = label_part.replace("*", "").strip()
-
-    # Extract the first word as the label
-    label = label_part.split()[0].capitalize()
-
-    # Get the evidence part after the dash
-    note = parts[1].strip() if len(parts) > 1 else ""
-
-    # Apply any label aliases
-    label = _ALIAS.get(label, label)
-
-    if label not in LABEL_SET:
-        logging.warning(f"Unknown label: {label} from response: {raw}")
+    # Clean and extract raw label (strip quotes/punctuation)
+    label_part = parts[0].replace("*", "").strip()
+    label_raw = label_part.split()[0].strip("\"'")
+    # Normalize and apply alias
+    label_norm = label_raw.capitalize()
+    label_mapped = _ALIAS.get(label_norm, label_norm)
+    # Case-insensitive match against known labels
+    valid_map = {lbl.lower(): lbl for lbl in LABEL_SET}
+    if label_mapped.lower() in valid_map:
+        label = valid_map[label_mapped.lower()]
+    else:
+        logging.warning(f"Unknown label: {label_mapped} from response: {raw}")
         return "Unknown", raw
+
+    # Extract evidence text if present
+    note = parts[1].strip() if len(parts) > 1 else ""
 
     return label, note
 

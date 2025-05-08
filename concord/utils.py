@@ -165,3 +165,24 @@ def chunked(items: List[T], chunk_size: int) -> List[List[T]]:
         List of chunks
     """
     return [items[i : i + chunk_size] for i in range(0, len(items), chunk_size)]
+
+
+def validate_template(template: str, raise_error: bool = True) -> bool:
+    """
+    Validate that a template contains required placeholders.
+
+    Args:
+        template: Template string to validate
+        raise_error: Whether to raise an error when validation fails
+
+    Returns:
+        True if template is valid, False otherwise
+
+    Raises:
+        ValueError: If template is invalid and raise_error is True
+    """
+    is_valid = "{A}" in template and "{B}" in template
+    if not is_valid and raise_error:
+        logger.error(f"Template missing required placeholders: {template[:50]}...")
+        raise ValueError("Template missing required {A} or {B} placeholders")
+    return is_valid

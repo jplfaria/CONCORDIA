@@ -40,6 +40,8 @@ def annotate_zero_shot(a: str, b: str, cfg: Any) -> dict[str, Any]:
 
 def annotate_vote(a: str, b: str, cfg: Any) -> dict[str, Any]:
     """Vote mode: three LLM calls at different temps with optional similarity hint"""
+    # Allow configurable vote temperatures: default [0.8, 0.2, 0.0]
+    temps = cfg["engine"].get("vote_temps", [0.8, 0.2, 0.0])
     # Compute similarity hint once if enabled
     sim = None
     if cfg["engine"].get("sim_hint", False):
@@ -71,8 +73,8 @@ def annotate_vote(a: str, b: str, cfg: Any) -> dict[str, Any]:
         return parts[0].strip("*- "), ""
 
     try:
-        l1, e1 = get_vote(0.8)
-        l2, e2 = get_vote(0.2)
+        l1, e1 = get_vote(temps[0])
+        l2, e2 = get_vote(temps[1])
         if l1 == l2:
             return {
                 "label": l1,
@@ -81,7 +83,7 @@ def annotate_vote(a: str, b: str, cfg: Any) -> dict[str, Any]:
                 "conflict": False,
                 "votes": [l1, l2],
             }
-        l3, e3 = get_vote(0.0)
+        l3, e3 = get_vote(temps[2] if len(temps) > 2 else 0.0)
         votes = [l1, l2, l3]
         winner = max(set(votes), key=votes.count)
         evidence = {l1: e1, l2: e2, l3: e3}[winner]
@@ -98,9 +100,10 @@ def annotate_vote(a: str, b: str, cfg: Any) -> dict[str, Any]:
 
 
 def annotate_fallback(a: str, b: str, cfg: Any, err: Exception) -> dict[str, Any]:
-    """Fallback mode on error: log clearly and do sim-only"""
-    logger.error(f"FALLBACK MODE ACTIVATED: {err}")
+    """Fallback mode on error: log clearly with error type and do sim-only"""
+    err_type = type(err).__name__
+    logger.error(f"FALLBACK MODE ACTIVATED: {err_type}: {err}")
     base = annotate_local(a, b, cfg)
-    base["evidence"] += f"  [FALLBACK—LLM failed: {err}]"
+    base["evidence"] += f"  [FALLBACK—{err_type}: {err}]"
     base["conflict"] = True
     return base
