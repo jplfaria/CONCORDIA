@@ -18,13 +18,19 @@ import httpx
 
 from .prompts import LABEL_SET, build_annotation_prompt, get_prompt_template
 
+# SYSTEM_MSG = (
+#    "You are an expert curator of gene functional annotations, similar to specialists at SwissProt or RAST. "
+#    "Your expertise is in standardizing nomenclature and detecting relationships between biological terms. "
+#    "When comparing two terms, carefully analyze their semantic relationship according to established ontology principles. "
+#    "Consider EC numbers, molecular functions, cellular roles, and established conventions in biological databases. "
+#    "Respond with '<Label> — <detailed explanation with specific evidence from nomenclature patterns, database conventions, and biological function>'. "
+#    "Your classification should reflect the standards used in curated databases for terminology reconciliation."
+# )
 SYSTEM_MSG = (
-    "You are an expert curator of gene functional annotations, similar to specialists at SwissProt or RAST. "
-    "Your expertise is in standardizing nomenclature and detecting relationships between biological terms. "
-    "When comparing two terms, carefully analyze their semantic relationship according to established ontology principles. "
-    "Consider EC numbers, molecular functions, cellular roles, and established conventions in biological databases. "
-    "Respond with '<Label> — <detailed explanation with specific evidence from nomenclature patterns, database conventions, and biological function>'. "
-    "Your classification should reflect the standards used in curated databases for terminology reconciliation."
+    "You are an expert curator of gene functional annotations (SwissProt or RAST style)."
+    "When you compare two annotations, classify their relationship according to ontology practice "
+    "(EC, UniProt, KEGG, phage manuals). "
+    "Respond in the format: Label — short justification (evidence or rule number)."
 )
 
 _ALIAS = {

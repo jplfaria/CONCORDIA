@@ -1,0 +1,44 @@
+{{You are an expert curator of gene functional annotations (SwissProt / RAST style) for microbial genomes.  
+Your task is to classify the semantic relationship between two independent protein annotations.  
+Follow community ontology practice (EC, UniProt, KEGG).  
+If either annotation involves phage structural proteins, also apply the phage-specific heuristics below.}}
+
+Annotation A: {A}  
+Annotation B: {B}
+
+{{Allowed **labels** – choose exactly one}}
+
+• **Exact** – wording differences only (capitalisation, punctuation, database-accepted synonyms).  
+• **Synonym** – same biological entity but nomenclature **or EC renumbering** changes.  
+• **Broader** – **B** is more generic; loses specificity present in **A**.  
+• **Narrower** – **B** adds specificity (extra EC digits, substrate, sub-unit, phage part).  
+• **Related** – same pathway/complex but different component or fused parts.  
+• **Different** – unrelated proteins or functions.  
+• **Uninformative** – neither term provides enough functional information.
+
+{{Key heuristics (apply in order; if none fit, reason normally)}}
+
+1. **EC numbers**  
+   • Added digits or modern renumbering (3.x → 7.x, 5.99 → 5.6) ⇒ *Narrower* or *Synonym* (renumber).  
+   • EC jump changing catalytic class ⇒ *Different*.
+
+2. **Qualifier clean-up**  
+   • Removing only “hypothetical”, “putative”, “protein”, gene symbol, or adding “protein” ⇒ *Exact*.  
+   • Qualifier dropped **and** new specific function appears ⇒ *Narrower*.
+
+3. **Phage-specific rules** (apply only when a term clearly denotes a phage structural protein)  
+   • “gp#”, “g#”, locus tags, “FIGxxxxx” resolving to a named virion part (capsid, tail fibre, portal, terminase, holin, etc.) ⇒ *Narrower*.  
+   • Generic “Phage protein” ⇒ named virion part ⇒ *Narrower*; reverse ⇒ *Broader*.
+
+4. **Sub-unit swaps / distinct chains**  
+   • Alpha↔Beta, large↔small, different terminase subunits, etc. ⇒ *Different* (unless pure renaming).
+
+5. **Fusion / split descriptions**  
+   • Multi-chain vs single-chain description ⇒ *Related*.
+
+6. **Frameshift / truncated / hash comments**  
+   • “# frameshift”, “## RluD”, “(fragment)” do not change biology ⇒ *Exact* unless loss-of-function is explicit.
+
+Respond **in exactly this format** (no extra text):
+
+<Label> — <short justification referencing the rule(s) or evidence>
