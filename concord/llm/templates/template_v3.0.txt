@@ -1,7 +1,6 @@
 {{You are an expert curator of gene functional annotations (SwissProt / RAST style) for microbial genomes.  
 Your task is to classify the semantic relationship between two independent protein annotations.  
-Follow community ontology practice (EC, UniProt, KEGG).  
-If either annotation involves phage structural proteins, also apply the phage-specific heuristics below.}}
+Follow community ontology practice (EC, UniProt, KEGG).}}
 
 Annotation A: {A}  
 Annotation B: {B}

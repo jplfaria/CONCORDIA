@@ -27,7 +27,13 @@ from tqdm import tqdm
 from .embedding import cosine_sim, embed_sentence  # local model
 from .llm.argo_gateway import SYSTEM_MSG, ArgoGatewayClient, _parse, llm_label
 from .llm.prompt_builder import build_annotation_prompt
-from .modes import annotate_fallback, annotate_local, annotate_vote, annotate_zero_shot
+from .modes import (
+    annotate_fallback,
+    annotate_local,
+    annotate_rac,
+    annotate_vote,
+    annotate_zero_shot,
+)
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -38,7 +44,7 @@ SIM_FIELD = "similarity_Pubmedbert"
 CONFLICT_FIELD = "duo_conflict"
 
 # Define types for better annotation
-EngineMode = Literal["local", "zero-shot", "vote"]
+EngineMode = Literal["local", "zero-shot", "vote", "rac"]
 
 
 # ──────────────────────────── types ───────────────────────────────
@@ -91,6 +97,7 @@ _ENGINE_MAP: dict[str, Any] = {
     "local": annotate_local,
     "zero-shot": annotate_zero_shot,
     "vote": annotate_vote,
+    "rac": annotate_rac,
 }
 
 

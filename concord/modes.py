@@ -107,3 +107,87 @@ def annotate_fallback(a: str, b: str, cfg: Any, err: Exception) -> dict[str, Any
     base["evidence"] += f"  [FALLBACK—{err_type}: {err}]"
     base["conflict"] = True
     return base
+
+
+def annotate_rac(a: str, b: str, cfg: Any) -> dict[str, Any]:
+    """Retrieval-augmented classification using similar examples.
+
+    This mode enhances LLM classification by retrieving similar examples
+    from the vector store and including them in the prompt to provide
+    context for the classification decision.
+
+    Args:
+        a: First text to compare
+        b: Second text to compare
+        cfg: Configuration dictionary
+
+    Returns:
+        Dictionary with classification results
+    """
+    from .embedding import cosine_sim, embed_sentence
+    from .pipeline import _call_llm
+    from .retrieval import add_classification_example, retrieve_similar_examples
+
+    # Get similarity score if enabled
+    sim = None
+    if cfg["engine"].get("sim_hint", False):
+        sim = cosine_sim(embed_sentence(a, cfg), embed_sentence(b, cfg))
+
+    # Retrieve similar examples
+    rac_cfg = cfg.get("rac", {})
+    limit = rac_cfg.get("example_limit", 3)
+    threshold = rac_cfg.get("similarity_threshold", 0.0)
+    examples = retrieve_similar_examples(a, b, cfg, limit=limit, threshold=threshold)
+
+    # Build a prompt with the examples and optional similarity hint
+    base_prompt = get_prompt_template(cfg)
+
+    # Add examples section if we have examples
+    if examples:
+        example_text = (
+            "\n\nHere are some similar previously classified pairs for reference:\n\n"
+        )
+        for i, (ex, score) in enumerate(examples, 1):
+            example_text += f"Example {i} (similarity: {score:.3f}):\n"
+            example_text += f"A: {ex['text_a']}\n"
+            example_text += f"B: {ex['text_b']}\n"
+            example_text += f"Label: {ex['label']}\n"
+            example_text += f"Reason: {ex['evidence']}\n\n"
+
+        # Insert examples before the final prompt instruction
+        parts = base_prompt.rsplit("\n\n", 1)
+        if len(parts) == 2:
+            prompt = parts[0] + example_text + "\n\n" + parts[1]
+        else:
+            prompt = base_prompt + example_text
+    else:
+        prompt = base_prompt
+
+    # Add similarity hint if enabled
+    if sim is not None:
+        hint = f"Cosine similarity between entities is {sim:.3f}"
+        prompt = f"{hint}\n\n{prompt}"
+
+    try:
+        # Get LLM response
+        label, evidence = _call_llm(a, b, prompt, cfg)
+
+        # Add to vector store if configured for auto-learning
+        if rac_cfg.get("auto_store", False) and not cfg.get("test_mode", False):
+            metadata = {
+                "source": "auto_classified",
+                "similarity": sim,
+                "examples_used": len(examples),
+            }
+            add_classification_example(a, b, label, evidence, cfg, metadata)
+
+        return {
+            "label": label,
+            "similarity": sim,
+            "evidence": evidence,
+            "conflict": False,
+            "examples_used": len(examples),
+        }
+    except Exception as err:
+        logger.error(f"RAC mode failed: {err}")
+        return annotate_fallback(a, b, cfg, err)
