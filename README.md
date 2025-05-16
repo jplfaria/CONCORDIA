@@ -49,10 +49,10 @@ Manually add any missing packages to `pyproject.toml` under `[tool.poetry.depend
 **CLI**
 ```bash
 # Simplified command structure (single invocation)
-concord data/pairs.csv --mode zero-shot --output results.csv
-concord data/pairs.csv --mode local --output local.csv
-concord data/pairs.csv --mode vote --output results_vote.csv
-concord data/pairs.csv --mode rac --output results_rac.csv
+concord example_data/annotations_test.csv --mode zero-shot --llm-model gpt4o
+concord example_data/annotations_test.csv --mode local --output local.csv
+concord example_data/annotations_test.csv --mode vote --output results_vote.csv
+concord example_data/annotations_test.csv --mode rac --output results_rac.csv
 
 # Direct text comparison (no CSV required)
 concord --text-a "Entity A" --text-b "Entity B" --mode zero-shot
@@ -61,7 +61,7 @@ concord --text-a "Entity A" --text-b "Entity B" --mode zero-shot
 concord --list-templates
 
 # Control batch processing
-concord data/pairs.csv --batch-size 32 --llm-batch-size 12
+concord example_data/annotations_test.csv --batch-size 32 --llm-batch-size 12
 ```
 
 **Python**
@@ -146,7 +146,7 @@ RAC mode currently has several limitations being actively worked on:
 mkdir -p data
 
 # Run with RAC mode (will build up examples over time)
-concord data/pairs.csv --mode rac --output results_rac.csv
+concord example_data/annotations_test.csv --mode rac --output results_rac.csv
 ```
 
 ## Documentation

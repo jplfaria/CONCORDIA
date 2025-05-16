@@ -1,0 +1,25 @@
+gene_id,annotation_a,annotation_b,relationship,similarity_Pubmedbert,evidence
+fig|273133.2.peg.39,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,1.0,"wording differences only (capitalisation, punctuation)"
+fig|273133.2.peg.40,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,1.0,wording differences only; capitalization and punctuation are the same
+fig|273133.2.peg.157,Phage tail fiber,Phage tail fiber protein,Exact,0.944,"Adding ""protein"" is a qualifier clean-up (Rule 2)"
+fig|273133.2.peg.54,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,0.952,wording differences only; both denote the same phage structural protein
+fig|273133.2.peg.156,Phage tail fiber,Phage tail fiber protein,Exact,0.944,"Adding ""protein"" does not change the functional meaning (Qualifier clean-up rule)"
+fig|273133.2.peg.166,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,0.716,EC number adds specificity to phage DNA helicase
+fig|273133.2.peg.76,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,0.716,EC number 3.6.4.12 adds specificity to Annotation B (Rule 1)
+fig|273133.2.peg.183,Phage endolysin,Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,0.576,"B specifies EC number and substrate, adding specificity to A"
+fig|273133.2.peg.185,HNH homing endonuclease,Phage homing endonuclease,Broader,0.783,"""Phage"" is more generic than ""HNH"" in endonuclease context"
+fig|273133.2.peg.188,"Phage lysin, N-acetylmuramoyl-L-alanine amidase",Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Exact,0.867,wording differences only; both describe the same enzyme with EC 3.5.1.28
+fig|273133.2.peg.1,Phage repressor,Phage repressor protein,Exact,0.926,"Adding ""protein"" is a qualifier clean-up (Rule 2)"
+fig|273133.2.peg.193,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,0.952,wording differences only; both denote the same phage structural protein
+fig|374463.4.peg.296,Glucose-6-phosphate 1-dehydrogenase (EC 1.1.1.49),Glucose-6-phosphate 1-dehydrogenase (NADP+) (EC 1.1.1.49),Exact,0.967,wording differences only; both annotations share the same EC number
+fig|374463.4.peg.298,Manganese transport protein MntH,"Mn(II) and Fe(II) import protein MntH, proton-dependent",Narrower,0.665,Annotation B specifies additional substrate (Fe(II)) and mechanism (proton-dependent)
+fig|374463.4.peg.181,hypothetical protein,Outer membrane beta-barrel assembly protein BamD,Different,0.394,Annotation A is uninformative; Annotation B specifies a distinct protein function
+fig|374463.4.peg.282,Enoyl-[acyl-carrier-protein] reductase [NADH] (EC 1.3.1.9),Enoyl-[acyl-carrier-protein] reductase (NADH) (EC 1.3.1.9),Exact,0.999,wording differences only; EC numbers and function are identical
+fig|374463.4.peg.161,Sulfate-binding protein Sbp,"Sulfate/thiosulfate ABC transporter, sulfate-binding protein Spb",Narrower,0.76,"B specifies thiosulfate binding, adding specificity to A's sulfate-binding function"
+fig|374463.4.peg.166,Glutaredoxin 3 (Grx3),Glutaredoxin 3,Exact,0.864,wording differences only; both annotations are identical
+fig|374463.4.peg.288,Cys regulon transcriptional activator CysB,"Cys regulon transcriptional activator CysB, LysR family",Narrower,0.901,"B specifies the LysR family, adding specificity to A"
+fig|374463.4.peg.289,DNA topoisomerase I (EC 5.99.1.2),DNA topoisomerase I (EC 5.6.2.1),Different,0.965,EC jump changes catalytic class (5.99 to 5.6)
+fig|374463.4.peg.291,YciL protein,YciI protein,Uninformative,0.835,Both annotations lack specific functional information beyond gene symbols
+fig|374463.4.peg.170,Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23),Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23) (EC 4.2.99.18),Narrower,0.963,"Annotation B adds EC 4.2.99.18, indicating additional specificity"
+fig|374463.4.peg.182,LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23),LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23) ## RluD,Exact,0.936,"""## RluD"" is a hash comment; does not change biological function (Rule 6)"
+fig|374463.4.peg.185,tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228),tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228) ## TrmD,Exact,0.942,"wording differences only; gene symbol ""TrmD"" does not alter function"
