@@ -24,14 +24,17 @@ concord data/pairs.tsv --mode zero-shot --col-a term1 --col-b term2 --sep '\t'
 
 ## Evaluation
 
-After generating predictions, evaluate them against the gold standard:
+After generating predictions (e.g., from a benchmark run as described in the [Benchmarking Workflow](benchmarking.md)), evaluate them against the gold standard using `eval/evaluate_suite.py`.
+
 ```bash
-python eval/evaluate_gold_standard.py \
-  --gold-standard eval/synthetic_gold_standard_v1.csv \
-  --predictions example_data/results_v2_zero.csv \
-  --relationship-column relationship \
+python eval/evaluate_suite.py \
+  --gold eval/datasets/Benchmark_subset__200_pairs_v1.csv \
+  --pred-dir eval/results/your_benchmark_run_timestamp_dir \
+  --pattern "**/*.csv" \
+  --out eval/results/your_benchmark_run_timestamp_dir/evaluation_output \
   --plot
 ```
+Replace `your_benchmark_run_timestamp_dir` with the specific output directory of your benchmark run.
 
 ### Global Options
 

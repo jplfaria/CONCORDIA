@@ -72,14 +72,19 @@ print(label, sim, evidence)
 ```
 
 ## Evaluation
-After generating predictions, evaluate them against the gold standard:
+After generating predictions (e.g., from a benchmark run), evaluate them against the gold standard using `eval/evaluate_suite.py`.
+For detailed instructions on running benchmark suites and evaluation, see the [Benchmarking Workflow](docs/benchmarking.md).
+
+Example evaluation command:
 ```bash
-python eval/evaluate_gold_standard.py \
-  --gold-standard eval/synthetic_gold_standard_v1.csv \
-  --predictions example_data/results_v2_zero.csv \
-  --relationship-column relationship \
+python eval/evaluate_suite.py \
+  --gold eval/datasets/Benchmark_subset__200_pairs_v1.csv \
+  --pred-dir eval/results/your_benchmark_run_timestamp_dir \
+  --pattern "**/*.csv" \
+  --out eval/results/your_benchmark_run_timestamp_dir/evaluation_output \
   --plot
 ```
+Replace `your_benchmark_run_timestamp_dir` with the specific output directory of your benchmark run.
 
 ## Configuration (`config.yaml`)
 ```yaml
