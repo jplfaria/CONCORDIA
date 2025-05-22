@@ -1,0 +1,49 @@
+2025-05-21 01:01:59,313 [INFO] concord.llm.prompts: Loaded external template: v1.1-enzyme
+2025-05-21 01:01:59,313 [INFO] concord.llm.prompts: Loaded external template: v2
+2025-05-21 01:01:59,313 [INFO] concord.llm.prompts: Loaded external template: v2.1
+2025-05-21 01:01:59,313 [INFO] concord.llm.prompts: Loaded external template: v3.0-CoT
+2025-05-21 01:01:59,313 [INFO] concord.llm.prompts: Loaded external template: v3.1-CoT
+2025-05-21 01:01:59,313 [INFO] concord.llm.prompts: Loaded external template: v1.2-general
+2025-05-21 01:01:59,313 [INFO] concord.llm.prompts: Loaded external template: v1.3-test
+2025-05-21 01:01:59,313 [INFO] concord.llm.prompts: Loaded external template: v1.1-phage
+2025-05-21 01:01:59,313 [INFO] concord.llm.prompts: Loaded external template: v1.0
+2025-05-21 01:01:59,313 [INFO] concord.llm.prompts: Loaded external template: v3.0
+2025-05-21 01:01:59,313 [INFO] concord.llm.prompts: Loaded external template: v1.1-general
+2025-05-21 01:01:59,313 [INFO] concord.llm.prompts: Loaded external template: v3.1
+2025-05-21 01:01:59,313 [INFO] concord.llm.prompts: Loaded external template: v0.0_bug_test
+2025-05-21 01:01:59,317 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Argo Gateway API reachable
+Processing:   0%|          | 0/200 [00:00<?, ?row/s]2025-05-21 01:02:02,809 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  10%|█         | 20/200 [00:17<02:36,  1.15row/s]
+Aborted.
+Processing:  10%|█         | 20/200 [00:17<02:36,  1.15row/s]
+[1/2] Running MODE=zero-shot, PROMPT=v1.0, SIM_HINT=no -> eval/results/benchmark_run_20250521_005756/gpto1/gpto1_v1.0_zero.csv
+Traceback (most recent call last):
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 1264, in wait
+    return self._wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 2053, in _wait
+    (pid, sts) = self._try_wait(0)
+                 ^^^^^^^^^^^^^^^^^
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 2011, in _try_wait
+    (pid, sts) = os.waitpid(self.pid, wait_flags)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jplfaria/repos/CONCORDIA/eval/scripts/benchmark_runner.py", line 87, in <module>
+    main()
+  File "/Users/jplfaria/repos/CONCORDIA/eval/scripts/benchmark_runner.py", line 83, in main
+    subprocess.run(cmd, check=True)
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 1201, in communicate
+    self.wait()
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 1277, in wait
+    self._wait(timeout=sigint_timeout)
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 2047, in _wait
+    time.sleep(delay)
+KeyboardInterrupt

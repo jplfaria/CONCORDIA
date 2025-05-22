@@ -16,6 +16,7 @@ from typing import Optional, Tuple
 
 import httpx
 from dotenv import load_dotenv
+
 from .prompts import LABEL_SET, build_annotation_prompt, get_prompt_template
 
 # Load environment variables from .env file

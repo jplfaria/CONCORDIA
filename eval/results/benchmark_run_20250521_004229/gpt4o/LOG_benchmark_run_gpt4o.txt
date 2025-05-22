@@ -1,0 +1,62 @@
+2025-05-21 00:42:31,269 [INFO] concord.llm.prompts: Loaded external template: v1.1-enzyme
+2025-05-21 00:42:31,269 [INFO] concord.llm.prompts: Loaded external template: v2
+2025-05-21 00:42:31,269 [INFO] concord.llm.prompts: Loaded external template: v2.1
+2025-05-21 00:42:31,269 [INFO] concord.llm.prompts: Loaded external template: v3.0-CoT
+2025-05-21 00:42:31,270 [INFO] concord.llm.prompts: Loaded external template: v3.1-CoT
+2025-05-21 00:42:31,270 [INFO] concord.llm.prompts: Loaded external template: v1.2-general
+2025-05-21 00:42:31,270 [INFO] concord.llm.prompts: Loaded external template: v1.3-test
+2025-05-21 00:42:31,270 [INFO] concord.llm.prompts: Loaded external template: v1.1-phage
+2025-05-21 00:42:31,270 [INFO] concord.llm.prompts: Loaded external template: v1.0
+2025-05-21 00:42:31,270 [INFO] concord.llm.prompts: Loaded external template: v3.0
+2025-05-21 00:42:31,271 [INFO] concord.llm.prompts: Loaded external template: v1.1-general
+2025-05-21 00:42:31,271 [INFO] concord.llm.prompts: Loaded external template: v3.1
+2025-05-21 00:42:31,271 [INFO] concord.llm.prompts: Loaded external template: v0.0_bug_test
+2025-05-21 00:42:31,275 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Argo Gateway API reachable
+Processing:   0%|          | 0/200 [00:00<?, ?row/s]2025-05-21 00:42:33,084 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  10%|█         | 20/200 [00:03<00:28,  6.31row/s]2025-05-21 00:42:36,246 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  20%|██        | 40/200 [00:07<00:30,  5.25row/s]2025-05-21 00:42:40,510 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  30%|███       | 60/200 [00:11<00:28,  4.90row/s]2025-05-21 00:42:44,913 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  40%|████      | 80/200 [00:17<00:27,  4.40row/s]2025-05-21 00:42:50,173 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  50%|█████     | 100/200 [00:21<00:22,  4.48row/s]2025-05-21 00:42:54,480 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  60%|██████    | 120/200 [00:27<00:20,  3.87row/s]2025-05-21 00:43:01,038 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  70%|███████   | 140/200 [00:32<00:14,  4.11row/s]2025-05-21 00:43:05,259 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  80%|████████  | 160/200 [00:36<00:09,  4.30row/s]2025-05-21 00:43:09,460 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  90%|█████████ | 180/200 [00:40<00:04,  4.55row/s]2025-05-21 00:43:13,291 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing: 100%|██████████| 200/200 [00:44<00:00,  4.45row/s]Processing: 100%|██████████| 200/200 [00:44<00:00,  4.45row/s]
+2025-05-21 00:43:18,010 [INFO] concord.pipeline: Processed 200 rows in 44.96s
+✓ wrote 
+eval/results/benchmark_run_20250521_004229/gpt4o/gpt4o_v1.0
+_zero.csv
+2025-05-21 00:43:20,170 [INFO] concord.llm.prompts: Loaded external template: v1.1-enzyme
+2025-05-21 00:43:20,170 [INFO] concord.llm.prompts: Loaded external template: v2
+2025-05-21 00:43:20,170 [INFO] concord.llm.prompts: Loaded external template: v2.1
+2025-05-21 00:43:20,170 [INFO] concord.llm.prompts: Loaded external template: v3.0-CoT
+2025-05-21 00:43:20,170 [INFO] concord.llm.prompts: Loaded external template: v3.1-CoT
+2025-05-21 00:43:20,171 [INFO] concord.llm.prompts: Loaded external template: v1.2-general
+2025-05-21 00:43:20,171 [INFO] concord.llm.prompts: Loaded external template: v1.3-test
+2025-05-21 00:43:20,171 [INFO] concord.llm.prompts: Loaded external template: v1.1-phage
+2025-05-21 00:43:20,171 [INFO] concord.llm.prompts: Loaded external template: v1.0
+2025-05-21 00:43:20,171 [INFO] concord.llm.prompts: Loaded external template: v3.0
+2025-05-21 00:43:20,171 [INFO] concord.llm.prompts: Loaded external template: v1.1-general
+2025-05-21 00:43:20,171 [INFO] concord.llm.prompts: Loaded external template: v3.1
+2025-05-21 00:43:20,171 [INFO] concord.llm.prompts: Loaded external template: v0.0_bug_test
+2025-05-21 00:43:20,174 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Argo Gateway API reachable
+Processing:   0%|          | 0/200 [00:00<?, ?row/s]2025-05-21 00:43:21,206 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  10%|█         | 20/200 [00:06<01:00,  2.98row/s]2025-05-21 00:43:27,906 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  20%|██        | 40/200 [00:12<00:47,  3.36row/s]2025-05-21 00:43:33,334 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  30%|███       | 60/200 [00:17<00:39,  3.54row/s]2025-05-21 00:43:38,628 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  40%|████      | 80/200 [00:22<00:32,  3.66row/s]2025-05-21 00:43:43,808 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  50%|█████     | 100/200 [00:29<00:30,  3.29row/s]2025-05-21 00:43:50,977 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  60%|██████    | 120/200 [00:34<00:22,  3.49row/s]2025-05-21 00:43:56,015 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  70%|███████   | 140/200 [00:40<00:16,  3.60row/s]2025-05-21 00:44:01,218 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  80%|████████  | 160/200 [00:45<00:11,  3.62row/s]2025-05-21 00:44:06,695 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  90%|█████████ | 180/200 [00:52<00:05,  3.38row/s]2025-05-21 00:44:13,441 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing: 100%|██████████| 200/200 [01:01<00:00,  2.93row/s]Processing: 100%|██████████| 200/200 [01:01<00:00,  3.27row/s]
+2025-05-21 00:44:22,324 [INFO] concord.pipeline: Processed 200 rows in 61.14s
+✓ wrote 
+eval/results/benchmark_run_20250521_004229/gpt4o/gpt4o_v3.1
+_zero.csv
+[1/2] Running MODE=zero-shot, PROMPT=v1.0, SIM_HINT=no -> eval/results/benchmark_run_20250521_004229/gpt4o/gpt4o_v1.0_zero.csv
+[2/2] Running MODE=zero-shot, PROMPT=v3.1, SIM_HINT=no -> eval/results/benchmark_run_20250521_004229/gpt4o/gpt4o_v3.1_zero.csv

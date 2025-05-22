@@ -33,6 +33,12 @@ def main():
     parser.add_argument(
         "--out-dir", default="eval/results", help="Directory to save output files"
     )
+    parser.add_argument(
+        "--llm-batch-size",
+        type=int,
+        default=1,
+        help="Aggregate N pairs into a single LLM request (passed to concord)",
+    )
     args = parser.parse_args()
 
     os.makedirs(args.out_dir, exist_ok=True)
@@ -71,6 +77,8 @@ def main():
                 ]
                 if hint:
                     cmd.append(hint)
+                if args.llm_batch_size > 0:
+                    cmd.extend(["--llm-batch-size", str(args.llm_batch_size)])
                 cmd += ["--output", output_file, "--cfg", args.cfg]
                 subprocess.run(cmd, check=True)
 

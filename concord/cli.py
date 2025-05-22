@@ -14,9 +14,11 @@ v1.2 (2025-05-02)
 from __future__ import annotations
 
 import logging
+import os
 import pathlib as P
 import sys
 import tempfile
+from typing import Optional
 
 import typer
 import yaml
@@ -57,6 +59,14 @@ def concord(  # noqa: C901
     batch_size: int = typer.Option(32, help="Batch size for processing"),
     llm_batch_size: int = typer.Option(
         1, "--llm-batch-size", help="Aggregate N pairs into a single LLM request"
+    ),
+    llm_stream: Optional[bool] = typer.Option(
+        None,
+        "--llm-stream/--no-llm-stream",
+        help="Force /streamchat (on) or /chat (off). Omit flag for auto mode.",
+    ),
+    llm_debug: bool = typer.Option(
+        False, "--llm-debug", help="Enable verbose Argo Gateway debugging"
     ),
     device: str = typer.Option("cpu", help="Device for embedding model (cpu/cuda)"),
     preload: bool = typer.Option(False, help="Preload embedding model"),
@@ -127,6 +137,16 @@ def concord(  # noqa: C901
         # Add embedding options
         cfg_dict.setdefault("embedding", {})["device"] = device
         cfg_dict["embedding"]["batch_size"] = batch_size
+
+        # propagate llm_debug to config/environment
+        if llm_debug:
+            cfg_dict.setdefault("llm", {})["debug"] = True
+            # Set env var so ArgoGatewayClient picks it up even if constructed elsewhere
+            os.environ["ARGO_DEBUG"] = "1"
+
+        # propagate llm_stream override if provided
+        if llm_stream is not None:
+            cfg_dict.setdefault("llm", {})["stream"] = llm_stream
 
         # Write updated config to temporary file
         with tempfile.NamedTemporaryFile("w", delete=False, suffix=".yml") as tmp:
