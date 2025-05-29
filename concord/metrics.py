@@ -24,6 +24,7 @@ import pandas as pd
 from sklearn.metrics import (
     accuracy_score,
     confusion_matrix,
+    matthews_corrcoef,
     precision_recall_fscore_support,
 )
 
@@ -323,12 +324,19 @@ def calculate_classification_metrics(
     # Calculate weighted F1-score
     weighted_f1 = np.sum(f1 * support) / np.sum(support) if np.sum(support) > 0 else 0
 
+    # Calculate Matthews Correlation Coefficient (MCC)
+    mcc = matthews_corrcoef(y_true, y_pred)
+
     # Create confusion matrix
     cm = confusion_matrix(y_true, y_pred, labels=classes)
 
     # Build results dictionary
     metrics_dict = {
-        "overall": {"accuracy": float(accuracy), "weighted_f1": float(weighted_f1)},
+        "overall": {
+            "accuracy": float(accuracy),
+            "weighted_f1": float(weighted_f1),
+            "mcc": float(mcc),
+        },
         "per_class": {},
         "confusion_matrix": {"matrix": cm.tolist(), "classes": classes.tolist()},
     }
@@ -355,6 +363,9 @@ def print_evaluation_summary(metrics_dict: Dict[str, Any]) -> None:
     print("\n===== EVALUATION METRICS =====")
     print(f"Overall Accuracy: {metrics_dict['overall']['accuracy']:.4f}")
     print(f"Weighted F1-Score: {metrics_dict['overall']['weighted_f1']:.4f}")
+    print(
+        f"Matthews Correlation Coefficient (MCC): {metrics_dict['overall']['mcc']:.4f}"
+    )
 
     print("\nPer-Class Metrics:")
     for cls, metrics in metrics_dict["per_class"].items():
