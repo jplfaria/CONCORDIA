@@ -1,0 +1,20 @@
+gene_id,annotation_a,annotation_b,relationship,evidence
+fig|273133.2.peg.39,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Only capitalisation differences; identical specific function (Qualifier clean-up rule)
+fig|273133.2.peg.40,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Only capitalization differs; both annotations convey the same function (Rule 1: Qualifier clean-up)
+fig|273133.2.peg.157,Phage tail fiber,Phage tail fiber protein,Exact,"only a nominal addition of ""protein"" without changing specificity (qualifier clean-up, rule 1)"
+fig|273133.2.peg.54,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,"wording differences only (capitalisation, punctuation variations; rule 1 qualifier clean-up)"
+fig|273133.2.peg.156,Phage tail fiber,Phage tail fiber protein,Exact,wording differences only (qualifier clean-up per rule 1)
+fig|273133.2.peg.166,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,Annotation B adds specificity by including the EC number (EC 3.6.4.12) not present in Annotation A (see Rule 1 on qualifier clean-up and new specific function)
+fig|273133.2.peg.76,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,Annotation B adds specificity by including the EC number (EC 3.6.4.12) not present in Annotation A (Rule 2)
+fig|273133.2.peg.183,Phage endolysin,Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,B adds EC specificity (EC 3.5.1.28) and detailed substrate information not present in A (rules 1 and 2)
+fig|273133.2.peg.185,HNH homing endonuclease,Phage homing endonuclease,Broader,"Annotation B is less specific, omitting the HNH motif detail present in A (qualifier difference per rule 1)"
+fig|273133.2.peg.188,"Phage lysin, N-acetylmuramoyl-L-alanine amidase",Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Exact,"Both annotations refer to the same enzyme activity with only naming differences and the addition of an EC number, matching rule 1"
+fig|273133.2.peg.1,Phage repressor,Phage repressor protein,Exact,wording differences only (qualifier clean-up: adding “protein” does not change function)
+fig|273133.2.peg.193,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,wording differences only (qualifier clean-up differences per heuristic 1)
+fig|374463.4.peg.296,Glucose-6-phosphate 1-dehydrogenase (EC 1.1.1.49),Glucose-6-phosphate 1-dehydrogenase (NADP+) (EC 1.1.1.49),Exact,both annotations refer to the same enzyme (same EC number) with a minor wording difference. (Rule 2)
+fig|374463.4.peg.298,Manganese transport protein MntH,"Mn(II) and Fe(II) import protein MntH, proton-dependent",Narrower,Annotation B adds substrate specificity (Fe(II)) and a proton-dependent mechanism not mentioned in A (Qualifier clean-up rule)
+fig|374463.4.peg.181,hypothetical protein,Outer membrane beta-barrel assembly protein BamD,Uninformative,"Annotation A (""hypothetical protein"") lacks functional information to compare with the specific function in Annotation B (Rule 1)"
+fig|374463.4.peg.282,Enoyl-[acyl-carrier-protein] reductase [NADH] (EC 1.3.1.9),Enoyl-[acyl-carrier-protein] reductase (NADH) (EC 1.3.1.9),Exact,Minor punctuation differences only; same EC number and functional terms (Rule 1: Qualifier clean-up)
+fig|374463.4.peg.161,Sulfate-binding protein Sbp,"Sulfate/thiosulfate ABC transporter, sulfate-binding protein Spb",Narrower,Annotation B adds specificity by including the ABC transporter context and an additional substrate (thiosulfate) compared to the simple sulfate-binding description in Annotation A (Rule 1)
+fig|374463.4.peg.166,Glutaredoxin 3 (Grx3),Glutaredoxin 3,Exact,trivial wording difference only (Rule 1: qualifier clean-up)
+fig|374463.4.peg.288,Cys regulon transcriptional activator CysB,"Cys regulon transcriptional activator CysB, LysR family",Narrower,"Annotation B adds the LysR family classification, increasing the specificity of the functional description (Rule 1)"

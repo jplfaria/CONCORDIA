@@ -1,0 +1,201 @@
+old_annotation,new_annotation,relationship,similarity_Pubmedbert,evidence
+putative anion permease,Putative anion permease,Exact,1.0,wording differences only (capitalisation)
+Phage tail fiber,Phage tail fiber protein,Exact,0.944,"Adding ""protein"" is a qualifier clean-up (Rule 2)"
+"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,1.0,wording differences only (capitalisation)
+"Selenide,water dikinase (EC 2.7.9.3) @ selenocysteine-containing","Selenide,water dikinase (EC 2.7.9.3) @ Selenocysteine-containing",Exact,1.0,Wording differences only; capitalization does not affect function
+diguanylate cyclase (GGDEF domain) with PAS/PAC sensor,Diguanylate cyclase (GGDEF domain) with PAS/PAC sensor,Exact,1.0,wording differences only; annotations are identical in function and specificity
+Gamma-glutamyltranspeptidase (EC 2.3.2.2) @ Glutathione hydrolase (EC 3.4.19.13),gamma-glutamyltranspeptidase (EC 2.3.2.2) @ Glutathione hydrolase (EC 3.4.19.13),Exact,1.0,wording differences only; identical EC numbers and function descriptions
+diguanylate cyclase/phosphodiesterase (GGDEF & EAL domains) with PAS/PAC sensor(s),Diguanylate cyclase/phosphodiesterase (GGDEF & EAL domains) with PAS/PAC sensor(s),Exact,1.0,wording differences only; annotations are identical in function and specificity
+Phage repressor,Phage repressor protein,Exact,0.926,"Adding ""protein"" does not change the functional meaning (Qualifier clean-up rule)"
+Putative inner membrane protein,Inner membrane protein,Exact,0.939,"""Putative"" qualifier removal does not change functional meaning (Rule 2)"
+"putative membrane-associated phospholipid phosphatase, PAP2 superfamily","Putative membrane-associated phospholipid phosphatase, PAP2 superfamily",Exact,1.0,wording differences only; capitalization and punctuation are identical
+Phage tail fiber,Phage tail fiber protein,Exact,0.944,"Adding ""protein"" is a qualifier clean-up (Rule 2)"
+diguanylate cyclase/phosphodiesterase (GGDEF & EAL domains) with PAS/PAC sensor(s),Diguanylate cyclase/phosphodiesterase (GGDEF & EAL domains) with PAS/PAC sensor(s),Exact,1.0,identical wording and structure; no differences in capitalization or punctuation
+"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,1.0,Wording differences only; capitalization and punctuation are the same
+Putative inner membrane protein,Inner membrane protein,Exact,0.939,"""Putative"" qualifier removal does not change functional meaning (Rule 2)"
+general secretion pathway protein F,General secretion pathway protein F,Exact,1.0,Only capitalization differs; both describe the same protein in the secretion pathway
+Inosine-5'-monophosphate dehydrogenase (EC 1.1.1.205) / CBS domain,Inosine-5'-monophosphate dehydrogenase (EC 1.1.1.205) / CBS domain protein,Exact,0.984,"Adding ""protein"" does not change function; EC numbers and domains match (Qualifier clean-up rule)"
+Ubiquinol-cytochrome C reductase iron-sulfur subunit (EC 1.10.2.2),Ubiquinol-cytochrome c reductase iron-sulfur subunit (EC 1.10.2.2),Exact,1.0,wording differences only; identical EC numbers and subunit description
+"Selenide,water dikinase (EC 2.7.9.3) @ selenocysteine-containing","Selenide,water dikinase (EC 2.7.9.3) @ Selenocysteine-containing",Exact,1.0,Wording differences only; capitalization does not affect function or classification
+"putative oxidoreductase, nitronate monooxygenase family","Putative oxidoreductase, nitronate monooxygenase family",Exact,1.0,wording differences only; both annotations are identical in meaning
+diguanylate cyclase/phosphodiesterase (GGDEF & EAL domains) with PAS/PAC sensor(s),Diguanylate cyclase/phosphodiesterase (GGDEF & EAL domains) with PAS/PAC sensor(s),Exact,1.0,wording differences only; identical functional description and domain presence
+TPR repeat containing exported protein; Putative periplasmic protein contains a protein prenylyltransferase domain,TPR repeat containing exported protein; Putative periplasmic protein contains a protein prenyltransferase domain,Exact,0.994,"wording difference only; ""prenylyltransferase"" and ""prenyltransferase"" are accepted synonyms"
+"Multidrug efflux system EmrAB-OMF, inner-membrane proton/drug antiporter EmrB (MFS type)","Multidrug efflux system EmrAB-OMF, inner-membrane proton/drug antiporter EmrB (MFS type) # fragment",Exact,0.978,Fragment qualifier does not change biological function (rule 6)
+DNA topoisomerase III (EC 5.99.1.2),DNA topoisomerase III (EC 5.6.2.1),Different,0.967,EC numbers indicate a change in catalytic class (5.99 to 5.6)
+NADP-dependent malic enzyme (EC 1.1.1.40),Malate dehydrogenase (oxaloacetate-decarboxylating) (NADP(+)) (EC 1.1.1.40),Exact,0.802,wording differences only; both annotations share the same EC number (1.1.1.40)
+Glycerate kinase (EC 2.7.1.31) # frameshift 1,Glycerate kinase (EC 2.7.1.31) # frameshift,Exact,0.977,Frameshift comments do not alter biological function (rule 6)
+Cytochrome c oxidase (cbb3-type) subunit CcoP (EC 1.9.3.1),Cytochrome c oxidase (cbb3-type) subunit CcoP (EC 7.1.1.9),Different,0.994,EC number change indicates a shift in catalytic class (rule 1)
+Succinate dehydrogenase flavoprotein subunit (EC 1.3.5.1),"Fumarate reductase (NADH), flavoprotein subunit (EC 1.3.1.6)",Related,0.86,Same pathway but different enzyme components (EC numbers indicate distinct reactions)
+tRNA-i(6)A37 methylthiotransferase (EC 2.8.4.3),tRNA-2-methylthio-N(6)-dimethylallyladenosine synthase (EC 2.8.4.3),Exact,0.817,wording differences only; same EC number indicates identical function
+"5,10-methylenetetrahydrofolate reductase (EC 1.5.1.20)",Methylenetetrahydrofolate reductase (NAD(P)H) (EC 1.5.1.20),Exact,0.779,wording differences only; EC number and function are identical
+V-type ATP synthase subunit B (EC 3.6.3.14),V-type H+-transporting ATPase subunit B (EC 7.1.2.2),Different,0.733,EC numbers indicate a change in catalytic class (3.x to 7.x)
+NADH-ubiquinone oxidoreductase chain I (EC 1.6.5.3),"NADH-quinone oxidoreductase (EC 7.1.1.2), subunit I",Related,0.915,"same complex, different EC numbers indicate distinct catalytic classes"
+Glucose-6-phosphate 1-dehydrogenase (EC 1.1.1.49),Glucose-6-phosphate 1-dehydrogenase (NADP+) (EC 1.1.1.49),Exact,0.967,wording differences only; both annotations share the same EC number (1.1.1.49)
+NADH-ubiquinone oxidoreductase chain F (EC 1.6.5.3),"NADH-quinone oxidoreductase (EC 7.1.1.2), subunit F",Synonym,0.916,EC renumbering from 1.6.5.3 to 7.1.1.2
+"Galactose/methyl galactoside ABC transporter, ATP-binding protein MglA (EC 3.6.3.17)","Galactose/methyl galactoside ABC transporter, ATP-binding protein MglA (EC 7.5.2.11)",Synonym,0.99,EC renumbering from 3.6.3.17 to 7.5.2.11
+UTP--glucose-1-phosphate uridylyltransferase (EC 2.7.7.9),UTP---glucose-1-phosphate uridylyltransferase (EC 2.7.7.9),Exact,0.999,Wording difference only; EC numbers are identical (rule 1)
+ATP-dependent DNA ligase (EC 6.5.1.1),"DNA ligase (ATP) (EC 6.5.1.1), Cdc9 type",Exact,0.915,wording differences only; both annotations share the same EC number (6.5.1.1)
+"ABC transporter-coupled two-component system, fused permease protein # fragment 2","ABC transporter-coupled two-component system, fused permease protein # fragment",Exact,0.99,Fragment notation does not alter biological function (rule 6)
+NADH-ubiquinone oxidoreductase chain G (EC 1.6.5.3),"NADH-quinone oxidoreductase (EC 7.1.1.2), subunit G",Synonym,0.917,EC renumbering from 1.6.5.3 to 7.1.1.2 for the same subunit
+NADH-ubiquinone oxidoreductase chain K (EC 1.6.5.3),"NADH-quinone oxidoreductase (EC 7.1.1.2), subunit K",Synonym,0.914,EC renumbering from 1.6.5.3 to 7.1.1.2
+ATP synthase epsilon chain (EC 3.6.3.14),ATP synthase epsilon chain (EC 7.1.2.2),Different,0.966,EC jump from 3.x to 7.x indicates a change in catalytic class
+Thiamine-monophosphate kinase (EC 2.7.4.16),Thiamine-phosphate kinase (EC 2.7.4.16),Exact,0.945,wording differences only; same EC number indicates identical function
+ATP synthase F0 sector subunit b (EC 3.6.3.14),ATP synthase F0 sector subunit b (EC 7.1.2.2),Synonym,0.975,EC renumbering from 3.6.3.14 to 7.1.2.2
+NADH-ubiquinone oxidoreductase chain M (EC 1.6.5.3),"NADH-quinone oxidoreductase (EC 7.1.1.2), subunit M",Synonym,0.912,EC renumbering from 1.6.5.3 to 7.1.1.2
+ATP synthase F0 sector subunit c (EC 3.6.3.14),ATP synthase F0 sector subunit c (EC 7.1.2.2),Synonym,0.974,EC renumbering from 3.6.3.14 to 7.1.2.2
+Inositol-1-phosphate synthase (EC 5.5.1.4),Inositol-3-phosphate synthase (EC 5.5.1.4),Exact,0.961,wording differences only; EC numbers are identical (5.5.1.4)
+"Thiol peroxidase, Tpx-type (EC 1.11.1.15)",Thiol peroxidase Tpx (EC 1.11.1.24),Different,0.973,EC numbers indicate different catalytic classes (1.11.1.15 vs 1.11.1.24)
+V-type ATP synthase subunit A (EC 3.6.3.14),V-type H+-transporting ATPase subunit A (EC 7.1.2.2),Different,0.728,EC numbers indicate a change in catalytic class (3.x to 7.x)
+"2,5-diamino-6-ribosylamino-pyrimidinone 5-phosphate reductase, fungal/archaeal (EC 1.1.1.302)","2,5-diamino-6-ribosylamino-pyrimidinone 5-phosphate reductase (EC 1.1.1.302)",Broader,0.926,Annotation B lacks the fungal/archaeal specificity present in Annotation A
+Dihydrolipoamide dehydrogenase of pyruvate dehydrogenase complex (EC 1.8.1.4),Dihydrolipoamide dehydrogenase (EC 1.8.1.4) @ Dihydrolipoamide dehydrogenase of pyruvate dehydrogenase complex (EC 1.8.1.4),Exact,0.968,wording differences only; both annotations share the same EC number and function
+NADH-ubiquinone oxidoreductase chain E (EC 1.6.5.3),"NADH-quinone oxidoreductase (EC 7.1.1.2), subunit E",Related,0.911,"Same complex, different EC numbers indicate distinct catalytic activities"
+hypothetical protein,"Transcriptional regulator, CdaR family",Different,0.238,Annotation A is non-specific; B specifies a transcriptional regulator function
+hypothetical protein,tRNA-2-methylthio-N(6)-dimethylallyladenosine synthase (EC 2.8.4.3),Different,0.06,Annotation A is hypothetical; B specifies a distinct enzyme function (EC 2.8.4.3)
+Cysteine desulfurase (EC 2.8.1.7),Cysteine desulfurase (EC 2.8.1.7) => IscS,Exact,0.915,IscS is a gene symbol; EC numbers match (Qualifier clean-up rule)
+hypothetical protein,Poly(A) polymerase (EC 2.7.7.19),Different,0.068,"EC number indicates specific function; ""hypothetical protein"" lacks functional information"
+hypothetical protein,Thymidylate synthase (EC 2.1.1.45),Different,0.115,EC number indicates specific function not present in hypothetical protein
+hypothetical protein,Serine protease,Different,0.196,Annotation A is non-specific; Annotation B specifies a protease function
+hypothetical protein,Bifunctional DNase/RNase,Different,0.146,Annotation A is non-specific; Annotation B specifies DNase/RNase functions
+Prephenate dehydrogenase (EC 1.3.1.12),"Prephenate dehydrogenase (EC 1.3.1.12) # TyrAp/ACT domain, NAD-specific",Exact,0.788,wording differences only; same EC number and function
+Shikimate 5-dehydrogenase I alpha (EC 1.1.1.25),Shikimate 5-dehydrogenase I alpha (EC 1.1.1.25) # AroDI alpha,Exact,0.93,wording differences only; both annotations have identical EC numbers and function
+hypothetical protein,Outer membrane beta-barrel assembly protein BamD,Different,0.394,Annotation A is uninformative; Annotation B specifies a known protein function
+hypothetical protein,Ferritin- and CCC1-domain-containing protein PF1325,Uninformative,0.345,Annotation A lacks functional information; B's domains don't specify a clear function
+hypothetical protein,Ribosomal silencing factor RsfA,Different,0.168,Hypothetical protein lacks specific function; RsfA is a known ribosomal silencing factor
+hypothetical protein,Cation antiporter,Different,0.127,Hypothetical protein lacks specific function; cation antiporter is a distinct functional category
+Tyrosyl-tRNA synthetase (EC 6.1.1.1),Tyrosyl-tRNA synthetase (EC 6.1.1.1) ## cluster 1,Exact,0.865,cluster comment does not alter biological function (rule 6)
+hypothetical protein,"Transcriptional regulator, ROK family",Different,0.272,Annotation A is non-specific; Annotation B specifies a protein family
+16S rRNA (uracil(1498)-N(3))-methyltransferase (EC 2.1.1.193),16S rRNA (uracil(1498)-N(3))-methyltransferase (EC 2.1.1.193) ## RsmE,Exact,0.942,Gene symbol addition does not alter function (Rule 2: Qualifier clean-up)
+hypothetical protein,DUF1653 domain-containing protein Pfl_3877,Uninformative,0.333,Both annotations lack specific functional information
+"RNA-2',3'-PO4:RNA-5'-OH ligase","RNA-2',3'-PO4:RNA-5'-OH ligase (EC 6.5.1.8)",Exact,0.929,EC number addition does not change function; wording differences only
+Ammonium transporter,Ammonium transporter AmtB,Narrower,0.886,AmtB specifies a subtype of ammonium transporter
+hypothetical protein,"Nickel ECF transporter, additional component NikL",Different,0.262,Hypothetical protein vs. specific transporter component indicates unrelated functions
+Leucyl-tRNA synthetase (EC 6.1.1.4),Leucyl-tRNA synthetase (EC 6.1.1.4) # carboxy-terminal portion,Exact,0.888,wording difference only; carboxy-terminal portion does not change function (rule 6)
+CRISPR-associated protein Cas5,CRISPR-associated protein Cas5/Cst3,Related,0.898,Cas5 and Cas5/Cst3 are different components of the CRISPR complex
+hypothetical protein,Two-component system sensor histidine kinase,Different,0.147,Annotation A is uninformative; B specifies a distinct protein function
+hypothetical protein,ATP-dependent protease subunit HslV (EC 3.4.25.2),Different,0.183,Annotation A is hypothetical; B specifies a protease with EC number
+Molybdopterin-synthase adenylyltransferase (EC 2.7.7.80),Molybdopterin-synthase adenylyltransferase (EC 2.7.7.80) ## MoeB,Exact,0.882,Gene symbol addition does not alter functional annotation (Qualifier clean-up rule)
+hypothetical protein,"ABC transporter, ATP-binding protein 2 (cluster 4, leucine/isoleucine/valine/benzoate)",Uninformative,0.219,Annotation A lacks functional information; B is specific but unrelated
+hypothetical protein,"Transcriptional regulator, AcrR family",Different,0.225,Annotation A is non-specific; Annotation B specifies a protein family function
+hypothetical protein,Alanine transaminase (EC 2.6.1.2) ## AlaA,Uninformative,0.201,Annotation A lacks functional information; no specific function to compare
+hypothetical protein,Thiamine phosphate synthase ThiE (EC 2.5.1.3),Different,0.174,Annotation A is a hypothetical protein; Annotation B specifies a known enzyme function
+hypothetical protein,Uncharacterized protein YdjG,Uninformative,0.632,Both annotations lack specific functional information
+hypothetical protein,Universal stress protein family,Uninformative,0.404,Both annotations lack specific functional information
+DNA internalization-related competence protein ComEC/Rec2,DNA internalization-related competence protein ComEC/Rec2 # fragment,Exact,0.958,"""fragment"" comment does not change biological function (Rule 6)"
+D-alanine--D-alanine ligase (EC 6.3.2.4),D-alanine--D-alanine ligase (EC 6.3.2.4) ## cluster A,Exact,0.916,Identical EC numbers and function; only cluster notation differs
+LSU rRNA pseudouridine(2605) synthase (EC 5.4.99.22),LSU rRNA pseudouridine(2605) synthase (EC 5.4.99.22) ## RluB,Exact,0.92,RluB is a gene symbol; EC numbers match (rule 6)
+putative head-tail joining protein,Phage head-tail joining protein,Narrower,0.812,"""Phage"" adds specificity to the head-tail joining protein (Rule 3)"
+Heat shock protein 10 kDa family chaperone GroES,Heat shock protein 10 kDa family chaperone GroES # truncated,Exact,0.942,Truncated comment does not alter biological function (rule 6)
+TraU,IncF plasmid conjugative transfer pilus assembly protein TraU,Narrower,0.184,"B specifies the function as part of plasmid conjugative transfer, adding specificity"
+hypothetical protein,DNA double-strand break repair nuclease NurA,Different,0.039,Annotation A is non-specific; Annotation B specifies a DNA repair function
+hypothetical protein,Aspartate carbamoyltransferase (EC 2.1.3.2),Different,0.097,Annotation A is non-specific; Annotation B specifies an enzyme with EC classification
+hypothetical protein,Malonyl CoA-acyl carrier protein transacylase (EC 2.3.1.39),Different,0.141,Annotation A is hypothetical; B has specific EC function (rule 2)
+"ABC transporter, ATP-binding protein","transporter, ATP-binding protein (cluster 1, maltose/g3p/polyamine/iron); ABC transporter, ATP-binding protein (cluster 10, nitrate/sulfonate/bicarbonate) # frameshift",Narrower,0.758,Annotation B specifies substrate clusters; adds specificity beyond Annotation A
+hypothetical protein,Iron-sulfur cluster regulator IscR,Different,0.103,Annotation A is non-specific; B specifies a distinct regulatory protein function
+hypothetical protein,GGDEF domain-containing protein,Uninformative,0.4,Both annotations lack specific functional information
+Exonuclease SbcC,Exonuclease SbcC # fragment,Exact,0.847,Fragment qualifier does not change biological function (rule 6)
+Hydroxymethylpyrimidine phosphate kinase ThiD (EC 2.7.4.7),Hydroxymethylpyrimidine kinase (EC 2.7.1.49) @ Hydroxymethylpyrimidine phosphate kinase ThiD (EC 2.7.4.7),Narrower,0.961,Annotation B adds specificity with EC 2.7.1.49 alongside EC 2.7.4.7
+DNA ligase (NAD(+)) (EC 6.5.1.2),"DNA ligase (NAD(+)) (EC 6.5.1.2), Ec.LigA",Exact,0.956,Ec.LigA is a gene symbol; rule 2 applies
+23S rRNA (guanosine(2251)-2'-O)-methyltransferase (EC 2.1.1.185),23S rRNA (guanosine(2251)-2'-O)-methyltransferase (EC 2.1.1.185) ## RlmB,Exact,0.93,RlmB is a gene symbol; EC numbers match (rule 6)
+Cob(I)alamin adenosyltransferase (EC 2.5.1.17),ATP:Cob(I)alamin adenosyltransferase (EC 2.5.1.17),Exact,0.969,wording differences only; both annotations share the same EC number
+hypothetical protein,dTDP-4-dehydrorhamnose reductase (EC 1.1.1.133),Different,0.126,Annotation A is hypothetical; B specifies an enzyme with EC 1.1.1.133
+Thiazole synthase (EC 2.8.1.10),Thiazole synthase (EC 2.8.1.10) ## ThiG,Exact,0.876,Gene symbol addition does not alter function (Rule 2)
+"Phosphate ABC transporter, permease protein PstC (TC 3.A.1.7.1)","Phosphate ABC transporter, permease protein PstC",Exact,0.872,wording differences only; both annotations describe the same protein without additional specificity
+Iron-sulfur cluster assembly scaffold protein IscU/NifU-like,Iron-sulfur cluster assembly scaffold protein IscU,Narrower,0.93,"B specifies IscU, a subset of IscU/NifU-like proteins"
+putative transposon integrase; Tn916 ORF3-like,hypothetical protein,Uninformative,0.344,Both annotations lack specific functional information
+Chemotaxis protein CheV (EC 2.7.3.-),Chemotaxis protein CheV,Exact,0.739,"Only EC number and ""protein"" qualifier differ; no functional change (Rule 2)"
+putative lipoprotein MlpB,hypothetical protein,Uninformative,0.356,Both annotations lack specific functional information
+D-glycero-beta-D-manno-heptose 1-phosphate adenylyltransferase (EC 2.7.7.70) / D-glycero-beta-D-manno-heptose-7-phosphate kinase (EC 2.7.1.167),D-glycero-beta-D-manno-heptose 1-phosphate adenylyltransferase (EC 2.7.7.70),Related,0.967,"Annotation A describes a fusion of two enzyme activities, while B describes only one"
+"Phosphate ABC transporter, permease protein PstA (TC 3.A.1.7.1)","Phosphate ABC transporter, permease protein PstA",Exact,0.865,wording differences only; both annotations describe the same protein without additional specificity
+"Phosphate ABC transporter, permease protein PstC (TC 3.A.1.7.1)","Phosphate ABC transporter, permease protein PstC",Exact,0.872,wording differences only; both annotations describe the same protein without additional qualifiers
+diguanylate cyclase/phosphodiesterase,hypothetical protein,Different,0.09,Annotation A specifies a function; B is non-specific (hypothetical protein)
+Glutaredoxin 3 (Grx3),Glutaredoxin 3,Exact,0.864,wording differences only; both annotations are identical in name
+no significant homology.,hypothetical protein,Uninformative,0.364,Both annotations lack functional information; no specific function described
+Cell division trigger factor (EC 5.2.1.8),Trigger factor (EC 5.2.1.8),Exact,0.752,wording differences only; EC number and function are identical
+"COG1355, Predicted dioxygenase",Predicted dioxygenase,Exact,0.822,wording differences only; both annotations describe the same predicted dioxygenase
+D-glycero-beta-D-manno-heptose 1-phosphate adenylyltransferase (EC 2.7.7.70) / D-glycero-beta-D-manno-heptose-7-phosphate kinase (EC 2.7.1.167),D-glycero-beta-D-manno-heptose-7-phosphate kinase (EC 2.7.1.167),Related,0.964,"Annotation A describes a fusion of two enzyme activities, while B is a single activity"
+crispr-associated protein Cas6,hypothetical protein,Uninformative,0.334,"""Hypothetical protein"" lacks functional information compared to ""crispr-associated protein Cas6"""
+"archaeal ATPase, fused to C-terminal DUF234 domain",hypothetical protein,Uninformative,0.214,"Annotation B lacks functional information; A has specific domains, B is generic"
+type IV pilus assembly PilZ,hypothetical protein,Different,0.097,"Annotation A specifies a pilus assembly protein, while B is a generic hypothetical protein"
+Probable transcriptional regulatory protein YebC,Transcriptional regulatory protein YebC,Exact,0.942,"""Probable"" qualifier removal does not change the biological function (Qualifier clean-up rule)"
+ankyrin repeat domain protein,hypothetical protein,Uninformative,0.361,Both annotations lack specific functional information
+FIG017897: Phage protein,Phage protein,Uninformative,0.755,"Both annotations lack specific functional information beyond ""Phage protein"""
+Translation initiation factor 2 domain,hypothetical protein,Uninformative,0.186,Annotation B lacks functional information; cannot determine relationship
+protein of unknown function DUF45,hypothetical protein,Uninformative,0.541,Both annotations lack specific functional information
+Heat shock protein 10 kDa family chaperone GroES # frameshift 1,Heat shock protein 10 kDa family chaperone GroES,Exact,0.936,Frameshift comment does not alter biological function (rule 6)
+putative signal-transduction protein with CBS domains,hypothetical protein,Uninformative,0.355,Both annotations lack specific functional information
+Heat shock protein 10 kDa family chaperone GroES # frameshift 2,Heat shock protein 10 kDa family chaperone GroES,Exact,0.931,Frameshift comment does not alter biological function (Rule 6)
+PaaD-like protein (DUF59) involved in Fe-S cluster assembly,Fe-S protein maturation auxiliary factor SufT,Related,0.584,Both involved in Fe-S cluster assembly but are different components
+Sodium-transporting ATPase subunit G,Na+-transporting two-sector ATPase subunit G (EC 7.2.2.1),Narrower,0.737,EC number 7.2.2.1 adds specificity to Annotation B
+Phage replication initiation protein,Phage DNA replication protein O,Related,0.802,Both are involved in phage DNA replication but denote different components
+"Transcriptional regulator, GntR family","Transcriptional regulator, FadR family",Related,0.658,Both are transcriptional regulators but belong to different families within the same pathway
+"Oligopeptide ABC transporter, ATP-binding protein OppF (TC 3.A.1.5.1)","Oligopeptide ABC transporter (EC 7.4.2.6), ATP-binding protein OppF",Exact,0.94,wording differences only; both describe the same protein and function
+Imidazole glycerol phosphate synthase amidotransferase subunit HisH,Imidazole glycerol-phosphate synthase amidotransferase subunit HisH (EC 4.3.2.10),Exact,0.868,wording differences only; EC number does not change catalytic class
+"Glycosyl transferase, family 2","Glycosyltransferase, family 2",Exact,0.904,Wording differences only; capitalization and spacing are the only variations
+Sodium-transporting ATPase subunit F,Na+-transporting two-sector ATPase subunit F (EC 7.2.2.1),Narrower,0.736,EC number 7.2.2.1 adds specificity to Na+ transport function
+Nudix hydrolase-like protein,Nudix hydrolase family protein,Exact,0.919,"wording differences only; ""like"" and ""family"" are synonyms in this context"
+"Extracellular matrix protein PelF, glycosyltransferase, group 1","Pellicle/biofilm biosynthesis protein PelF, CAZy glycosyltransferase family 4",Related,0.698,Both annotations describe PelF involved in biofilm formation but differ in glycosyltransferase family
+Transmembrane component of general energizing module of ECF transporters,"ECF transporter, transmembrane component of energizing module",Exact,0.913,wording differences only; both describe the same transmembrane component of ECF transporters
+"Oligopeptide ABC transporter, permease protein OppC (TC 3.A.1.5.1)","Oligopeptide ABC transporter (EC 7.4.2.6), permease protein OppC",Exact,0.93,wording differences only; both annotations describe the same protein function
+CBS domain protein,GGDEF domain protein protein,Different,0.661,CBS and GGDEF domains indicate distinct protein functions and roles
+Uncharacterized putative hydrolase YigB,5-amino-6-(5-phospho-D-ribitylamino)uracil phosphatase YigB (EC 3.1.3.104),Narrower,0.253,"EC number and specific function added, indicating more specificity (Rule 2)"
+"Molybdenum ABC transporter, substrate-binding protein ModA","Molybdenum ABC transporter (EC 7.3.2.5), substrate-binding protein ModA",Narrower,0.871,EC number 7.3.2.5 adds specificity to Annotation B (Rule 1)
+CDP-4-dehydro-6-deoxy-D-glucose 3-dehydratase (EC 4.2.1.-),"CDP-4-dehydro-6-deoxyglucose reductase, component E1 (EC 1.17.1.1)",Different,0.868,EC numbers indicate different catalytic classes (4.x vs 1.x)
+Sulfate transport system permease protein CysW,"Sulfate/thiosulfate ABC transporter (EC 7.3.2.3), permease protein CysW",Narrower,0.764,EC number 7.3.2.3 adds specificity to Annotation B
+Formate hydrogenlyase transcriptional activator,"Two-component transcriptional response regulator, AtoC family",Different,0.353,Distinct transcriptional regulators with no shared specific function or pathway
+Phage-associated HNH homing endonuclease,Phage homing endonuclease,Broader,0.891,"Annotation B is more generic, losing the specificity of ""HNH"" in A"
+"Serine/threonine protein kinase PrkC, regulator of stationary phase","Serine/threonine protein kinase PrkC, regulator of cell elongation and stationary phase (EC 2.7.11.1)",Narrower,0.876,"Annotation B adds cell elongation function and EC number (rule 1, qualifier clean-up)"
+"Ferric iron ABC transporter, iron-binding protein","Ferric iron ABC transporter, substrate-binding protein",Exact,0.917,"wording differences only; ""iron-binding"" and ""substrate-binding"" are synonyms in this context"
+Extracellular Matrix protein PelD,Pellicle/biofilm biosynthesis inner membrane protein PelD,Narrower,0.496,Annotation B specifies location and function in biofilm formation
+FIG022979: MoxR-like ATPases,MoxR-like ATPase YeaC,Narrower,0.737,"B specifies ""YeaC"", a specific MoxR-like ATPase, adding specificity to A"
+putative histidinol phosphatase and related hydrolases of the PHP family,Probable phosphatase YcdX,Related,0.527,Both are phosphatases but differ in specificity and family association
+"Protein of unknown function DUF86, SO_3166 group / Protein of unknown function DUF86, SO_3166 group",mRNA nuclease HepT / mRNA nuclease HepT,Different,0.083,Annotations describe unrelated proteins or functions; no shared biological context
+FIG002473: Protein YcaR in KDO2-Lipid A biosynthesis cluster,General activator of methyltransferases YcaR,Related,0.303,Same protein name but different functional roles in pathway
+periplasmic nitrate reductase NapD,Periplasmic nitrate reductase component NapD,Exact,0.975,"wording differences only; ""component"" does not alter function or specificity"
+Molybdenum ABC transporter ATP-binding protein ModC,"Molybdenum ABC transporter (EC 7.3.2.5), ATP-binding protein ModC",Narrower,0.871,EC number 7.3.2.5 adds specificity to Annotation B (Rule 1)
+"Oligopeptide ABC transporter, permease protein OppB (TC 3.A.1.5.1)","Oligopeptide ABC transporter (EC 7.4.2.6), permease protein OppB",Exact,0.929,wording differences only; both annotations describe the same protein function
+"Membrane protease subunits, stomatin/prohibitin-like protein (SPFH domain/band 7 family), putative",Inner membrane protein YqiK,Different,0.357,unrelated proteins or functions; no shared domain or specific pathway connection
+D-alanine-D-alanine ligase and related ATP-grasp enzymes-like,D-alanine--D-alanine ligase and related ATP-grasp enzymes,Exact,0.98,wording differences only; both describe the same enzyme class
+DNA polymerase III delta subunit (EC 2.7.7.7),"DNA polymerase III delta subunit, clamp loader part A",Related,0.672,"same complex, different subunit roles (delta vs clamp loader part A)"
+Sulfate transport system permease protein CysT,"Sulfate/thiosulfate ABC transporter (EC 7.3.2.3), permease protein CysT",Narrower,0.73,EC 7.3.2.3 adds specificity to sulfate transport function
+FIG015287: Zinc protease,Zinc protease PA0371,Exact,0.722,"wording differences only; FIG015287 is a locus tag, no functional change"
+UPF0125 protein RatB,Antitoxin RatB,Uninformative,0.431,Both annotations lack specific functional information beyond gene/protein name
+FIG00617327: hypothetical protein,Nitrogenase NifE paralog,Uninformative,0.221,Annotation A lacks functional information; B specifies a paralog without clear function
+probable iron-sulfur binding reductase,Uncharacterized glycosyltransferase SCO3464,Different,0.165,annotations describe unrelated protein functions: reductase vs glycosyltransferase
+PlyP35,Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Different,0.028,"PlyP35 lacks EC number and specific function, unlike B's defined amidase activity"
+FolM Alternative dihydrofolate reductase 1,"Oxidoreductase, short-chain dehydrogenase/reductase family",Different,0.417,"Distinct enzyme families; FolM is specific, B is generic oxidoreductase"
+NRFI PROTEIN,Putative cytochrome C-type biogenesis protein,Uninformative,0.354,Both annotations lack specific functional information
+gp4,Phage minor capsid protein,Uninformative,0.266,gp4 lacks functional detail; minor capsid protein is generic
+primosome assembly protein PriA,Primosomal protein N' (PriA),Exact,0.785,wording differences only; both refer to PriA in the primosome complex
+NAD-dependent epimerase/dehydratase,CDP-paratose synthase (EC 1.1.1.342),Different,0.154,EC class change from epimerase/dehydratase to oxidoreductase (EC 1.1.1.342)
+"Type IV fimbrial assembly, ATPase PilB",MSHA biogenesis protein MshE,Related,0.284,Both are involved in fimbrial assembly but represent different components or systems
+Polyferredoxin NapH (periplasmic nitrate reductase),Polyferredoxin-like protein,Related,0.373,Both involve polyferredoxin but differ in specific function or complex component
+putative RecA-like recombination and repairprotein,Phage protein,Different,0.176,RecA-like protein and generic phage protein are unrelated functions
+Microsomal dipeptidase (EC 3.4.13.19),Zn-dependent dipeptidase-like protein,Different,0.515,"EC number indicates specific enzyme; ""dipeptidase-like"" lacks specificity"
+putative head-tail joining protein,Phage protein,Broader,0.417,"""Phage protein"" is more generic than ""head-tail joining protein"""
+putative portal vertex protein,Phage 62kDa structural protein,Related,0.39,Both are phage structural proteins but denote different components
+"Ribonucleotide reductase of class III (anaerobic), activating protein (EC 1.97.1.4)",Anaerobic ribonucleoside-triphosphate reductase-activating protein,Exact,0.67,wording differences only; both describe the same activating protein function
+putative tail-associated peptidoglycanhydrolase,Phage protein,Broader,0.395,"""Phage protein"" is more generic than ""tail-associated peptidoglycanhydrolase"""
+Magnesium and cobalt efflux protein CorC,UPF0053 inner membrane protein YoaE,Different,0.264,"Unrelated proteins; CorC is an efflux protein, YoaE is an inner membrane protein"
+Uncharacterized protein CLJU_c23110,Nitrogenase NifE paralog,Uninformative,0.291,Annotation A lacks functional information; B specifies a paralog without full context
+Diadenylate cyclase spyDAC; Bacterial checkpoint controller DisA with nucleotide-binding domain,Cyclic di-AMP synthase CdaA (EC 2.7.7.85),Synonym,0.515,EC renumbering from Diadenylate cyclase to Cyclic di-AMP synthase (EC 2.7.7.85)
+hypothetical signal transduction protein,EAL domain protein,Uninformative,0.341,Both annotations lack specific functional information
+protein of unknown function DUF433,Antitoxin,Uninformative,0.171,Both annotations lack specific functional information
+Biopolymer transport protein ExbD/TolR,Ton complex ExbD subunit,Related,0.514,Both annotations describe components of the Ton complex but different subunits
+General secretion pathway protein A,ExeA-like protein / Peptidoglycan-binding domain,Related,0.36,Both are part of secretion systems but represent different components or domains
+cAMP-binding proteins - catabolite gene activator and regulatory subunit of cAMP-dependent protein kinases,"Transcriptional regulator, Crp/Fnr family",Related,0.27,Both annotations involve cAMP regulation but describe different protein roles
+FIG00003370: Multicopper polyphenol oxidase,Peptidoglycan editing factor PgeF,Different,0.191,Unrelated functions; multicopper oxidase vs peptidoglycan editing factor
+"Type IV fimbrial assembly, ATPase PilB",General secretion pathway protein E,Related,0.256,Both are involved in secretion systems but represent different components
+"beta 1,4 glucosyltransferase","Glycosyltransferase, family 2",Broader,0.523,Annotation B is a more generic family classification than specific enzyme in A
+Tellurite resistance protein-related protein,SAM-dependent methyltransferase,Different,0.231,unrelated proteins or functions; no shared pathway or EC number
+Carbon storage regulator,RNA-binding protein CsrA,Related,0.288,"Both annotations involve CsrA, a regulator of carbon storage and RNA-binding"
+Polysaccharide biosynthesis protein,Oligosaccharide/polysaccharide export flippase Wzx,Related,0.452,Both are involved in polysaccharide processes but differ in function (biosynthesis vs export)
+FIG00614844: hypothetical protein,hypothetical protein,Uninformative,0.765,Both annotations lack functional information beyond being hypothetical proteins
+Putative permease,hypothetical protein,Uninformative,0.451,Both annotations lack specific functional information
+phosphoribosyltransferase,hypothetical protein,Uninformative,0.185,Annotation B lacks functional information; no specific function compared to A
+FIG00524300: hypothetical protein,hypothetical protein,Uninformative,0.758,"Both annotations lack functional information beyond ""hypothetical protein"""
+FIG00617511: hypothetical protein,hypothetical protein,Uninformative,0.77,"Both annotations lack functional information beyond ""hypothetical protein"""
+ATPase,hypothetical protein,Uninformative,0.211,"""hypothetical protein"" lacks functional information compared to ""ATPase"""
+FIG01145086: hypothetical protein,hypothetical protein,Uninformative,0.75,"Both annotations lack functional information beyond ""hypothetical protein"""
+hypothetical protein,Phage protein,Uninformative,0.458,Both annotations lack specific functional information
+FIG01125089: hypothetical protein,hypothetical protein,Uninformative,0.74,"Both annotations lack functional information beyond ""hypothetical protein"""
+FIG01032562: hypothetical protein,hypothetical protein,Uninformative,0.747,"Both annotations lack functional information beyond ""hypothetical protein"""

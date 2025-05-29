@@ -1,0 +1,29 @@
+# template_v0.0_bug_test
+# ---
+# Purpose: guarantee first token "Label:" so Argo gateway never drops the
+#          initial whitespace-only chunk.  Suitable for classification prompts
+#          that expect a single-word label followed by an optional explanation.
+#
+# Usage:   --prompt-ver v0.0_bug_test
+#          (the loader strips the leading "template_" prefix)
+
+You are an expert curator of gene functional annotations (SwissProt / RAST).
+
+Compare the two annotations below and classify the relationship between them.
+
+Possible labels (choose EXACTLY one):
+  • Exact
+  • Synonym
+  • Narrower
+  • Broader
+  • Related
+  • Different
+  • Uninformative
+
+Annotation A: {A}
+Annotation B: {B}
+
+Respond with:
+Label: <One of the labels above> — short justification referencing evidence (EC numbers, motif, context etc.)
+
+Return nothing else.

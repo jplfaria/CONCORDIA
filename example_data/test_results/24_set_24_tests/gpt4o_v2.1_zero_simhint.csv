@@ -1,0 +1,25 @@
+gene_id,annotation_a,annotation_b,relationship,similarity_Pubmedbert,evidence
+fig|273133.2.peg.39,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,1.0,Only minor formatting change detected
+fig|273133.2.peg.40,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,1.0,Only minor formatting change detected
+fig|273133.2.peg.157,Phage tail fiber,Phage tail fiber protein,Exact,0.944,Minor formatting change; same functional entity
+fig|273133.2.peg.54,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,0.952,"minor reordering of words, same function"
+fig|273133.2.peg.156,Phage tail fiber,Phage tail fiber protein,Exact,0.944,"Minor formatting change, same functional entity"
+fig|273133.2.peg.166,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,0.716,EC number specifies helicase activity type
+fig|273133.2.peg.76,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,0.716,EC number specifies helicase activity type
+fig|273133.2.peg.183,Phage endolysin,Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,0.576,EC specifies amidase activity within endolysin function
+fig|273133.2.peg.185,HNH homing endonuclease,Phage homing endonuclease,Narrower,0.783,HNH is specific type of phage endonuclease
+fig|273133.2.peg.188,"Phage lysin, N-acetylmuramoyl-L-alanine amidase",Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Exact,0.867,Identical EC and minor nomenclature change
+fig|273133.2.peg.1,Phage repressor,Phage repressor protein,Exact,0.926,Minor formatting change; same functional role
+fig|273133.2.peg.193,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,0.952,Minor formatting change; same protein function
+fig|374463.4.peg.296,Glucose-6-phosphate 1-dehydrogenase (EC 1.1.1.49),Glucose-6-phosphate 1-dehydrogenase (NADP+) (EC 1.1.1.49),Exact,0.967,Identical EC number indicates same enzyme
+fig|374463.4.peg.298,Manganese transport protein MntH,"Mn(II) and Fe(II) import protein MntH, proton-dependent",Broader,0.665,"Updated includes Fe(II) transport, original only Mn"
+fig|374463.4.peg.181,hypothetical protein,Outer membrane beta-barrel assembly protein BamD,Different,0.394,BamD is not a hypothetical protein
+fig|374463.4.peg.282,Enoyl-[acyl-carrier-protein] reductase [NADH] (EC 1.3.1.9),Enoyl-[acyl-carrier-protein] reductase (NADH) (EC 1.3.1.9),Exact,0.999,Identical EC; only formatting change
+fig|374463.4.peg.161,Sulfate-binding protein Sbp,"Sulfate/thiosulfate ABC transporter, sulfate-binding protein Spb",Broader,0.76,Updated includes thiosulfate transport function
+fig|374463.4.peg.166,Glutaredoxin 3 (Grx3),Glutaredoxin 3,Exact,0.864,Identical name; no functional difference noted
+fig|374463.4.peg.288,Cys regulon transcriptional activator CysB,"Cys regulon transcriptional activator CysB, LysR family",Narrower,0.901,"Specifies LysR family, a subset of transcriptional activators"
+fig|374463.4.peg.289,DNA topoisomerase I (EC 5.99.1.2),DNA topoisomerase I (EC 5.6.2.1),Different,0.965,EC numbers indicate distinct enzyme classes
+fig|374463.4.peg.291,YciL protein,YciI protein,Uninformative,0.835,insufficient data on YciL and YciI functions
+fig|374463.4.peg.170,Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23),Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23) (EC 4.2.99.18),Broader,0.963,Updated includes additional EC number
+fig|374463.4.peg.182,LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23),LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23) ## RluD,Exact,0.936,Identical EC and minor name addition (RluD)
+fig|374463.4.peg.185,tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228),tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228) ## TrmD,Exact,0.942,Identical EC and minor name addition

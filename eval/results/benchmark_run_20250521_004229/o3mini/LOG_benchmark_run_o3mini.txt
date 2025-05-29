@@ -1,0 +1,106 @@
+2025-05-21 00:46:33,213 [INFO] concord.llm.prompts: Loaded external template: v1.1-enzyme
+2025-05-21 00:46:33,213 [INFO] concord.llm.prompts: Loaded external template: v2
+2025-05-21 00:46:33,213 [INFO] concord.llm.prompts: Loaded external template: v2.1
+2025-05-21 00:46:33,213 [INFO] concord.llm.prompts: Loaded external template: v3.0-CoT
+2025-05-21 00:46:33,213 [INFO] concord.llm.prompts: Loaded external template: v3.1-CoT
+2025-05-21 00:46:33,213 [INFO] concord.llm.prompts: Loaded external template: v1.2-general
+2025-05-21 00:46:33,213 [INFO] concord.llm.prompts: Loaded external template: v1.3-test
+2025-05-21 00:46:33,213 [INFO] concord.llm.prompts: Loaded external template: v1.1-phage
+2025-05-21 00:46:33,213 [INFO] concord.llm.prompts: Loaded external template: v1.0
+2025-05-21 00:46:33,213 [INFO] concord.llm.prompts: Loaded external template: v3.0
+2025-05-21 00:46:33,213 [INFO] concord.llm.prompts: Loaded external template: v1.1-general
+2025-05-21 00:46:33,213 [INFO] concord.llm.prompts: Loaded external template: v3.1
+2025-05-21 00:46:33,213 [INFO] concord.llm.prompts: Loaded external template: v0.0_bug_test
+2025-05-21 00:46:33,217 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+⚠️ Argo Gateway API unreachable; LLM calls may fail
+Processing:   0%|          | 0/200 [00:00<?, ?row/s]2025-05-21 00:46:33,408 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:33,567 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  10%|█         | 20/200 [00:00<00:01, 121.57row/s]2025-05-21 00:46:33,568 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:33,718 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  20%|██        | 40/200 [00:00<00:01, 128.01row/s]2025-05-21 00:46:33,719 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:33,858 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  30%|███       | 60/200 [00:00<00:01, 134.39row/s]2025-05-21 00:46:33,858 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:34,031 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  40%|████      | 80/200 [00:00<00:00, 126.33row/s]2025-05-21 00:46:34,031 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:34,229 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  50%|█████     | 100/200 [00:00<00:00, 115.64row/s]2025-05-21 00:46:34,230 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:34,382 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  60%|██████    | 120/200 [00:00<00:00, 120.37row/s]2025-05-21 00:46:34,383 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:34,567 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  70%|███████   | 140/200 [00:01<00:00, 116.12row/s]2025-05-21 00:46:34,568 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:34,743 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  80%|████████  | 160/200 [00:01<00:00, 115.30row/s]2025-05-21 00:46:34,744 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:34,924 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  90%|█████████ | 180/200 [00:01<00:00, 113.82row/s]2025-05-21 00:46:34,925 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:35,091 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing: 100%|██████████| 200/200 [00:01<00:00, 115.47row/s]Processing: 100%|██████████| 200/200 [00:01<00:00, 118.40row/s]
+2025-05-21 00:46:35,093 [INFO] concord.pipeline: Processed 200 rows in 1.71s
+2025-05-21 00:46:35,093 [WARNING] concord.pipeline: 10 chunks failed processing
+[Warning] 10 chunks failed during processing
+✓ wrote 
+eval/results/benchmark_run_20250521_004229/o3mini/o3mini_v1
+.0_zero.csv
+2025-05-21 00:46:37,175 [INFO] concord.llm.prompts: Loaded external template: v1.1-enzyme
+2025-05-21 00:46:37,175 [INFO] concord.llm.prompts: Loaded external template: v2
+2025-05-21 00:46:37,175 [INFO] concord.llm.prompts: Loaded external template: v2.1
+2025-05-21 00:46:37,175 [INFO] concord.llm.prompts: Loaded external template: v3.0-CoT
+2025-05-21 00:46:37,175 [INFO] concord.llm.prompts: Loaded external template: v3.1-CoT
+2025-05-21 00:46:37,175 [INFO] concord.llm.prompts: Loaded external template: v1.2-general
+2025-05-21 00:46:37,175 [INFO] concord.llm.prompts: Loaded external template: v1.3-test
+2025-05-21 00:46:37,175 [INFO] concord.llm.prompts: Loaded external template: v1.1-phage
+2025-05-21 00:46:37,175 [INFO] concord.llm.prompts: Loaded external template: v1.0
+2025-05-21 00:46:37,175 [INFO] concord.llm.prompts: Loaded external template: v3.0
+2025-05-21 00:46:37,175 [INFO] concord.llm.prompts: Loaded external template: v1.1-general
+2025-05-21 00:46:37,175 [INFO] concord.llm.prompts: Loaded external template: v3.1
+2025-05-21 00:46:37,175 [INFO] concord.llm.prompts: Loaded external template: v0.0_bug_test
+2025-05-21 00:46:37,179 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+⚠️ Argo Gateway API unreachable; LLM calls may fail
+Processing:   0%|          | 0/200 [00:00<?, ?row/s]2025-05-21 00:46:37,395 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:37,610 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  10%|█         | 20/200 [00:00<00:01, 90.88row/s]2025-05-21 00:46:37,611 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:37,801 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  20%|██        | 40/200 [00:00<00:01, 98.61row/s]2025-05-21 00:46:37,802 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:38,016 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  30%|███       | 60/200 [00:00<00:01, 95.98row/s]2025-05-21 00:46:38,017 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:38,198 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  40%|████      | 80/200 [00:00<00:01, 100.99row/s]2025-05-21 00:46:38,199 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:38,417 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  50%|█████     | 100/200 [00:01<00:01, 97.36row/s]2025-05-21 00:46:38,417 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:38,600 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  60%|██████    | 120/200 [00:01<00:00, 101.12row/s]2025-05-21 00:46:38,600 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:38,782 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  70%|███████   | 140/200 [00:01<00:00, 103.78row/s]2025-05-21 00:46:38,783 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:38,965 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  80%|████████  | 160/200 [00:01<00:00, 105.50row/s]2025-05-21 00:46:38,965 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:40,194 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing:  90%|█████████ | 180/200 [00:02<00:00, 38.87row/s] 2025-05-21 00:46:40,194 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=o3mini env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 00:46:40,402 [ERROR] concord.pipeline: Error processing chunk: Client error '400 Bad Request' for url 'https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400
+Processing: 100%|██████████| 200/200 [00:03<00:00, 47.62row/s]Processing: 100%|██████████| 200/200 [00:03<00:00, 66.40row/s]
+2025-05-21 00:46:40,402 [INFO] concord.pipeline: Processed 200 rows in 3.04s
+2025-05-21 00:46:40,402 [WARNING] concord.pipeline: 10 chunks failed processing
+[Warning] 10 chunks failed during processing
+✓ wrote 
+eval/results/benchmark_run_20250521_004229/o3mini/o3mini_v3
+.1_zero.csv
+[1/2] Running MODE=zero-shot, PROMPT=v1.0, SIM_HINT=no -> eval/results/benchmark_run_20250521_004229/o3mini/o3mini_v1.0_zero.csv
+[2/2] Running MODE=zero-shot, PROMPT=v3.1, SIM_HINT=no -> eval/results/benchmark_run_20250521_004229/o3mini/o3mini_v3.1_zero.csv

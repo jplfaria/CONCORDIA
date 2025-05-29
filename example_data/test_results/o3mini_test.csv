@@ -1,0 +1,7 @@
+gene_id,annotation_a,annotation_b,relationship,evidence
+fig|273133.2.peg.39,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,annotations are identical aside from capitalization
+fig|273133.2.peg.40,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,identical function description with only case differences in terminology
+fig|273133.2.peg.157,Phage tail fiber,Phage tail fiber protein,Synonym,Both names refer to the same entity with minimal naming variation
+fig|273133.2.peg.54,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Synonym,identical function and description with only minor word order changes
+fig|273133.2.peg.156,Phage tail fiber,Phage tail fiber protein,Synonym,Both annotations denote the same structural phage component (minor wording difference)
+fig|273133.2.peg.166,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,"Annotation B includes an EC number, specifying a more precise enzymatic function"

@@ -1,0 +1,4 @@
+gene_id,annotation_a,annotation_b,relationship,similarity_Pubmedbert,evidence
+fig|273133.2.peg.39,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,1.0,  [FALLBACK—RuntimeError: LLM annotation failed: exhausted retries]
+fig|273133.2.peg.40,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,1.0,  [FALLBACK—RuntimeError: LLM annotation failed: exhausted retries]
+fig|273133.2.peg.157,Phage tail fiber,Phage tail fiber protein,Different,0.944,  [FALLBACK—RuntimeError: LLM annotation failed: exhausted retries]

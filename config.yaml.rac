@@ -1,0 +1,37 @@
+# ╭─────────────────────────────────────────────────────────────╮
+# │  Concordia – with RAC configuration (May 2025)             │
+# ╰─────────────────────────────────────────────────────────────╯
+
+engine:
+  # Allowed: local | zero-shot | vote | rac
+  #
+  # • local     – cosine-only heuristic, no LLM calls
+  # • zero-shot – every pair goes to the LLM directly
+  # • vote      – three LLM calls at different temps with voting
+  # • rac       – retrieval-augmented classification with examples
+  #
+  mode: rac     # Set to use retrieval-augmented classification
+  sim_hint: true  # Include cosine similarity in prompts
+
+# ──────────────────────────────────────────────────────────────
+llm:                      # Argo Gateway settings
+  model: gpt4o            # o-series ⇒ auto-env = apps-dev
+  stream: false           # set true to use /streamchat/ endpoint
+  user: ${ARGO_USER}      # export ARGO_USER=<anl-login>
+
+# ──────────────────────────────────────────────────────────────
+local:                    # Local embedding model
+  model_id: NeuML/pubmedbert-base-embeddings
+  # If you want SPECTER2 instead, flip the id and run once so it downloads:
+  # model_id: allenai/specter2
+
+# ──────────────────────────────────────────────────────────────
+rac:                      # Retrieval-Augmented Classification settings
+  example_limit: 3        # Number of examples to retrieve (0-5 recommended)
+  similarity_threshold: 0.6  # Minimum similarity score to include example (0-1)
+  auto_store: true        # Auto-save successful classifications to vector store
+                          # Enable to create a self-improving system
+
+# ──────────────────────────────────────────────────────────────
+data_dir: "./data"        # Directory for storing vector database and other data
+prompt_ver: v3.0          # Default prompt template version

@@ -1,0 +1,6 @@
+A: {A}
+B: {B}
+
+### Task
+Return **<Label> — <very short reason>**.
+Allowed labels: Broader, Different, Exact, Narrower, Related, Synonym, Uninformative

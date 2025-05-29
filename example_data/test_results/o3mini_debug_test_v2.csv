@@ -1,0 +1,25 @@
+gene_id,annotation_a,annotation_b,relationship,evidence
+fig|273133.2.peg.39,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,"wording differences only (capitalisation only, Rule 1: Qualifier clean-up)"
+fig|273133.2.peg.40,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Difference is only in capitalization; both annotations are identical in meaning (Qualifier clean-up rule)
+fig|273133.2.peg.157,Phage tail fiber,Phage tail fiber protein,Exact,wording differences only (qualifier clean-up; rule 1)
+fig|273133.2.peg.54,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,"minor wording differences only (qualifier clean-up, rule 1)"
+fig|273133.2.peg.156,Phage tail fiber,Phage tail fiber protein,Exact,"The only difference is the addition of “protein”, a qualifier clean-up change (Rule 1)"
+fig|273133.2.peg.166,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,additional specificity provided by EC 3.6.4.12 (Rule 2)
+fig|273133.2.peg.76,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,B adds an EC number which provides additional specificity not present in A (rule 2)
+fig|273133.2.peg.183,Phage endolysin,Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,Annotation B adds specific catalytic and substrate detail (EC 3.5.1.28) not present in A (Rule 1 and 2)
+fig|273133.2.peg.185,HNH homing endonuclease,Phage homing endonuclease,Different,0.783,  [FALLBACK—RuntimeError: LLM annotation failed: exhausted retries]
+fig|273133.2.peg.188,"Phage lysin, N-acetylmuramoyl-L-alanine amidase",Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,"B includes the specific EC number (EC 3.5.1.28), adding functional detail not present in A (rule 2)"
+fig|273133.2.peg.1,Phage repressor,Phage repressor protein,Different,0.926,  [FALLBACK—RuntimeError: LLM annotation failed: Server disconnected without sending a response.]
+fig|273133.2.peg.193,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,Wording differences only (qualifier clean-up rule)
+fig|374463.4.peg.296,Glucose-6-phosphate 1-dehydrogenase (EC 1.1.1.49),Glucose-6-phosphate 1-dehydrogenase (NADP+) (EC 1.1.1.49),Exact,"Both annotations describe the same enzyme (EC 1.1.1.49); the addition of ""(NADP+)"" is a wording difference only (Rule"
+fig|374463.4.peg.298,Manganese transport protein MntH,"Mn(II) and Fe(II) import protein MntH, proton-dependent",Narrower,Annotation B adds substrate specificity (Fe(II)) and mechanism detail (proton-dependent) not present in A (Rule 1: qualifier clean-up with added functional details)
+fig|374463.4.peg.181,hypothetical protein,Outer membrane beta-barrel assembly protein BamD,Narrower,B adds specific function information not present in A (Rule 1: qualifier clean-up)
+fig|374463.4.peg.282,Enoyl-[acyl-carrier-protein] reductase [NADH] (EC 1.3.1.9),Enoyl-[acyl-carrier-protein] reductase (NADH) (EC 1.3.1.9),Exact,"Only punctuation differences, with identical enzyme commission number and function (Rule 1: qualifier clean-up)"
+fig|374463.4.peg.161,Sulfate-binding protein Sbp,"Sulfate/thiosulfate ABC transporter, sulfate-binding protein Spb",Narrower,Annotation B adds additional substrate specificity and transporter context (thiosulfate inclusion) not present in A (rule 1)
+fig|374463.4.peg.166,Glutaredoxin 3 (Grx3),Glutaredoxin 3,Exact,wording differences only (qualifier clean-up: addition of gene symbol does not alter function)
+fig|374463.4.peg.288,Cys regulon transcriptional activator CysB,"Cys regulon transcriptional activator CysB, LysR family",Narrower,"Annotation B adds the specific detail ""LysR family,"" providing extra specificity not present in Annotation A (Rule 1: Qualifier clean-up and added specificity)"
+fig|374463.4.peg.289,DNA topoisomerase I (EC 5.99.1.2),DNA topoisomerase I (EC 5.6.2.1),Different,0.965,  [FALLBACK—RuntimeError: LLM annotation failed: exhausted retries]
+fig|374463.4.peg.291,YciL protein,YciI protein,Different,0.835,  [FALLBACK—RuntimeError: LLM annotation failed: exhausted retries]
+fig|374463.4.peg.170,Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23),Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23) (EC 4.2.99.18),Different,0.963,  [FALLBACK—RuntimeError: LLM annotation failed: exhausted retries]
+fig|374463.4.peg.182,LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23),LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23) ## RluD,Exact,Both annotations denote the identical enzyme with matching EC number; the “## RluD” comment doesn’t alter the function (rule 6)
+fig|374463.4.peg.185,tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228),tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228) ## TrmD,Exact,"identical function and EC number; additional ""TrmD"" is an accepted synonym (Rule 1)"

@@ -1,0 +1,9 @@
+gene_id,annotation_a,annotation_b,relationship,evidence
+fig|273133.2.peg.39,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,annotations identical aside from case variation (evidence: case normalization)
+fig|273133.2.peg.40,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Identical annotations except for minor capitalization
+fig|273133.2.peg.157,Phage tail fiber,Phage tail fiber protein,Exact,Both descriptions identify the same gene product with a trivial wording variation
+fig|273133.2.peg.54,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Synonym,same protein function with only word order differences (Rule: Annotation equivalence)
+fig|273133.2.peg.156,Phage tail fiber,Phage tail fiber protein,Synonym,Both annotations refer to the same phage protein with only minimal naming variation (rule 3)
+fig|273133.2.peg.166,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,B is more specific by including the EC number (EC 3.6.4.12)
+fig|273133.2.peg.76,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,B provides additional enzyme classification information (EC 3.6.4.12) specifying activity
+fig|273133.2.peg.183,Phage endolysin,Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,B specifies the exact enzymatic activity (EC 3.5.1.28) within the broader phage endolysin category
