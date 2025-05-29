@@ -1,0 +1,39 @@
+2025-05-21 22:35:40,866 [INFO] concord.llm.prompts: Loaded external template: v1.1-enzyme
+2025-05-21 22:35:40,866 [INFO] concord.llm.prompts: Loaded external template: v2
+2025-05-21 22:35:40,866 [INFO] concord.llm.prompts: Loaded external template: v2.1
+2025-05-21 22:35:40,866 [INFO] concord.llm.prompts: Loaded external template: v3.0-CoT
+2025-05-21 22:35:40,866 [INFO] concord.llm.prompts: Loaded external template: v3.1-CoT
+2025-05-21 22:35:40,866 [INFO] concord.llm.prompts: Loaded external template: v1.2-general
+2025-05-21 22:35:40,866 [INFO] concord.llm.prompts: Loaded external template: v1.3-test
+2025-05-21 22:35:40,866 [INFO] concord.llm.prompts: Loaded external template: v1.1-phage
+2025-05-21 22:35:40,866 [INFO] concord.llm.prompts: Loaded external template: v1.0
+2025-05-21 22:35:40,866 [INFO] concord.llm.prompts: Loaded external template: v3.0
+2025-05-21 22:35:40,866 [INFO] concord.llm.prompts: Loaded external template: v1.1-general
+2025-05-21 22:35:40,866 [INFO] concord.llm.prompts: Loaded external template: v3.1
+2025-05-21 22:35:40,866 [INFO] concord.llm.prompts: Loaded external template: v0.0_bug_test
+2025-05-21 22:35:40,870 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4o env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-21 22:36:10,936 [WARNING] concord.llm.argo_gateway: Timeout on attempt 1
+
+Aborted.
+[retry 1/5] timeout; sleeping 1.7s
+[1/2] Running MODE=zero-shot, PROMPT=v1.0, SIM_HINT=no -> eval/results/benchmark_run_20250521_223538/gpt4o/gpt4o_v1.0_zero.csv
+Traceback (most recent call last):
+  File "/Users/jplfaria/repos/CONCORDIA/eval/scripts/benchmark_runner.py", line 87, in <module>
+    main()
+  File "/Users/jplfaria/repos/CONCORDIA/eval/scripts/benchmark_runner.py", line 83, in main
+    subprocess.run(cmd, check=True)
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 1201, in communicate
+    self.wait()
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 1264, in wait
+    return self._wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 2053, in _wait
+    (pid, sts) = self._try_wait(0)
+                 ^^^^^^^^^^^^^^^^^
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 2011, in _try_wait
+    (pid, sts) = os.waitpid(self.pid, wait_flags)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

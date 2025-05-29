@@ -1,8 +1,0 @@
-gene_id,annotation_a,annotation_b,relationship,evidence
-fig|273133.2.peg.39,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,only differs by capitalization
-fig|273133.2.peg.40,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,identical except for capitalization
-fig|273133.2.peg.157,Phage tail fiber,Phage tail fiber protein,Unknown,
-fig|273133.2.peg.54,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Unknown,
-fig|273133.2.peg.156,Phage tail fiber,Phage tail fiber protein,Unknown,
-fig|273133.2.peg.166,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Unknown,
-fig|273133.2.peg.76,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,B includes specific EC classification
