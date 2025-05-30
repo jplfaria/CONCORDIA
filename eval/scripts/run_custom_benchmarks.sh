@@ -39,7 +39,7 @@ for model_name in "${MODELS_TO_TEST[@]}"; do
   MODEL_OUT_DIR="${BASE_OUT_DIR}/${model_name}"
   mkdir -p "$MODEL_OUT_DIR"
 
-  runner_cmd="python eval/scripts/benchmark_runner.py \\
+  runner_cmd="poetry run python eval/scripts/benchmark_runner.py \\
                 --data \"$BENCHMARK_DATASET\" \\
                 --modes $MODES_TO_TEST \\
                 --prompts $PROMPTS_TO_TEST \\
