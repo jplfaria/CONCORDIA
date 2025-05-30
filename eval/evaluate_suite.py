@@ -95,6 +95,7 @@ def plot_combined_metrics_summary(df_summary: pd.DataFrame, output_dir: P.Path):
                 hue="file",  # Assign y to hue as per FutureWarning
                 palette="viridis",
                 legend=False,  # Set legend to False as per FutureWarning
+                ax=ax,  # Ensure plotting on the correct subplot axis
             )
             ax.set_title(metric_info["title"])
             ax.set_xlabel(metric_info["col"].replace("_", " ").title())
