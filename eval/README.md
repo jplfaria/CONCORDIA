@@ -4,7 +4,8 @@ This directory contains the end-to-end benchmarking workflow for CONCORDIA:
 
 - `datasets/` – Gold and unlabeled CSVs for benchmarks.
 - `scripts/` – Helper scripts for running and processing benchmarks.
-- `results/` – Generated outputs (ignored by Git).
+- `results/` – Main directory for generated benchmark outputs (ignored by Git).
+- `example_outputs/` – Contains an example of a full benchmark run output, including evaluation results (tracked by Git). This serves as a reference for the expected structure.
 
 ## Usage
 
@@ -41,6 +42,8 @@ python eval/scripts/benchmark_runner.py \
 
 After generating benchmark predictions (typically using `run_custom_benchmarks.sh`), use `eval/evaluate_suite.py` to compare predictions against the gold standard, calculate metrics, and produce visualizations.
 
+The main `eval/results/` directory (where `run_custom_benchmarks.sh` saves its output) is ignored by Git to prevent clutter from multiple test runs. However, a complete example of a benchmark run's output, including the `evaluation_output` subdirectory with plots and metrics, can be found in `eval/example_outputs/`. This directory is tracked by Git and serves as a reference.
+
 Key points for `evaluate_suite.py`:
 - If `--pred-dir` is not specified, the script will attempt to automatically use the latest `benchmark_run_*` directory found in `eval/results/`.
 - The default pattern for finding prediction files (if `--pattern` is not specified) is `"*_predictions.csv"`. The example below uses a more general pattern.
@@ -53,7 +56,7 @@ python eval/evaluate_suite.py \
   --pred-dir eval/results/your_benchmark_run_timestamp_dir \
   --pattern "**/*.csv" \
   --out eval/results/your_benchmark_run_timestamp_dir/evaluation_output \
-  --plot
+  --plot  # Ensures generation of .png plots (confusion matrices, summary charts)
 ```
 
 If omitting `--pred-dir` to use the auto-detected latest run, the command might look like:
@@ -61,7 +64,7 @@ If omitting `--pred-dir` to use the auto-detected latest run, the command might 
 python eval/evaluate_suite.py \
   --gold eval/datasets/Benchmark_subset__200_pairs_v1.csv \
   --pattern "**/*.csv" \
-  --plot
+  --plot  # Ensures generation of .png plots
 ```
 Note: When using auto-detection for `--pred-dir`, the `--out` path will also be relative to the auto-detected directory (e.g., `evaluation_output` inside it). If you specify `--pred-dir`, ensure your `--out` path is also appropriate, typically pointing to an `evaluation_output` subdirectory within your chosen `pred-dir`.
 
