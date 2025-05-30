@@ -1,6 +1,0 @@
-sentence1,sentence2,gold_relationship_label,pred_relationship_label
-HNH homing endonuclease,Phage homing endonuclease,Related,Broader
-Manganese transport protein MntH,"Mn(II) and Fe(II) import protein MntH, proton-dependent",Broader,Narrower
-hypothetical protein,Outer-membrane β-barrel assembly protein BamD,Uninformative,Narrower
-Sulfate-binding protein Sbp,"Sulfate/thiosulfate ABC transporter, sulfate-binding protein Spb",Broader,Narrower
-Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23),Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23) (EC 4.2.99.18),Broader,Narrower

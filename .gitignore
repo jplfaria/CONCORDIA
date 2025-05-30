@@ -28,10 +28,12 @@ __pycache__/
 *.log
 *.concordia.csv        # result files regenerated each run
 example_data/test_results/    # benchmark test results directory
-eval/results/                # ignore new benchmark results directory
-eval/benchmark_results/      # ignore benchmark suite output
-eval/scripts/eval/results/   # ignore nested eval script results
-*.png                        # ignore plot files
+
+# Evaluation outputs
+eval/results/*                 # Ignore all content within the main results directory
+!eval/example_outputs/         # DO track the specific example outputs directory
+# eval/benchmark_results/      # Obsolete: directory removed
+# eval/scripts/eval/results/   # Obsolete: directory removed
 
 # Hugging Face cache (weights are huge; re-downloaded on demand)
 .cache/
