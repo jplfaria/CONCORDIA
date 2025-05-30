@@ -2,12 +2,12 @@
 
 # --- Configuration ---
 # Ensure this path is correct for your benchmark dataset
-BENCHMARK_DATASET="eval/datasets/Benchmark_subset__200_pairs_v1.csv" 
+BENCHMARK_DATASET="eval/datasets/Benchmark_subset__24_pairs_v1.tsv" 
 # Main config file for concord
 CONFIG_FILE="config.yaml" 
 
 # Models to test
-MODELS_TO_TEST=("gpt4o" "gpt4olatest" "gpto3mini" "gpto1")
+MODELS_TO_TEST=("gpt4olatest" "gpto1")
 # Prompts/Templates to test (space-separated string)
 PROMPTS_TO_TEST="v1.0 v3.1" 
 # Modes to test (space-separated string)
