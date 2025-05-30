@@ -2,7 +2,7 @@
 
 # --- Configuration ---
 # Ensure this path is correct for your benchmark dataset
-BENCHMARK_DATASET="eval/datasets/Benchmark_subset__24_pairs_v1.tsv" 
+BENCHMARK_DATASET="eval/datasets/Benchmark_subset__24_pairs_v1.csv" 
 # Main config file for concord
 CONFIG_FILE="config.yaml" 
 
