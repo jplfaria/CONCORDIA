@@ -47,8 +47,14 @@ python eval/scripts/benchmark_runner.py \
 
 ## Evaluating Results
 
-After running benchmarks (e.g., using `run_custom_benchmarks.sh`), evaluate the generated predictions:
+After running benchmarks (e.g., using `run_custom_benchmarks.sh`), evaluate the generated predictions using `evaluate_suite.py`.
 
+Key points for `evaluate_suite.py`:
+- If `--pred-dir` is not specified, the script will attempt to automatically use the latest `benchmark_run_*` directory found in `eval/results/`.
+- The default pattern for finding prediction files (if `--pattern` is not specified) is `"*_predictions.csv"`. The example below uses a more general pattern.
+- For advanced use cases with custom CSV formats, arguments like `--gold-s1-col`, `--pred-rel-col`, etc., are available to specify column names. Run `python eval/evaluate_suite.py --help` for details.
+
+Example evaluation command:
 ```bash
 python eval/evaluate_suite.py \
   --gold eval/datasets/Benchmark_subset__200_pairs_v1.csv \
@@ -58,4 +64,11 @@ python eval/evaluate_suite.py \
   --plot
 ```
 
-Replace `your_benchmark_run_timestamp_dir` with the actual directory name created by the benchmark script (e.g., `benchmark_run_20250521_011119`).
+If omitting `--pred-dir` to use the auto-detected latest run, the command might look like:
+```bash
+python eval/evaluate_suite.py \
+  --gold eval/datasets/Benchmark_subset__200_pairs_v1.csv \
+  --pattern "**/*.csv" \
+  --plot
+```
+Note: When using auto-detection for `--pred-dir`, the `--out` path will also be relative to the auto-detected directory (e.g., `evaluation_output` inside it). If you specify `--pred-dir`, ensure your `--out` path is also appropriate, typically pointing to an `evaluation_output` subdirectory within your chosen `pred-dir`.

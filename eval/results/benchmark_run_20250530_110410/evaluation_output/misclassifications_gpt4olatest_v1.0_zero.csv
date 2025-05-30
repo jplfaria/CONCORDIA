@@ -1,0 +1,20 @@
+sentence1,sentence2,gold_relationship_label,pred_relationship_label
+Phage tail fiber,Phage tail fiber protein,Exact,Synonym
+Phage tail fiber,Phage tail fiber protein,Exact,Synonym
+Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,Synonym
+Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,Synonym
+Phage tail fiber,Phage tail fiber protein,Exact,Synonym
+Phage tail fiber,Phage tail fiber protein,Exact,Synonym
+"Phage lysin, N-acetylmuramoyl-L-alanine amidase",Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,Synonym
+Phage repressor,Phage repressor protein,Exact,Synonym
+Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,Synonym
+Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,Synonym
+Glucose-6-phosphate 1-dehydrogenase (EC 1.1.1.49),Glucose-6-phosphate 1-dehydrogenase (NADP+) (EC 1.1.1.49),Narrower,Exact
+Manganese transport protein MntH,"Mn(II) and Fe(II) import protein MntH, proton-dependent",Broader,Related
+hypothetical protein,Outer-membrane β-barrel assembly protein BamD,Uninformative,Different
+Sulfate-binding protein Sbp,"Sulfate/thiosulfate ABC transporter, sulfate-binding protein Spb",Broader,Narrower
+Glutaredoxin 3 (Grx3),Glutaredoxin 3,Exact,Synonym
+DNA topoisomerase I (EC 5.99.1.2),DNA topoisomerase I (EC 5.6.2.1),Synonym,Different
+YciL protein,YciI protein,Different,Related
+LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23),LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23) ## RluD,Exact,Synonym
+tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228),tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228) ## TrmD,Exact,Synonym

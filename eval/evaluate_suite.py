@@ -35,8 +35,19 @@ from concord.metrics import calculate_classification_metrics, plot_confusion_mat
 
 
 def gather_predictions(pred_dir: P.Path, pattern: str) -> List[P.Path]:
-    """Return list of CSV files matching *pattern* inside *pred_dir*."""
-    return sorted(pred_dir.glob(pattern))
+    """Return list of CSV files matching *pattern* inside *pred_dir*, excluding 'evaluation_output'."""
+    all_files = pred_dir.glob(
+        pattern
+    )  # This might be recursive if pattern contains '**'
+    # Filter out files that are within an 'evaluation_output' directory
+    # This check is robust even if 'pattern' itself causes recursive search (e.g. '**/*.csv')
+    # and 'evaluation_output' is a subdirectory of 'pred_dir'.
+    filtered_files = [
+        f
+        for f in all_files
+        if "evaluation_output" not in [p.name for p in f.relative_to(pred_dir).parents]
+    ]
+    return sorted(filtered_files)
 
 
 def plot_combined_metrics_summary(df_summary: pd.DataFrame, output_dir: P.Path):
@@ -72,8 +83,18 @@ def plot_combined_metrics_summary(df_summary: pd.DataFrame, output_dir: P.Path):
     for i, metric_info in enumerate(metrics_to_plot):
         if i < len(axes):
             ax = axes[i]
+            df_summary_melted = df_sorted.melt(
+                id_vars="file", value_vars=[metric_info["col"]]
+            )
             sns.barplot(
-                data=df_sorted, y="file", x=metric_info["col"], ax=ax, palette="crest"
+                data=df_summary_melted[
+                    df_summary_melted["variable"] == metric_info["col"]
+                ],
+                x="value",
+                y="file",
+                hue="file",  # Assign y to hue as per FutureWarning
+                palette="viridis",
+                legend=False,  # Set legend to False as per FutureWarning
             )
             ax.set_title(metric_info["title"])
             ax.set_xlabel(metric_info["col"].replace("_", " ").title())
@@ -200,21 +221,44 @@ def main() -> None:
     parser.add_argument(
         "--pattern",
         default="**/*.csv",
-        help="Glob pattern to match prediction CSVs within --pred-dir (searches recursively, e.g., through model subfolders).",
+        help="Glob pattern to find prediction CSVs within --pred-dir (default: '**/*.csv')",
+    )
+    parser.add_argument(
+        "--pred-s1-col",
+        default="annotation_a",
+        help="Column name for sentence 1 in prediction CSVs (default: annotation_a)",
+    )
+    parser.add_argument(
+        "--pred-s2-col",
+        default="annotation_b",
+        help="Column name for sentence 2 in prediction CSVs (default: annotation_b)",
+    )
+    parser.add_argument(
+        "--pred-rel-col",
+        default="relationship",
+        help="Column name for the predicted relationship in prediction CSVs (default: relationship)",
     )
     parser.add_argument(
         "--out",
         default=str(default_out_dir),
-        help="Output directory. Defaults to 'evaluation_output' inside the determined --pred-dir, or 'eval/results/evaluation_output_default' if no runs are found.",
+        help="Output directory for evaluation results (default: <latest_pred_dir>/evaluation_output/ or eval/results/evaluation_output_default/)",
     )
     parser.add_argument(
-        "--rel-col", default="relationship_label", help="Label column name"
+        "--gold-s1-col",
+        default="annotation_a",
+        help="Column name for sentence 1 in gold CSV (default: annotation_a)",
     )
     parser.add_argument(
-        "--pred-col",
-        default="relationship",
-        help="Label column name in prediction files",
+        "--gold-s2-col",
+        default="annotation_b",
+        help="Column name for sentence 2 in gold CSV (default: annotation_b)",
     )
+    parser.add_argument(
+        "--gold-rel-col",
+        default="relationship_label",
+        help="Column name for relationship label in gold CSV (default: relationship_label)",
+    )
+
     parser.add_argument(
         "--plot", action="store_true", help="Make confusion-matrix and bar plots"
     )
@@ -244,75 +288,55 @@ def main() -> None:
     run_details_for_report = []
     for csv_path in csv_paths:
         try:
-            gold_df = pd.read_csv(gold_path)
-            pred_df = pd.read_csv(csv_path)
+            # Read gold standard (once per run, could be moved outside loop if memory allows for large gold files)
+            df_gold = pd.read_csv(
+                gold_path,
+                usecols=[args.gold_s1_col, args.gold_s2_col, args.gold_rel_col],
+            )
 
-            # Handle different column naming conventions for gold standard
-            if (
-                "old_annotation" in gold_df.columns
-                and "new_annotation" in gold_df.columns
+            # Read prediction file, selecting only specified columns
+            pred_df = pd.read_csv(
+                csv_path,
+                usecols=[args.pred_s1_col, args.pred_s2_col, args.pred_rel_col],
+            )
+
+            # Verify necessary columns are in the dataframes after selection
+            if not all(
+                col in df_gold.columns
+                for col in [args.gold_s1_col, args.gold_s2_col, args.gold_rel_col]
             ):
-                gold_df = gold_df.rename(
-                    columns={
-                        "old_annotation": "sentence1",
-                        "new_annotation": "sentence2",
-                    }
-                )
-            elif (
-                "annotation_a" in gold_df.columns and "annotation_b" in gold_df.columns
-            ):
-                gold_df = gold_df.rename(
-                    columns={"annotation_a": "sentence1", "annotation_b": "sentence2"}
-                )
-
-            # Handle different column naming conventions for predictions
-            # Check for old_annotation/new_annotation vs sentence1/sentence2
-            if (
-                "old_annotation" in pred_df.columns
-                and "new_annotation" in pred_df.columns
-            ):
-                pred_df = pred_df.rename(
-                    columns={
-                        "old_annotation": "sentence1",
-                        "new_annotation": "sentence2",
-                    }
-                )
-
-            # Check that required columns exist in both dataframes
-            required_cols_gold = ["sentence1", "sentence2", args.rel_col]
-            missing_cols_gold = [
-                col for col in required_cols_gold if col not in gold_df.columns
-            ]
-            if missing_cols_gold:
-                print(f"Error: Gold standard missing columns {missing_cols_gold}")
-                continue
-
-            required_cols = ["sentence1", "sentence2", args.pred_col]
-            missing_cols = [col for col in required_cols if col not in pred_df.columns]
-            if missing_cols:
-                print(
-                    f"Error processing {csv_path.name}: Missing columns {missing_cols}"
-                )
-                continue
-
-            # Ensure prediction column doesn't have spaces
-            pred_df.columns = pred_df.columns.str.strip()
-
-            # Check if prediction file has the expected column
-            if args.pred_col not in pred_df.columns:
                 rprint(
-                    f"[yellow]Warning: '{csv_path.name}' missing '{args.pred_col}' column.[/yellow]"
+                    f"[red]Error: Gold standard file '{gold_path}' is missing one or more required columns: {args.gold_s1_col}, {args.gold_s2_col}, {args.gold_rel_col}. Check --gold-*col arguments.[/red]"
+                )
+                return  # Exit if gold standard is misconfigured
+
+            if not all(
+                col in pred_df.columns
+                for col in [args.pred_s1_col, args.pred_s2_col, args.pred_rel_col]
+            ):
+                rprint(
+                    f"[yellow]Warning: Prediction file '{csv_path.name}' is missing one or more columns: {args.pred_s1_col}, {args.pred_s2_col}, {args.pred_rel_col}. Skipping.[/yellow]"
                 )
                 continue
 
             # Align pred_df with gold_df to ensure y_true and y_pred are comparable
             # Using an inner merge, so only pairs present in both are evaluated.
             merged_df = pd.merge(
-                gold_df,
-                pred_df,
-                on=["sentence1", "sentence2"],
+                pred_df,  # Left DataFrame
+                df_gold,  # Right DataFrame
+                left_on=[
+                    args.pred_s1_col,
+                    args.pred_s2_col,
+                ],  # Keys from left DataFrame (pred_df)
+                right_on=[
+                    args.gold_s1_col,
+                    args.gold_s2_col,
+                ],  # Keys from right DataFrame (df_gold)
                 how="inner",
-                suffixes=["_gold", "_pred"],
+                suffixes=[
+                    "_pred",
+                    "_gold",
+                ],  # Note: suffix order changed to match df order
             )
 
             if merged_df.empty:
@@ -323,20 +347,12 @@ def main() -> None:
 
             # Determine the correct column names after merge
             # The relationship label from gold will have _gold suffix
-            gold_rel_col = (
-                f"{args.rel_col}_gold"
-                if f"{args.rel_col}_gold" in merged_df.columns
-                else args.rel_col
-            )
-            # The prediction column might not have _pred suffix if it doesn't exist in gold
-            pred_rel_col = (
-                f"{args.pred_col}_pred"
-                if f"{args.pred_col}_pred" in merged_df.columns
-                else args.pred_col
-            )
-
-            y_true = merged_df[gold_rel_col].values
-            y_pred = merged_df[pred_rel_col].values
+            # Access relationship columns directly by their names as defined in args, because they don't clash by default.
+            # If they were to clash (e.g., both gold and pred files used 'relationship' as the column name),
+            # then suffixes '_pred' and '_gold' would be applied by the merge.
+            # The 'relationship' column from pred_df and 'relationship_label' from df_gold do not clash by default.
+            y_true = merged_df[args.gold_rel_col].values
+            y_pred = merged_df[args.pred_rel_col].values
 
             # Calculate metrics
             metrics = calculate_classification_metrics(y_true, y_pred)
@@ -425,21 +441,50 @@ def main() -> None:
             misclass_file_path = None  # Initialize
             misclassified_mask = y_true != y_pred
             if np.any(misclassified_mask):
-                misclassified_data = merged_df[misclassified_mask][
-                    ["sentence1", "sentence2", gold_rel_col, pred_rel_col]
-                ]
-                misclassified_data = misclassified_data.rename(
-                    columns={
-                        gold_rel_col: "true_label",
-                        pred_rel_col: "predicted_label",
-                    }
-                )
+                # Select columns for misclassification report, using original column names from gold and pred with suffixes
+                # The sentence columns in merged_df will be args.pred_s1_col, args.pred_s2_col (from pred_df, no suffix if not clashing)
+                # or args.gold_s1_col_gold, args.gold_s2_col_gold if they were different from pred_df's sentence columns.
+                # Given suffixes=["_pred", "_gold"], and pred_df is left:
+                # - pred sentence cols: args.pred_s1_col, args.pred_s2_col (if no clash)
+                #   or args.pred_s1_col_pred, args.pred_s2_col_pred (if clashing with df_gold's original names)
+                # - gold sentence cols: args.gold_s1_col_gold, args.gold_s2_col_gold
+                # Let's assume for simplicity that sentence column names in pred and gold are distinct after suffixing if they were originally the same.
+                # The keys used for merging (args.pred_s1_col, etc.) will be present directly if they don't clash.
+                # If they do clash, they get suffixes. Since we use suffixes=["_pred", "_gold"], and pred_df is left:
+                # - Columns unique to pred_df or used as left_on key: original name (e.g., args.pred_s1_col)
+                # - Columns unique to df_gold or used as right_on key: original name + "_gold" (e.g., args.gold_s1_col + "_gold")
+                # - Columns present in both AND NOT merge keys: original_name_pred, original_name_gold
 
-                misclass_file_path = out_dir / f"misclassifications_{csv_path.stem}.csv"
-                misclassified_data.to_csv(misclass_file_path, index=False)
-                rprint(
-                    f"[cyan]Misclassifications report saved to {misclass_file_path}[/cyan]"
-                )
+                # For sentence columns in misclassification report, these are the merge keys.
+                # If pred_s1_col and gold_s1_col are the same (e.g. 'annotation_a' by default),
+                # pandas keeps the original name from the left df ('annotation_a') rather than applying suffixes like '_pred'.
+                s1_col_for_report = args.pred_s1_col  # e.g., 'annotation_a'
+                s2_col_for_report = args.pred_s2_col  # e.g., 'annotation_b'
+
+            misclassified_df = merged_df[
+                y_true != y_pred
+            ].copy()  # Use .copy() to avoid SettingWithCopyWarning
+            misclassified_df = misclassified_df[
+                [
+                    s1_col_for_report,
+                    s2_col_for_report,
+                    args.gold_rel_col,  # True label column (e.g., 'relationship_label')
+                    args.pred_rel_col,  # Predicted label column (e.g., 'relationship')
+                ]
+            ].rename(
+                columns={
+                    s1_col_for_report: "sentence1",
+                    s2_col_for_report: "sentence2",
+                    args.gold_rel_col: "gold_relationship_label",
+                    args.pred_rel_col: "pred_relationship_label",
+                }
+            )
+
+            misclass_file_path = out_dir / f"misclassifications_{csv_path.stem}.csv"
+            misclassified_df.to_csv(misclass_file_path, index=False)
+            rprint(
+                f"[cyan]Misclassifications report saved to {misclass_file_path}[/cyan]"
+            )
             # ------------------------------------------
 
             # --- Collect details for HTML report ---
