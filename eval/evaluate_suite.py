@@ -460,7 +460,17 @@ def main() -> None:
         except Exception as e:
             rprint(f"[red]Error processing {csv_path.name}: {e}[/red]")
 
-    # ───────────── summary table ───────────────────────────────
+    # --- Generate summary metrics & plots ---
+    if not records:
+        rprint(
+            "[yellow]No valid prediction files were processed. Cannot generate summary metrics or plots.[/yellow]"
+        )
+        rprint(
+            f"[yellow]Please ensure --pred-dir '{str(pred_dir)}' contains valid prediction CSVs matching pattern '{args.pattern}'.[/yellow]"
+        )
+        return  # Exit gracefully
+
+    rprint("\n[bold green]Evaluation complete![/bold green]")
     df = pd.DataFrame(records).sort_values("macro_f1", ascending=False)
     summary_path = out_dir / "summary_metrics.csv"
     df.to_csv(summary_path, index=False)
