@@ -7,9 +7,11 @@ BENCHMARK_DATASET="eval/datasets/Benchmark_subset__24_pairs_v1.csv"
 CONFIG_FILE="config.yaml" 
 
 # Models to test
-MODELS_TO_TEST=("gpt4olatest" "gpto1")
+MODELS_TO_TEST=("gpt4olatest" "gpto1" "gpto3mini")
 # Prompts/Templates to test (space-separated string)
-PROMPTS_TO_TEST="v1.0 v3.1" 
+PROMPTS_TO_TEST="v3.2 v3.2-CoT" 
+#PROMPTS_TO_TEST="v3.1 v3.1-CoT v3.2 v3.2-CoT" 
+
 # Modes to test (space-separated string)
 MODES_TO_TEST="zero-shot" 
 

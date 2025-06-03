@@ -7,6 +7,19 @@ This directory contains the end-to-end benchmarking workflow for CONCORDIA:
 - `results/` – Main directory for generated benchmark outputs (ignored by Git).
 - `example_outputs/` – Contains an example of a full benchmark run output, including evaluation results (tracked by Git). This serves as a reference for the expected structure.
 
+## Label System
+
+CONCORDIA uses a **6-class ontology** for relationship classification:
+
+- **Exact**: Wording differences only (capitalization, punctuation, accepted synonyms)
+- **Synonym**: Same biological entity but nomenclature or EC renumbering changes
+- **Broader**: B is more generic; loses specificity present in A
+- **Narrower**: B adds specificity (extra EC digits, substrate, sub-unit, phage part)
+- **Different**: Unrelated proteins or functions (includes pathway neighbors or fused variants)
+- **Uninformative**: Neither term provides enough functional information
+
+*Note: The "Related" label from the previous 7-class system is automatically mapped to "Different" for backward compatibility during evaluation.*
+
 ## Usage
 
 There are two main ways to run benchmarks:
@@ -32,10 +45,38 @@ For running specific combinations of datasets, modes, prompts, and models, you c
 python eval/scripts/benchmark_runner.py \
   --data eval/datasets/Benchmark_subset__200_pairs_v1.csv \
   --modes zero-shot vote \
-  --prompts v1.0 v2.1 v3.0 v3.0-CoT v3.1 v3.1-CoT \
+  --prompts v1.0 v3.2 v3.2-CoT \
   --hint both \
   --llm-model gpt4o \
   --out-dir eval/results
+```
+
+### Available Templates
+
+Current available templates for benchmarking:
+- `v1.0`: Basic template with all labels listed
+- `v1.1-general`: Microbial genome curator context
+- `v1.1-enzyme`: Enzymology specialist context
+- `v1.1-phage`: Bacteriophage protein expert context
+- `v3.2`: Latest comprehensive template with detailed heuristics (default)
+- `v3.2-CoT`: Chain-of-thought version of v3.2
+
+### Performance Optimizations
+
+For faster benchmarking, consider enabling performance features:
+
+```bash
+# Enable metrics to track performance
+export CONCORDIA_METRICS=true
+
+# Use larger batch sizes for faster processing
+python eval/scripts/benchmark_runner.py \
+  --data eval/datasets/Benchmark_subset__200_pairs_v1.csv \
+  --modes zero-shot \
+  --prompts v3.2 \
+  --batch-size 64 \
+  --llm-batch-size 8 \
+  --llm-model gpt4o
 ```
 
 ## Evaluating Results
@@ -48,6 +89,7 @@ Key points for `evaluate_suite.py`:
 - If `--pred-dir` is not specified, the script will attempt to automatically use the latest `benchmark_run_*` directory found in `eval/results/`.
 - The default pattern for finding prediction files (if `--pattern` is not specified) is `"*_predictions.csv"`. The example below uses a more general pattern.
 - For advanced use cases with custom CSV formats, arguments like `--gold-s1-col`, `--pred-rel-col`, etc., are available to specify column names. Run `python eval/evaluate_suite.py --help` for details.
+- **Important**: The evaluation automatically handles the "Related" → "Different" mapping for backward compatibility.
 
 #### CSV Column Name Conventions for Evaluation
 
@@ -105,4 +147,15 @@ python eval/evaluate_suite.py \
 ```
 Note: When using auto-detection for `--pred-dir`, the `--out` path will also be relative to the auto-detected directory (e.g., `evaluation_output` inside it). If you specify `--pred-dir`, ensure your `--out` path is also appropriate, typically pointing to an `evaluation_output` subdirectory within your chosen `pred-dir`.
 
-Further details on evaluation metrics and plots can be found in the main project [Benchmarking Workflow documentation](../../docs/benchmarking.md).
+## Evaluation Metrics
+
+The evaluation suite automatically handles the 6-class label system and provides comprehensive metrics:
+
+- **Accuracy**: Overall classification accuracy
+- **Precision/Recall/F1**: Per-class and macro-averaged metrics
+- **Matthews Correlation Coefficient (MCC)**: Balanced performance measure
+- **Confusion Matrix**: Visual representation of classification performance
+
+All metrics are automatically adjusted for the "Related" → "Different" mapping to ensure consistent evaluation across different dataset versions.
+
+Further details on evaluation metrics and plots can be found in the main project [Benchmarking Workflow documentation](../docs/benchmarking.md).

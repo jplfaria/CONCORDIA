@@ -1,6 +1,6 @@
 [tool.poetry]
 name        = "concordia"
-version     = "0.0.1"
+version     = "0.1.0"
 description = "CONCORDIA – genome-annotation concordance engine"
 authors     = ["Your Name <you@anl.gov>"]
 license     = "MIT"

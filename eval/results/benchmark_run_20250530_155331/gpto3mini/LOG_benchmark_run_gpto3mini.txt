@@ -1,0 +1,160 @@
+2025-05-30 16:13:38,200 [INFO] concord.llm.prompts: Loaded template: v2
+2025-05-30 16:13:38,200 [INFO] concord.llm.prompts: Loaded template: v2.1
+2025-05-30 16:13:38,200 [INFO] concord.llm.prompts: Loaded template: v3.0-CoT
+2025-05-30 16:13:38,200 [INFO] concord.llm.prompts: Loaded template: v3.1-CoT
+2025-05-30 16:13:38,200 [INFO] concord.llm.prompts: Loaded template: v3.2
+2025-05-30 16:13:38,200 [INFO] concord.llm.prompts: Loaded template: v1.0
+2025-05-30 16:13:38,200 [INFO] concord.llm.prompts: Loaded template: v3.0
+2025-05-30 16:13:38,201 [INFO] concord.llm.prompts: Loaded template: v3.1
+2025-05-30 16:13:38,201 [INFO] concord.llm.prompts: Loaded template: v3.2-CoT
+2025-05-30 16:13:38,204 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Gateway reachable
+Processing:   0%|          | 0/24 [00:00<?, ?row/s]2025-05-30 16:13:47,870 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:13:52,733 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:13:58,297 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:14:03,122 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:14:28,331 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:14:30,719 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:14:37,243 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:14:43,377 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:14:49,762 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:15:00,516 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:15:06,580 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:15:09,416 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:15:13,697 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:15:21,663 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:15:25,985 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:15:43,073 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:15:46,377 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:15:59,965 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:16:04,980 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:16:10,915 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  83%|████████▎ | 20/24 [02:37<00:31,  7.85s/row]2025-05-30 16:16:24,917 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:16:34,184 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:16:49,089 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:16:53,130 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing: 100%|██████████| 24/24 [03:11<00:00,  8.00s/row]Processing: 100%|██████████| 24/24 [03:11<00:00,  7.96s/row]
+2025-05-30 16:16:58,926 [INFO] concord.pipeline: Processed 24 rows in 191.07s
+✓ Output written to eval/results/benchmark_run_20250530_155331/gpto3mini/gpto3mini_v3.1_zero.csv
+2025-05-30 16:16:58,928 [INFO] concord.embedding: Embedding cache cleared
+2025-05-30 16:17:00,973 [INFO] concord.llm.prompts: Loaded template: v2
+2025-05-30 16:17:00,973 [INFO] concord.llm.prompts: Loaded template: v2.1
+2025-05-30 16:17:00,973 [INFO] concord.llm.prompts: Loaded template: v3.0-CoT
+2025-05-30 16:17:00,974 [INFO] concord.llm.prompts: Loaded template: v3.1-CoT
+2025-05-30 16:17:00,974 [INFO] concord.llm.prompts: Loaded template: v3.2
+2025-05-30 16:17:00,974 [INFO] concord.llm.prompts: Loaded template: v1.0
+2025-05-30 16:17:00,974 [INFO] concord.llm.prompts: Loaded template: v3.0
+2025-05-30 16:17:00,974 [INFO] concord.llm.prompts: Loaded template: v3.1
+2025-05-30 16:17:00,974 [INFO] concord.llm.prompts: Loaded template: v3.2-CoT
+2025-05-30 16:17:00,977 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Gateway reachable
+Processing:   0%|          | 0/24 [00:00<?, ?row/s]2025-05-30 16:17:05,959 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:17:09,507 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:17:14,634 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:17:18,543 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:17:23,381 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:17:26,725 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:17:33,044 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:17:41,061 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:17:44,705 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:18:08,702 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:18:12,352 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:18:14,742 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:18:23,742 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:18:37,680 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:18:43,619 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:18:55,624 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:18:59,900 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:19:16,552 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:19:21,091 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:19:34,265 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  83%|████████▎ | 20/24 [02:35<00:31,  7.79s/row]2025-05-30 16:19:41,681 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:19:49,972 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:19:57,139 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:20:01,856 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing: 100%|██████████| 24/24 [03:00<00:00,  7.41s/row]Processing: 100%|██████████| 24/24 [03:00<00:00,  7.51s/row]
+2025-05-30 16:20:06,122 [INFO] concord.pipeline: Processed 24 rows in 180.18s
+✓ Output written to eval/results/benchmark_run_20250530_155331/gpto3mini/gpto3mini_v3.1-CoT_zero.csv
+2025-05-30 16:20:06,123 [INFO] concord.embedding: Embedding cache cleared
+2025-05-30 16:20:08,070 [INFO] concord.llm.prompts: Loaded template: v2
+2025-05-30 16:20:08,070 [INFO] concord.llm.prompts: Loaded template: v2.1
+2025-05-30 16:20:08,070 [INFO] concord.llm.prompts: Loaded template: v3.0-CoT
+2025-05-30 16:20:08,071 [INFO] concord.llm.prompts: Loaded template: v3.1-CoT
+2025-05-30 16:20:08,071 [INFO] concord.llm.prompts: Loaded template: v3.2
+2025-05-30 16:20:08,071 [INFO] concord.llm.prompts: Loaded template: v1.0
+2025-05-30 16:20:08,071 [INFO] concord.llm.prompts: Loaded template: v3.0
+2025-05-30 16:20:08,071 [INFO] concord.llm.prompts: Loaded template: v3.1
+2025-05-30 16:20:08,071 [INFO] concord.llm.prompts: Loaded template: v3.2-CoT
+2025-05-30 16:20:08,075 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Gateway reachable
+Processing:   0%|          | 0/24 [00:00<?, ?row/s]2025-05-30 16:20:13,200 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:20:16,419 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:20:18,824 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:20:23,020 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:20:27,891 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:20:31,461 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:20:42,363 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:20:52,859 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:20:58,241 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:21:20,725 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:21:46,707 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:21:50,262 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:21:53,809 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:21:59,601 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:22:18,085 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:22:21,310 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:22:25,012 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:22:32,501 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:22:36,515 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:22:54,196 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  83%|████████▎ | 20/24 [02:46<00:33,  8.33s/row]2025-05-30 16:22:59,834 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:23:08,431 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:23:13,142 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:23:16,664 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing: 100%|██████████| 24/24 [03:09<00:00,  7.73s/row]Processing: 100%|██████████| 24/24 [03:09<00:00,  7.88s/row]
+2025-05-30 16:23:22,356 [INFO] concord.pipeline: Processed 24 rows in 189.18s
+✓ Output written to eval/results/benchmark_run_20250530_155331/gpto3mini/gpto3mini_v3.2_zero.csv
+2025-05-30 16:23:22,358 [INFO] concord.embedding: Embedding cache cleared
+2025-05-30 16:23:24,280 [INFO] concord.llm.prompts: Loaded template: v2
+2025-05-30 16:23:24,280 [INFO] concord.llm.prompts: Loaded template: v2.1
+2025-05-30 16:23:24,280 [INFO] concord.llm.prompts: Loaded template: v3.0-CoT
+2025-05-30 16:23:24,280 [INFO] concord.llm.prompts: Loaded template: v3.1-CoT
+2025-05-30 16:23:24,280 [INFO] concord.llm.prompts: Loaded template: v3.2
+2025-05-30 16:23:24,280 [INFO] concord.llm.prompts: Loaded template: v1.0
+2025-05-30 16:23:24,280 [INFO] concord.llm.prompts: Loaded template: v3.0
+2025-05-30 16:23:24,280 [INFO] concord.llm.prompts: Loaded template: v3.1
+2025-05-30 16:23:24,280 [INFO] concord.llm.prompts: Loaded template: v3.2-CoT
+2025-05-30 16:23:24,284 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Gateway reachable
+Processing:   0%|          | 0/24 [00:00<?, ?row/s]2025-05-30 16:23:28,824 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:23:33,215 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:23:49,982 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:23:52,587 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:23:57,562 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:24:00,145 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:24:04,433 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:24:10,562 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:24:16,670 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:24:46,830 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:24:55,157 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:24:58,019 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:25:02,429 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:25:08,138 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:25:11,442 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:25:19,446 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:25:23,192 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:26:12,959 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:26:17,533 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:26:21,441 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  83%|████████▎ | 20/24 [03:06<00:37,  9.34s/row]2025-05-30 16:26:35,618 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:26:43,496 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:26:49,378 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 16:26:54,434 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing: 100%|██████████| 24/24 [03:57<00:00, 10.09s/row]Processing: 100%|██████████| 24/24 [03:57<00:00,  9.90s/row]
+2025-05-30 16:27:26,491 [INFO] concord.pipeline: Processed 24 rows in 237.69s
+✓ Output written to eval/results/benchmark_run_20250530_155331/gpto3mini/gpto3mini_v3.2-CoT_zero.csv
+2025-05-30 16:27:26,493 [INFO] concord.embedding: Embedding cache cleared
+[1/4] Running MODE=zero-shot, PROMPT=v3.1, SIM_HINT=no -> eval/results/benchmark_run_20250530_155331/gpto3mini/gpto3mini_v3.1_zero.csv
+[2/4] Running MODE=zero-shot, PROMPT=v3.1-CoT, SIM_HINT=no -> eval/results/benchmark_run_20250530_155331/gpto3mini/gpto3mini_v3.1-CoT_zero.csv
+[3/4] Running MODE=zero-shot, PROMPT=v3.2, SIM_HINT=no -> eval/results/benchmark_run_20250530_155331/gpto3mini/gpto3mini_v3.2_zero.csv
+[4/4] Running MODE=zero-shot, PROMPT=v3.2-CoT, SIM_HINT=no -> eval/results/benchmark_run_20250530_155331/gpto3mini/gpto3mini_v3.2-CoT_zero.csv

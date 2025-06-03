@@ -1,10 +1,9 @@
 """
 concord.metrics
 ==============
-Performance tracking and metrics for the CONCORDIA engine.
+Optional performance tracking and metrics for the CONCORDIA engine.
 
-This module records and reports performance metrics to help identify
-bottlenecks and optimization opportunities.
+This module provides opt-in metrics collection to avoid overhead when not needed.
 """
 
 from __future__ import annotations
@@ -12,6 +11,7 @@ from __future__ import annotations
 import functools
 import json
 import logging
+import os
 import pathlib as P
 import statistics
 import time
@@ -34,43 +34,36 @@ logger = logging.getLogger(__name__)
 T = TypeVar("T")
 R = TypeVar("R")
 
+# Global control for metrics collection
+_METRICS_ENABLED = os.getenv("CONCORDIA_METRICS", "false").lower() in (
+    "true",
+    "1",
+    "yes",
+)
+
 
 @dataclass
 class MetricCollector:
-    """Collect and analyze performance metrics."""
+    """Optional metrics collector with minimal overhead when disabled."""
 
-    # Storage for metrics
+    enabled: bool = field(default_factory=lambda: _METRICS_ENABLED)
     timings: Dict[str, List[float]] = field(default_factory=dict)
     counters: Dict[str, int] = field(default_factory=dict)
     gauges: Dict[str, float] = field(default_factory=dict)
-
-    # Start times for ongoing operations
     _start_times: Dict[str, float] = field(default_factory=dict)
 
     def start_timer(self, name: str) -> None:
-        """
-        Start a timer for an operation.
-
-        Args:
-            name: Name of the timer
-        """
-        self._start_times[name] = time.time()
+        """Start a timer (no-op if disabled)."""
+        if self.enabled:
+            self._start_times[name] = time.time()
 
     def stop_timer(self, name: str) -> float:
-        """
-        Stop a timer and record the elapsed time.
+        """Stop timer and return elapsed time (0.0 if disabled)."""
+        if not self.enabled:
+            return 0.0
 
-        Args:
-            name: Name of the timer
-
-        Returns:
-            Elapsed time in seconds
-
-        Raises:
-            ValueError: If timer wasn't started
-        """
         if name not in self._start_times:
-            raise ValueError(f"Timer '{name}' was not started")
+            return 0.0
 
         elapsed = time.time() - self._start_times[name]
         del self._start_times[name]
@@ -78,43 +71,34 @@ class MetricCollector:
         if name not in self.timings:
             self.timings[name] = []
         self.timings[name].append(elapsed)
-
         return elapsed
 
     def increment_counter(self, name: str, amount: int = 1) -> int:
-        """
-        Increment a counter.
+        """Increment counter (no-op if disabled)."""
+        if not self.enabled:
+            return 0
 
-        Args:
-            name: Counter name
-            amount: Amount to increment by
-
-        Returns:
-            New counter value
-        """
         if name not in self.counters:
             self.counters[name] = 0
         self.counters[name] += amount
         return self.counters[name]
 
     def set_gauge(self, name: str, value: float) -> None:
-        """
-        Set a gauge value.
-
-        Args:
-            name: Gauge name
-            value: Gauge value
-        """
-        self.gauges[name] = value
+        """Set gauge value (no-op if disabled)."""
+        if self.enabled:
+            self.gauges[name] = value
 
     def get_summary(self) -> Dict[str, Any]:
-        """
-        Get a summary of all metrics.
+        """Get metrics summary (empty if disabled)."""
+        if not self.enabled:
+            return {"enabled": False}
 
-        Returns:
-            Dictionary with metric summaries
-        """
-        summary = {"timings": {}, "counters": self.counters, "gauges": self.gauges}
+        summary = {
+            "enabled": True,
+            "timings": {},
+            "counters": self.counters,
+            "gauges": self.gauges,
+        }
 
         # Calculate timing statistics
         for name, values in self.timings.items():
@@ -137,12 +121,10 @@ class MetricCollector:
         return summary
 
     def log_summary(self, level: int = logging.INFO) -> None:
-        """
-        Log a summary of all metrics.
+        """Log metrics summary (no-op if disabled)."""
+        if not self.enabled:
+            return
 
-        Args:
-            level: Logging level
-        """
         summary = self.get_summary()
 
         logger.log(level, "Performance Metrics Summary:")
@@ -154,8 +136,7 @@ class MetricCollector:
                 logger.log(
                     level,
                     f"  {name}: avg={stats['mean']:.4f}s, count={stats['count']}, "
-                    f"min={stats['min']:.4f}s, max={stats['max']:.4f}s, "
-                    f"total={stats['total']:.4f}s",
+                    f"min={stats['min']:.4f}s, max={stats['max']:.4f}s",
                 )
 
         # Log counters
@@ -171,12 +152,11 @@ class MetricCollector:
                 logger.log(level, f"  {name}: {value}")
 
     def save_to_file(self, path: Union[str, P.Path]) -> None:
-        """
-        Save metrics to a JSON file.
+        """Save metrics to file (no-op if disabled)."""
+        if not self.enabled:
+            logger.debug("Metrics disabled, not saving to file")
+            return
 
-        Args:
-            path: Path to output file
-        """
         summary = self.get_summary()
         summary["timestamp"] = datetime.now().isoformat()
 
@@ -189,19 +169,55 @@ class MetricCollector:
 
     def reset(self) -> None:
         """Reset all metrics."""
-        self.timings.clear()
-        self.counters.clear()
-        self.gauges.clear()
-        self._start_times.clear()
+        if self.enabled:
+            self.timings.clear()
+            self.counters.clear()
+            self.gauges.clear()
+            self._start_times.clear()
 
 
-# Global metrics collector instance
-metrics = MetricCollector()
+# Lazy initialization of global metrics collector
+_metrics: Optional[MetricCollector] = None
+
+
+def get_metrics() -> MetricCollector:
+    """Get global metrics collector with lazy initialization."""
+    global _metrics
+    if _metrics is None:
+        _metrics = MetricCollector()
+    return _metrics
+
+
+def enable_metrics() -> None:
+    """Enable metrics collection globally."""
+    global _METRICS_ENABLED
+    _METRICS_ENABLED = True
+    collector = get_metrics()
+    collector.enabled = True
+    logger.info("Metrics collection enabled")
+
+
+def disable_metrics() -> None:
+    """Disable metrics collection globally."""
+    global _METRICS_ENABLED
+    _METRICS_ENABLED = False
+    collector = get_metrics()
+    collector.enabled = False
+    logger.debug("Metrics collection disabled")
+
+
+def is_metrics_enabled() -> bool:
+    """Check if metrics collection is enabled."""
+    return _METRICS_ENABLED
+
+
+# Provide access to the metrics collector
+metrics = get_metrics()
 
 
 def timed(name: Optional[str] = None) -> Callable:
     """
-    Decorator to time function execution and record in metrics.
+    Decorator to time function execution (no-op if metrics disabled).
 
     Args:
         name: Timer name (defaults to function name)
@@ -215,12 +231,17 @@ def timed(name: Optional[str] = None) -> Callable:
 
         @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> R:
-            metrics.start_timer(timer_name)
+            if not _METRICS_ENABLED:
+                return func(*args, **kwargs)
+
+            collector = get_metrics()
+            collector.start_timer(timer_name)
             try:
                 return func(*args, **kwargs)
             finally:
-                elapsed = metrics.stop_timer(timer_name)
-                logger.debug(f"{timer_name} completed in {elapsed:.4f}s")
+                elapsed = collector.stop_timer(timer_name)
+                if elapsed > 0:
+                    logger.debug(f"{timer_name} completed in {elapsed:.4f}s")
 
         return wrapper
 
@@ -272,7 +293,16 @@ def evaluate_gold_standard(
         pred_df[relationship_column] = pred_df["label"]
 
     # Extract true and predicted labels
-    y_true = gold_df[relationship_column].values
+    y_true_raw = gold_df[relationship_column].astype(str).values
+    y_pred_raw = pred_df[relationship_column].astype(str).values
+
+    # Remap "Related" to "Different" for both true and predicted labels
+    y_true = np.array(
+        [("Different" if label == "Related" else label) for label in y_true_raw]
+    )
+    y_pred = np.array(
+        [("Different" if label == "Related" else label) for label in y_pred_raw]
+    )
 
     # Ensure prediction dataframe has the same structure
     required_columns = [pred_column1, pred_column2, relationship_column]
@@ -280,14 +310,19 @@ def evaluate_gold_standard(
         missing = [col for col in required_columns if col not in pred_df.columns]
         raise ValueError(f"Prediction file missing required columns: {missing}")
 
-    y_pred = pred_df[relationship_column].values
-
     # Calculate metrics
-    metrics_dict = calculate_classification_metrics(y_true, y_pred)
+    # Use the updated LABEL_SET from prompts for class labels in metrics
+    from .llm.prompts import LABEL_SET
+
+    class_labels = sorted(list(LABEL_SET))
+
+    metrics_dict = calculate_classification_metrics(y_true, y_pred, labels=class_labels)
 
     # Save results if requested
     if output_path:
         try:
+            # Ensure output directory exists
+            P.Path(output_path).parent.mkdir(parents=True, exist_ok=True)
             with open(output_path, "w") as f:
                 json.dump(metrics_dict, f, indent=2)
             logger.info(f"Evaluation metrics saved to {output_path}")
@@ -298,59 +333,95 @@ def evaluate_gold_standard(
 
 
 def calculate_classification_metrics(
-    y_true: np.ndarray, y_pred: np.ndarray
+    y_true: np.ndarray, y_pred: np.ndarray, labels: Optional[List[str]] = None
 ) -> Dict[str, Any]:
     """
-    Calculate classification metrics.
+    Calculate various classification metrics.
 
     Args:
-        y_true: Array of true labels
-        y_pred: Array of predicted labels
+        y_true: True labels
+        y_pred: Predicted labels
+        labels: Optional list of labels to include in the report.
+                If None, labels are inferred from data.
 
     Returns:
-        Dictionary with evaluation metrics
+        Dictionary with classification metrics
     """
-    # Get unique classes
-    classes = np.unique(np.concatenate([y_true, y_pred]))
+    # Ensure labels for metrics are derived from the updated LABEL_SET if not provided explicitly
+    if labels is None:
+        from .llm.prompts import LABEL_SET
 
-    # Calculate overall accuracy
-    accuracy = accuracy_score(y_true, y_pred)
+        labels = sorted(list(LABEL_SET))
 
-    # Calculate precision, recall, and F1 score for each category
-    precision, recall, f1, support = precision_recall_fscore_support(
-        y_true, y_pred, labels=classes, zero_division=0
+    # Remap "Related" to "Different" in y_true and y_pred again just in case they weren't already.
+    # This ensures consistency if this function is called directly.
+    y_true_mapped = np.array(
+        [("Different" if str(label) == "Related" else str(label)) for label in y_true]
+    )
+    y_pred_mapped = np.array(
+        [("Different" if str(label) == "Related" else str(label)) for label in y_pred]
     )
 
-    # Calculate weighted F1-score
-    weighted_f1 = np.sum(f1 * support) / np.sum(support) if np.sum(support) > 0 else 0
+    # Get unique labels present in the data after mapping
+    unique_labels = sorted(list(set(y_true_mapped) | set(y_pred_mapped)))
 
-    # Calculate Matthews Correlation Coefficient (MCC)
-    mcc = matthews_corrcoef(y_true, y_pred)
+    # Ensure the `labels` parameter for sklearn metrics uses only those present in data
+    # or the explicitly passed `labels` list if it's more restrictive.
+    # This avoids errors with labels not present in y_true/y_pred.
+    if labels:
+        # Filter labels to only those present in the data or in the global LABEL_SET
+        # This is to ensure consistency and avoid errors if a label was expected but not found
+        # It's important that `labels` here aligns with the classes the confusion matrix expects
+        current_label_set = set(unique_labels)
+        final_labels = [label for label in labels if label in current_label_set]
+        if (
+            not final_labels
+        ):  # if all expected labels are missing from data, use unique_labels from data
+            final_labels = unique_labels
+    else:
+        final_labels = unique_labels
 
-    # Create confusion matrix
-    cm = confusion_matrix(y_true, y_pred, labels=classes)
+    accuracy = accuracy_score(y_true_mapped, y_pred_mapped)
+    precision, recall, f1, support = precision_recall_fscore_support(
+        y_true_mapped, y_pred_mapped, average=None, labels=final_labels, zero_division=0
+    )
+    precision_macro, recall_macro, f1_macro, _ = precision_recall_fscore_support(
+        y_true_mapped,
+        y_pred_mapped,
+        average="macro",
+        labels=final_labels,
+        zero_division=0,
+    )
+    precision_weighted, recall_weighted, f1_weighted, _ = (
+        precision_recall_fscore_support(
+            y_true_mapped,
+            y_pred_mapped,
+            average="weighted",
+            labels=final_labels,
+            zero_division=0,
+        )
+    )
+    mcc = matthews_corrcoef(y_true_mapped, y_pred_mapped)
 
-    # Build results dictionary
-    metrics_dict = {
-        "overall": {
-            "accuracy": float(accuracy),
-            "weighted_f1": float(weighted_f1),
-            "mcc": float(mcc),
-        },
-        "per_class": {},
-        "confusion_matrix": {"matrix": cm.tolist(), "classes": classes.tolist()},
+    # Confusion matrix
+    cm = confusion_matrix(y_true_mapped, y_pred_mapped, labels=final_labels)
+
+    return {
+        "accuracy": accuracy,
+        "precision_per_class": dict(zip(final_labels, precision.tolist())),
+        "recall_per_class": dict(zip(final_labels, recall.tolist())),
+        "f1_per_class": dict(zip(final_labels, f1.tolist())),
+        "support_per_class": dict(zip(final_labels, support.tolist())),
+        "precision_macro": precision_macro,
+        "recall_macro": recall_macro,
+        "f1_macro": f1_macro,
+        "precision_weighted": precision_weighted,
+        "recall_weighted": recall_weighted,
+        "f1_weighted": f1_weighted,
+        "matthews_corrcoef": mcc,
+        "confusion_matrix": cm.tolist(),
+        "labels": final_labels,  # Ensure labels used for CM are returned
     }
-
-    # Add per-class metrics
-    for i, cls in enumerate(classes):
-        metrics_dict["per_class"][str(cls)] = {
-            "precision": float(precision[i]),
-            "recall": float(recall[i]),
-            "f1": float(f1[i]),
-            "support": int(support[i]),
-        }
-
-    return metrics_dict
 
 
 def print_evaluation_summary(metrics_dict: Dict[str, Any]) -> None:

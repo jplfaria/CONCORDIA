@@ -22,19 +22,17 @@ DEFAULT_BATCH_SIZE: Final[int] = 32
 MAX_CACHE_SIZE: Final[int] = 10000
 
 # Prompt constants
-DEFAULT_PROMPT_VERSION: Final[str] = "v1.0"
-EXAMPLES_PER_BUCKET: Final[int] = 3
+DEFAULT_PROMPT_VERSION: Final[str] = "v3.2"
 
 # Similarity thresholds
 EXACT_SIMILARITY_THRESHOLD: Final[float] = 0.98
 
-# Label set
+# Label set (6-class ontology)
 LABEL_SET: Final[Set[str]] = {
     "Exact",
     "Synonym",
     "Broader",
     "Narrower",
-    "Related",
     "Uninformative",
     "Different",
 }
@@ -42,14 +40,13 @@ LABEL_SET: Final[Set[str]] = {
 # Engine modes
 VALID_ENGINE_MODES: Final[List[str]] = [
     "local",
-    "llm",
-    "dual",
-    "bucket",
-    "duo",
+    "zero-shot",
+    "vote",
+    "rac",
 ]
 
 # Default configuration paths
-DEFAULT_CONFIG_PATH: Final[str] = "concord/config.yaml"
+DEFAULT_CONFIG_PATH: Final[str] = "config.yaml"
 
 # API retries
 MAX_RETRIES: Final[int] = 3

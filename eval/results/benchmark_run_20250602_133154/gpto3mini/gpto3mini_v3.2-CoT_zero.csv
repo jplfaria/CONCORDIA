@@ -1,0 +1,24 @@
+gene_id,annotation_a,annotation_b,relationship_label,relationship,evidence
+fig|273133.2.peg.39,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Exact,Only case and punctuation differences; pure wording cleanup (Rule 2)
+fig|273133.2.peg.40,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Exact,Identical apart from minor case variation; same function (Rule 2)
+fig|273133.2.peg.157,Phage tail fiber,Phage tail fiber protein,Exact,Exact,The addition of “protein” is an accepted nominal variant (Rule 2)
+fig|273133.2.peg.54,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,Broader,"B omits the subunit designation “T,” reducing specificity (Rule 3)"
+fig|273133.2.peg.156,Phage tail fiber,Phage tail fiber protein,Exact,Exact,“Protein” addition is a nominal variant without changing function (Rule 2)
+fig|273133.2.peg.166,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,Narrower,"B adds an EC number, increasing enzymatic detail (Rule 1)"
+fig|273133.2.peg.76,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,Narrower,EC annotation in B provides extra specificity (Rule 1)
+fig|273133.2.peg.183,Phage endolysin,Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,Narrower,"B includes substrate detail and EC number, adding specificity (Rules 1 and 2)"
+fig|273133.2.peg.188,"Phage lysin, N-acetylmuramoyl-L-alanine amidase",Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,Narrower,"B adds EC and the synonym “endolysin,” increasing specificity (Rules 1 and 2)"
+fig|273133.2.peg.1,Phage repressor,Phage repressor protein,Exact,Exact,The extra “protein” word is a trivial naming variant (Rule 2)
+fig|273133.2.peg.193,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,Broader,"B lacks the specific “T” subunit designation, making it more generic (Rule 3)"
+fig|374463.4.peg.296,Glucose-6-phosphate 1-dehydrogenase (EC 1.1.1.49),Glucose-6-phosphate 1-dehydrogenase (NADP+) (EC 1.1.1.49),Narrower,Narrower,"B specifies the NADP+ cofactor, adding detail (Rule 2)"
+fig|374463.4.peg.298,Manganese transport protein MntH,"Mn(II) and Fe(II) import protein MntH, proton-dependent",Broader,Narrower,B adds substrate specificity (Mn(II) and Fe(II)) and mechanism (proton-dependent) (Rule 2)
+fig|374463.4.peg.181,hypothetical protein,Outer-membrane β-barrel assembly protein BamD,Uninformative,Different,A is a generic “hypothetical protein” while B is a defined outer-membrane protein (Rule 0)
+fig|374463.4.peg.282,Enoyl-[acyl-carrier-protein] reductase [NADH] (EC 1.3.1.9),Enoyl-[acyl-carrier-protein] reductase (NADH) (EC 1.3.1.9),Exact,Exact,Only formatting differences (bracket placement) exist; both are identical functionally (Rule 2)
+fig|374463.4.peg.161,Sulfate-binding protein Sbp,"Sulfate/thiosulfate ABC transporter, sulfate-binding protein Spb",Broader,Narrower,B provides additional context of an ABC transporter with sulfate/thiosulfate specificity (Rule 2)
+fig|374463.4.peg.166,Glutaredoxin 3 (Grx3),Glutaredoxin 3,Exact,Exact,The inclusion of the alias “Grx3” in A is a stylistic variant (Rule 2)
+fig|374463.4.peg.288,Cys regulon transcriptional activator CysB,"Cys regulon transcriptional activator CysB, LysR family",Narrower,Narrower,"B adds “LysR family,” providing extra specificity to the transcriptional activator (Rule 2)"
+fig|374463.4.peg.289,DNA topoisomerase I (EC 5.99.1.2),DNA topoisomerase I (EC 5.6.2.1),Synonym,Different,The differing EC numbers indicate distinct enzyme classes (Rule 1)
+fig|374463.4.peg.291,YciL protein,YciI protein,Different,Different,The differing gene designations (YciL vs. YciI) imply distinct proteins (Rule 0)
+fig|374463.4.peg.170,Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23),Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23) (EC 4.2.99.18),Broader,Narrower,"Annotation B adds an extra EC number (EC 4.2.99.18), increasing specificity (rule 1)"
+fig|374463.4.peg.182,LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23),LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23) ## RluD,Exact,Exact,The added hash comment (## RluD) is a nomenclature note with no functional change (rule 5)
+fig|374463.4.peg.185,tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228),tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228) ## TrmD,Exact,Exact,The hash comment (## TrmD) is only an alias with no effect on function (rule 5)

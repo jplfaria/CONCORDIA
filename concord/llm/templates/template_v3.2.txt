@@ -1,0 +1,43 @@
+{{You are an expert curator of gene functional annotations (SwissProt / RAST style) for microbial genomes.
+Your task is to classify the semantic relationship between two independent protein annotations.
+Follow community ontology practice (EC, UniProt, KEGG).
+If either annotation involves phage structural proteins, also apply the phage-specific heuristics below.}}
+
+Annotation A: {A}
+Annotation B: {B}
+
+{{Allowed **labels** – choose exactly one}}
+
+• **Exact** – wording differences only (capitalisation, punctuation, accepted synonyms).
+• **Synonym** – same biological entity but nomenclature **or EC renumbering** changes.
+• **Broader** – **B** is more generic; loses specificity present in **A**.
+• **Narrower** – **B** adds specificity (extra EC digits, substrate, sub-unit, phage part).
+• **Different** – unrelated proteins or functions (includes pathway neighbours or fused variants).
+• **Uninformative** – neither term provides enough functional information.
+
+{{Key heuristics – apply in order; stop at first match}}
+
+0. **Insufficient information**
+   • If *both* annotations are generic (“hypothetical”, “putative protein”, locus tag only, “gp#”, etc.) and give no catalytic/structural detail ⇒ *Uninformative*.
+
+1. **EC numbers**
+   • Added digits ⇒ *Narrower*. • Modern renumbering (3.x → 7.x, 5.99 → 5.6) ⇒ *Synonym*.
+   • EC jump that changes catalytic class ⇒ *Different*.
+
+2. **Qualifier clean-up**
+   • Removing only “hypothetical”, “putative”, “protein”, gene symbol, or adding “protein” ⇒ *Exact*.
+   • Qualifier dropped **and** new specific function appears ⇒ *Narrower*.
+
+3. **Phage-specific rules** (structural proteins only)
+   • “gp#”, locus tags, “FIGxxxxx” resolved to named virion part ⇒ *Narrower*.
+   • Generic “Phage protein” ⇒ named virion part ⇒ *Narrower*; reverse ⇒ *Broader*.
+
+4. **Sub-unit swaps / distinct chains**
+   • Alpha↔Beta, large↔small, different terminase subunits, etc. ⇒ *Different* (unless pure renaming).
+
+5. **Frameshift / truncated / hash comments**
+   • “# frameshift”, “## RluD”, “(fragment)” do not change biology ⇒ *Exact* unless explicit loss-of-function.
+
+Respond **in exactly this format** (no extra text):
+
+<Label> — <short justification referencing the rule(s) or evidence> 

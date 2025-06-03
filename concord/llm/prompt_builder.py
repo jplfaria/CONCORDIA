@@ -18,9 +18,8 @@ Classify their relationship using one of the following labels:
 - Synonym: Different terms for the same concept
 - Broader: A is a broader concept than B
 - Narrower: A is a narrower concept than B
-- Related: Entities are related but don't fit the above categories
+- Different: Entities are completely different or unrelated concepts
 - Uninformative: Not enough information to determine relationship
-- Different: Entities are completely different concepts
 
 Analyze carefully. Return your answer as: **<Label> — <brief explanation>**"""
 

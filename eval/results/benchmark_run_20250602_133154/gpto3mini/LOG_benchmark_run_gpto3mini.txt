@@ -1,0 +1,38 @@
+2025-06-02 13:35:07,006 [INFO] concord.llm.prompts: Loaded template: v2
+2025-06-02 13:35:07,006 [INFO] concord.llm.prompts: Loaded template: v2.1
+2025-06-02 13:35:07,006 [INFO] concord.llm.prompts: Loaded template: v3.0-CoT
+2025-06-02 13:35:07,006 [INFO] concord.llm.prompts: Loaded template: v3.1-CoT
+2025-06-02 13:35:07,006 [INFO] concord.llm.prompts: Loaded template: v3.2
+2025-06-02 13:35:07,006 [INFO] concord.llm.prompts: Loaded template: v1.0
+2025-06-02 13:35:07,006 [INFO] concord.llm.prompts: Loaded template: v3.0
+2025-06-02 13:35:07,006 [INFO] concord.llm.prompts: Loaded template: v3.1
+2025-06-02 13:35:07,006 [INFO] concord.llm.prompts: Loaded template: v3.2-CoT
+2025-06-02 13:35:07,010 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Gateway reachable
+Processing:   0%|          | 0/23 [00:00<?, ?row/s]2025-06-02 13:35:12,270 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-06-02 13:35:12,278 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  87%|████████▋ | 20/23 [00:59<00:08,  2.97s/row]2025-06-02 13:36:11,638 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing: 100%|██████████| 23/23 [01:17<00:00,  3.52s/row]Processing: 100%|██████████| 23/23 [01:17<00:00,  3.37s/row]
+2025-06-02 13:36:29,855 [INFO] concord.pipeline: Processed 23 rows in 77.61s
+✓ Output written to eval/results/benchmark_run_20250602_133154/gpto3mini/gpto3mini_v3.2_zero.csv
+2025-06-02 13:36:29,857 [INFO] concord.embedding: Embedding cache cleared
+2025-06-02 13:36:31,786 [INFO] concord.llm.prompts: Loaded template: v2
+2025-06-02 13:36:31,786 [INFO] concord.llm.prompts: Loaded template: v2.1
+2025-06-02 13:36:31,786 [INFO] concord.llm.prompts: Loaded template: v3.0-CoT
+2025-06-02 13:36:31,786 [INFO] concord.llm.prompts: Loaded template: v3.1-CoT
+2025-06-02 13:36:31,786 [INFO] concord.llm.prompts: Loaded template: v3.2
+2025-06-02 13:36:31,786 [INFO] concord.llm.prompts: Loaded template: v1.0
+2025-06-02 13:36:31,786 [INFO] concord.llm.prompts: Loaded template: v3.0
+2025-06-02 13:36:31,786 [INFO] concord.llm.prompts: Loaded template: v3.1
+2025-06-02 13:36:31,786 [INFO] concord.llm.prompts: Loaded template: v3.2-CoT
+2025-06-02 13:36:31,790 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Gateway reachable
+Processing:   0%|          | 0/23 [00:00<?, ?row/s]2025-06-02 13:36:34,961 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-06-02 13:36:34,968 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  87%|████████▋ | 20/23 [01:09<00:10,  3.49s/row]2025-06-02 13:37:44,761 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing: 100%|██████████| 23/23 [01:30<00:00,  4.10s/row]Processing: 100%|██████████| 23/23 [01:30<00:00,  3.94s/row]
+2025-06-02 13:38:05,590 [INFO] concord.pipeline: Processed 23 rows in 90.66s
+✓ Output written to eval/results/benchmark_run_20250602_133154/gpto3mini/gpto3mini_v3.2-CoT_zero.csv
+2025-06-02 13:38:05,593 [INFO] concord.embedding: Embedding cache cleared
+[1/2] Running MODE=zero-shot, PROMPT=v3.2, SIM_HINT=no -> eval/results/benchmark_run_20250602_133154/gpto3mini/gpto3mini_v3.2_zero.csv
+[2/2] Running MODE=zero-shot, PROMPT=v3.2-CoT, SIM_HINT=no -> eval/results/benchmark_run_20250602_133154/gpto3mini/gpto3mini_v3.2-CoT_zero.csv

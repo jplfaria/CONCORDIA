@@ -1,0 +1,25 @@
+gene_id,annotation_a,annotation_b,relationship_label,relationship,evidence
+fig|273133.2.peg.39,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Exact,Differ only by capitalization; rule 2 (qualifier clean-up) indicates no functional change
+fig|273133.2.peg.40,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Exact,only difference is capitalization (rule: wording differences only)
+fig|273133.2.peg.157,Phage tail fiber,Phage tail fiber protein,Exact,Exact,addition of “protein” qualifies as clean-up (rule 2)
+fig|273133.2.peg.54,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,Exact,"difference is only presence of “T” (gene symbol), covered by rule #2"
+fig|273133.2.peg.156,Phage tail fiber,Phage tail fiber protein,Exact,Exact,rule #2 (adding “protein” is just a qualifier change)
+fig|273133.2.peg.166,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,Narrower,"Annotation B adds an EC number, providing more specific detail (rule 1)"
+fig|273133.2.peg.76,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,Narrower,B includes additional specificity via the EC number (rule 1)
+fig|273133.2.peg.183,Phage endolysin,Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,Narrower,B adds specificity (EC 3.5.1.28) relative to the broader term A
+fig|273133.2.peg.185,HNH homing endonuclease,Phage homing endonuclease,Related,Broader,B omits the HNH‐domain detail and is thus more generic
+fig|273133.2.peg.188,"Phage lysin, N-acetylmuramoyl-L-alanine amidase",Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,Narrower,B adds the explicit EC number (rule #1) and thus greater specificity
+fig|273133.2.peg.1,Phage repressor,Phage repressor protein,Exact,Exact,Adding “protein” is a simple qualifier change (rule 2)
+fig|273133.2.peg.193,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,Exact,“T” appears to be just a gene symbol (rule #2 qualifier) with no functional change
+fig|374463.4.peg.296,Glucose-6-phosphate 1-dehydrogenase (EC 1.1.1.49),Glucose-6-phosphate 1-dehydrogenase (NADP+) (EC 1.1.1.49),Narrower,Exact,"same EC and function; adding “(NADP+)” does not change meaning, per rule 2 (wording only)"
+fig|374463.4.peg.298,Manganese transport protein MntH,"Mn(II) and Fe(II) import protein MntH, proton-dependent",Broader,Narrower,B adds additional substrate (Fe(II)) and mechanism (proton-dependent) specificity (rule 2)
+fig|374463.4.peg.181,hypothetical protein,Outer-membrane β-barrel assembly protein BamD,Uninformative,Narrower,qualifier dropped and a new specific function appears (Rule 2)
+fig|374463.4.peg.282,Enoyl-[acyl-carrier-protein] reductase [NADH] (EC 1.3.1.9),Enoyl-[acyl-carrier-protein] reductase (NADH) (EC 1.3.1.9),Exact,Exact,"same function, only parentheses vs brackets; no substantive difference"
+fig|374463.4.peg.161,Sulfate-binding protein Sbp,"Sulfate/thiosulfate ABC transporter, sulfate-binding protein Spb",Broader,Narrower,B adds substrate detail (thiosulfate) and specifies ABC transporter subunit
+fig|374463.4.peg.166,Glutaredoxin 3 (Grx3),Glutaredoxin 3,Exact,Exact,dropping the gene symbol “Grx3” is covered by rule #2 (qualifier clean-up)
+fig|374463.4.peg.288,Cys regulon transcriptional activator CysB,"Cys regulon transcriptional activator CysB, LysR family",Narrower,Narrower,"B adds the LysR family detail, increasing specificity"
+fig|374463.4.peg.289,DNA topoisomerase I (EC 5.99.1.2),DNA topoisomerase I (EC 5.6.2.1),Synonym,Synonym,modern EC renumbering (5.99 → 5.6) for the same topoisomerase I function
+fig|374463.4.peg.291,YciL protein,YciI protein,Different,Different,distinct gene symbols with no indication of equivalence or related function
+fig|374463.4.peg.170,Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23),Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23) (EC 4.2.99.18),Broader,Narrower,"B adds an additional EC activity (4.2.99.18), making it more specific per rule 1"
+fig|374463.4.peg.182,LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23),LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23) ## RluD,Exact,Exact,"""## RluD"" is a comment not changing function (rule 6)"
+fig|374463.4.peg.185,tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228),tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228) ## TrmD,Exact,Exact,addition of gene symbol “TrmD” does not change function (Qualifier cleanup rule #2)

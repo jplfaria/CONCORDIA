@@ -1,0 +1,21 @@
+annotation_a,annotation_b,relationship_label,relationship,evidence
+putative anion permease,Putative anion permease,Exact,Exact,difference in capitalization only per rule #2
+Phage tail fiber,Phage tail fiber protein,Exact,Narrower,“protein” adds new detail per rule #2
+"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Exact,Pure wording cleanup (capitalization only) per rule #2
+"Selenide,water dikinase (EC 2.7.9.3) @ selenocysteine-containing","Selenide,water dikinase (EC 2.7.9.3) @ Selenocysteine-containing",Exact,Exact,pure wording difference (rule #2)
+diguanylate cyclase (GGDEF domain) with PAS/PAC sensor,Diguanylate cyclase (GGDEF domain) with PAS/PAC sensor,Exact,Exact,purely a wording difference (rule #2)
+Gamma-glutamyltranspeptidase (EC 2.3.2.2) @ Glutathione hydrolase (EC 3.4.19.13),gamma-glutamyltranspeptidase (EC 2.3.2.2) @ Glutathione hydrolase (EC 3.4.19.13),Exact,Exact,pure wording difference (rule #2) without added detail
+diguanylate cyclase/phosphodiesterase (GGDEF & EAL domains) with PAS/PAC sensor(s),Diguanylate cyclase/phosphodiesterase (GGDEF & EAL domains) with PAS/PAC sensor(s),Exact,Exact,Only minor wording changes (capitalization) with no added specificity (rule #2)
+Phage repressor,Phage repressor protein,Exact,Exact,purely wording difference (rule #2)
+Putative inner membrane protein,Inner membrane protein,Exact,Exact,"“Putative” is only a qualifier, so this is pure wording cleanup (rule 2)"
+"putative membrane-associated phospholipid phosphatase, PAP2 superfamily","Putative membrane-associated phospholipid phosphatase, PAP2 superfamily",Exact,Exact,Pure wording difference (capitalization only)
+Phage tail fiber,Phage tail fiber protein,Exact,Narrower,“Phage tail fiber protein” is more specific than “Phage tail fiber” (phage rule #3)
+diguanylate cyclase/phosphodiesterase (GGDEF & EAL domains) with PAS/PAC sensor(s),Diguanylate cyclase/phosphodiesterase (GGDEF & EAL domains) with PAS/PAC sensor(s),Exact,Exact,only minor wording/capitalization differences (rule #2)
+"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Exact,purely editorial difference in wording (rule #2)
+Putative inner membrane protein,Inner membrane protein,Exact,Exact,“Putative” is just a qualifier; otherwise identical (rule #2)
+general secretion pathway protein F,General secretion pathway protein F,Exact,Exact,only capitalization difference (rule #2)
+Inosine-5'-monophosphate dehydrogenase (EC 1.1.1.205) / CBS domain,Inosine-5'-monophosphate dehydrogenase (EC 1.1.1.205) / CBS domain protein,Exact,Exact,same EC and function with minor wording difference (rule #2)
+Ubiquinol-cytochrome C reductase iron-sulfur subunit (EC 1.10.2.2),Ubiquinol-cytochrome c reductase iron-sulfur subunit (EC 1.10.2.2),Exact,Exact,"same meaning, only capitalization differs (rule #2)"
+"Selenide,water dikinase (EC 2.7.9.3) @ selenocysteine-containing","Selenide,water dikinase (EC 2.7.9.3) @ Selenocysteine-containing",Exact,Exact,1.0, [FALLBACK—RemoteProtocolError]
+"putative oxidoreductase, nitronate monooxygenase family","Putative oxidoreductase, nitronate monooxygenase family",Exact,Exact,same annotation differing only in capitalization (rule #2)
+diguanylate cyclase/phosphodiesterase (GGDEF & EAL domains) with PAS/PAC sensor(s),Diguanylate cyclase/phosphodiesterase (GGDEF & EAL domains) with PAS/PAC sensor(s),Exact,Exact,purely a capitalization difference (rule #2)

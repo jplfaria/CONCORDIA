@@ -1,0 +1,24 @@
+2025-05-30 15:46:57,302 [INFO] concord.llm.prompts: Loaded template: v2
+2025-05-30 15:46:57,302 [INFO] concord.llm.prompts: Loaded template: v2.1
+2025-05-30 15:46:57,302 [INFO] concord.llm.prompts: Loaded template: v3.0-CoT
+2025-05-30 15:46:57,302 [INFO] concord.llm.prompts: Loaded template: v3.1-CoT
+2025-05-30 15:46:57,302 [INFO] concord.llm.prompts: Loaded template: v3.2
+2025-05-30 15:46:57,302 [INFO] concord.llm.prompts: Loaded template: v1.0
+2025-05-30 15:46:57,302 [INFO] concord.llm.prompts: Loaded template: v3.0
+2025-05-30 15:46:57,303 [INFO] concord.llm.prompts: Loaded template: v3.1
+2025-05-30 15:46:57,303 [INFO] concord.llm.prompts: Loaded template: v3.2-CoT
+2025-05-30 15:46:57,305 [ERROR] concord.cli: CLI error: _update_config() got multiple values for argument 'cfg_dict'
+Traceback (most recent call last):
+  File "/Users/jplfaria/repos/CONCORDIA/concord/cli.py", line 145, in concord
+    _update_config(cfg_dict, **locals())
+TypeError: _update_config() got multiple values for argument 'cfg_dict'
+Error: _update_config() got multiple values for argument 'cfg_dict'
+[1/4] Running MODE=zero-shot, PROMPT=v3.1, SIM_HINT=no -> eval/results/benchmark_run_20250530_154655/gpt4olatest/gpt4olatest_v3.1_zero.csv
+Traceback (most recent call last):
+  File "/Users/jplfaria/repos/CONCORDIA/eval/scripts/benchmark_runner.py", line 87, in <module>
+    main()
+  File "/Users/jplfaria/repos/CONCORDIA/eval/scripts/benchmark_runner.py", line 83, in main
+    subprocess.run(cmd, check=True)
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['concord', 'eval/datasets/Benchmark_subset__24_pairs_v1.csv', '--mode', 'zero-shot', '--llm-model', 'gpt4olatest', '--prompt-ver', 'v3.1', '--llm-batch-size', '20', '--output', 'eval/results/benchmark_run_20250530_154655/gpt4olatest/gpt4olatest_v3.1_zero.csv', '--cfg', 'config.yaml']' returned non-zero exit status 1.

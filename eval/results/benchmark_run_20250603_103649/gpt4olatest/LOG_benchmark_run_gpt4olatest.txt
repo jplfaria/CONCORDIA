@@ -1,0 +1,38 @@
+2025-06-03 10:36:51,296 [INFO] concord.llm.prompts: Loaded template: v2
+2025-06-03 10:36:51,296 [INFO] concord.llm.prompts: Loaded template: v2.1
+2025-06-03 10:36:51,296 [INFO] concord.llm.prompts: Loaded template: v3.0-CoT
+2025-06-03 10:36:51,296 [INFO] concord.llm.prompts: Loaded template: v3.1-CoT
+2025-06-03 10:36:51,296 [INFO] concord.llm.prompts: Loaded template: v3.2
+2025-06-03 10:36:51,296 [INFO] concord.llm.prompts: Loaded template: v1.0
+2025-06-03 10:36:51,296 [INFO] concord.llm.prompts: Loaded template: v3.0
+2025-06-03 10:36:51,296 [INFO] concord.llm.prompts: Loaded template: v3.1
+2025-06-03 10:36:51,296 [INFO] concord.llm.prompts: Loaded template: v3.2-CoT
+2025-06-03 10:36:51,300 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4olatest env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Gateway reachable
+Processing:   0%|          | 0/23 [00:00<?, ?row/s]2025-06-03 10:36:52,001 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4olatest env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  87%|████████▋ | 20/23 [00:09<00:01,  2.21row/s]Processing: 100%|██████████| 23/23 [00:11<00:00,  1.89row/s]Processing: 100%|██████████| 23/23 [00:11<00:00,  1.96row/s]
+2025-06-03 10:37:03,720 [INFO] concord.pipeline: Processed 23 rows in 11.75s
+✓ Output written to 
+eval/results/benchmark_run_20250603_103649/gpt4olatest/gpt4olatest_v3.2_zero
+.csv
+2025-06-03 10:37:03,724 [INFO] concord.embedding: Embedding cache cleared
+2025-06-03 10:37:05,556 [INFO] concord.llm.prompts: Loaded template: v2
+2025-06-03 10:37:05,556 [INFO] concord.llm.prompts: Loaded template: v2.1
+2025-06-03 10:37:05,557 [INFO] concord.llm.prompts: Loaded template: v3.0-CoT
+2025-06-03 10:37:05,557 [INFO] concord.llm.prompts: Loaded template: v3.1-CoT
+2025-06-03 10:37:05,557 [INFO] concord.llm.prompts: Loaded template: v3.2
+2025-06-03 10:37:05,557 [INFO] concord.llm.prompts: Loaded template: v1.0
+2025-06-03 10:37:05,557 [INFO] concord.llm.prompts: Loaded template: v3.0
+2025-06-03 10:37:05,557 [INFO] concord.llm.prompts: Loaded template: v3.1
+2025-06-03 10:37:05,557 [INFO] concord.llm.prompts: Loaded template: v3.2-CoT
+2025-06-03 10:37:05,560 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4olatest env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Gateway reachable
+Processing:   0%|          | 0/23 [00:00<?, ?row/s]2025-06-03 10:37:06,179 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpt4olatest env=prod timeout=30.0s url=https://apps.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  87%|████████▋ | 20/23 [00:11<00:01,  1.78row/s]Processing: 100%|██████████| 23/23 [00:12<00:00,  1.81row/s]Processing: 100%|██████████| 23/23 [00:12<00:00,  1.80row/s]
+2025-06-03 10:37:18,968 [INFO] concord.pipeline: Processed 23 rows in 12.81s
+✓ Output written to 
+eval/results/benchmark_run_20250603_103649/gpt4olatest/gpt4olatest_v3.2-CoT_
+zero.csv
+2025-06-03 10:37:18,971 [INFO] concord.embedding: Embedding cache cleared
+[1/2] Running MODE=zero-shot, PROMPT=v3.2, SIM_HINT=no -> eval/results/benchmark_run_20250603_103649/gpt4olatest/gpt4olatest_v3.2_zero.csv
+[2/2] Running MODE=zero-shot, PROMPT=v3.2-CoT, SIM_HINT=no -> eval/results/benchmark_run_20250603_103649/gpt4olatest/gpt4olatest_v3.2-CoT_zero.csv

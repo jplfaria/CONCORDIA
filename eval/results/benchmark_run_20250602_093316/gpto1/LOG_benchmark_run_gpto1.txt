@@ -1,0 +1,42 @@
+2025-06-02 09:34:55,070 [INFO] concord.llm.prompts: Loaded template: v2
+2025-06-02 09:34:55,070 [INFO] concord.llm.prompts: Loaded template: v2.1
+2025-06-02 09:34:55,070 [INFO] concord.llm.prompts: Loaded template: v3.0-CoT
+2025-06-02 09:34:55,070 [INFO] concord.llm.prompts: Loaded template: v3.1-CoT
+2025-06-02 09:34:55,070 [INFO] concord.llm.prompts: Loaded template: v3.2
+2025-06-02 09:34:55,070 [INFO] concord.llm.prompts: Loaded template: v1.0
+2025-06-02 09:34:55,070 [INFO] concord.llm.prompts: Loaded template: v3.0
+2025-06-02 09:34:55,070 [INFO] concord.llm.prompts: Loaded template: v3.1
+2025-06-02 09:34:55,070 [INFO] concord.llm.prompts: Loaded template: v3.2-CoT
+2025-06-02 09:34:55,074 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Gateway reachable
+Processing:   0%|          | 0/23 [00:00<?, ?row/s]2025-06-02 09:34:56,552 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-06-02 09:35:01,624 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-06-02 09:35:06,469 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-06-02 09:35:08,995 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-06-02 09:35:21,376 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-06-02 09:35:24,795 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-06-02 09:35:35,666 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  87%|████████▋ | 20/23 [00:49<00:07,  2.49s/row]
+Aborted.
+Processing:  87%|████████▋ | 20/23 [00:49<00:07,  2.49s/row]
+[1/4] Running MODE=zero-shot, PROMPT=v3.1, SIM_HINT=no -> eval/results/benchmark_run_20250602_093316/gpto1/gpto1_v3.1_zero.csv
+Traceback (most recent call last):
+  File "/Users/jplfaria/repos/CONCORDIA/eval/scripts/benchmark_runner.py", line 87, in <module>
+    main()
+  File "/Users/jplfaria/repos/CONCORDIA/eval/scripts/benchmark_runner.py", line 83, in main
+    subprocess.run(cmd, check=True)
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 1201, in communicate
+    self.wait()
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 1264, in wait
+    return self._wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 2053, in _wait
+    (pid, sts) = self._try_wait(0)
+                 ^^^^^^^^^^^^^^^^^
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 2011, in _try_wait
+    (pid, sts) = os.waitpid(self.pid, wait_flags)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

@@ -1,0 +1,25 @@
+gene_id,annotation_a,annotation_b,relationship_label,relationship,evidence
+fig|273133.2.peg.39,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Exact,differs only by capitalization (rule 2)
+fig|273133.2.peg.40,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Exact,"Only minor wording/capitalization differences, per qualifier clean-up rule"
+fig|273133.2.peg.157,Phage tail fiber,Phage tail fiber protein,Exact,Exact,the only difference is the addition of “protein” (rule 2)
+fig|273133.2.peg.54,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,Exact,minor wording/gene symbol difference only (rule 2)
+fig|273133.2.peg.156,Phage tail fiber,Phage tail fiber protein,Exact,Exact,adding “protein” only (rule 2 qualifier clean-up)
+fig|273133.2.peg.166,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,Narrower,B adds an EC number (rule 1)
+fig|273133.2.peg.76,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,Narrower,B adds the EC annotation (rule #1)
+fig|273133.2.peg.183,Phage endolysin,Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,Narrower,B adds specificity (EC 3.5.1.28)
+fig|273133.2.peg.185,HNH homing endonuclease,Phage homing endonuclease,Related,Broader,"B lacks the specific “HNH” domain detail present in A, thus losing functional specificity"
+fig|273133.2.peg.188,"Phage lysin, N-acetylmuramoyl-L-alanine amidase",Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,Narrower,"B adds the explicit EC number, providing additional specificity (rule 1)"
+fig|273133.2.peg.1,Phage repressor,Phage repressor protein,Exact,Exact,"Qualifier clean-up (rule 2): only the word “protein” was added, no change in function"
+fig|273133.2.peg.193,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,Exact,minor wording/gene symbol difference only (Rule 2)
+fig|374463.4.peg.296,Glucose-6-phosphate 1-dehydrogenase (EC 1.1.1.49),Glucose-6-phosphate 1-dehydrogenase (NADP+) (EC 1.1.1.49),Narrower,Exact,same EC and function; adding “(NADP+)” does not alter the underlying enzyme function
+fig|374463.4.peg.298,Manganese transport protein MntH,"Mn(II) and Fe(II) import protein MntH, proton-dependent",Broader,Narrower,B adds specificity (additional substrate Fe(II) and proton-dependence) compared to A
+fig|374463.4.peg.181,hypothetical protein,Outer-membrane β-barrel assembly protein BamD,Uninformative,Narrower,Qualifier dropped and new specific function appears (rule 2)
+fig|374463.4.peg.282,Enoyl-[acyl-carrier-protein] reductase [NADH] (EC 1.3.1.9),Enoyl-[acyl-carrier-protein] reductase (NADH) (EC 1.3.1.9),Exact,Exact,only punctuation/formatting differences (Rule 2)
+fig|374463.4.peg.161,Sulfate-binding protein Sbp,"Sulfate/thiosulfate ABC transporter, sulfate-binding protein Spb",Broader,Narrower,"B adds additional substrate (thiosulfate) and transporter detail, increasing specificity"
+fig|374463.4.peg.166,Glutaredoxin 3 (Grx3),Glutaredoxin 3,Exact,Exact,removal of gene symbol “Grx3” only; per rule #2
+fig|374463.4.peg.288,Cys regulon transcriptional activator CysB,"Cys regulon transcriptional activator CysB, LysR family",Narrower,Narrower,B adds extra specificity (“LysR family”) per rule 2
+fig|374463.4.peg.289,DNA topoisomerase I (EC 5.99.1.2),DNA topoisomerase I (EC 5.6.2.1),Synonym,Synonym,modern EC renumbering (rule 1)
+fig|374463.4.peg.291,YciL protein,YciI protein,Different,Different,distinct named proteins (YciL vs YciI) with no indication of shared function
+fig|374463.4.peg.170,Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23),Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23) (EC 4.2.99.18),Broader,Narrower,additional EC number indicates a more specific function (rule 1)
+fig|374463.4.peg.182,LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23),LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23) ## RluD,Exact,Exact,adding the gene symbol “RluD” does not change the function (rule 2)
+fig|374463.4.peg.185,tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228),tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228) ## TrmD,Exact,Exact,Only the gene symbol “TrmD” is added (Rule #2)

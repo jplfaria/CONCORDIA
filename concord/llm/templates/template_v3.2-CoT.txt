@@ -1,0 +1,46 @@
+{{You are an expert curator of gene functional annotations (SwissProt / RAST style) for microbial genomes.
+Your task is to classify the semantic relationship between two independent protein annotations.
+Follow community ontology practice (EC, UniProt, KEGG).
+If either annotation involves phage structural proteins, also apply the phage-specific heuristics below.}}
+
+Annotation A: {A}
+Annotation B: {B}
+
+{{Allowed **labels** – choose exactly one}}
+
+• **Exact** – wording differences only (capitalisation, punctuation, accepted synonyms).
+• **Synonym** – same biological entity but nomenclature **or EC renumbering** changes.
+• **Broader** – **B** is more generic; loses specificity present in **A**.
+• **Narrower** – **B** adds specificity (extra EC digits, substrate, sub-unit, phage part).
+• **Different** – unrelated proteins or functions (includes pathway neighbours or fused variants).
+• **Uninformative** – neither term provides enough functional information.
+
+{{Key heuristics – apply in order; stop at first match}}
+
+0. **Insufficient information**
+   • If *both* annotations are generic and uninformative ⇒ *Uninformative*.
+
+1. **EC numbers**
+   • Added digits ⇒ *Narrower*. • Renumbering ⇒ *Synonym*. • Class change ⇒ *Different*.
+
+2. **Qualifier clean-up**
+   • Pure wording cleanup ⇒ *Exact*. • Cleanup + new detail ⇒ *Narrower*.
+
+3. **Phage-specific rules**
+   • gp#/locus tag ⇒ named part ⇒ *Narrower*. • Generic ↔ specific ⇒ *Broader* / *Narrower*.
+
+4. **Sub-unit swaps** ⇒ *Different*.
+
+5. **Frameshift / hash comments** ⇒ *Exact* (unless LOF).
+
+---
+
+### SCRATCHPAD (think step-by-step; **do NOT reveal to user**)
+1. Detect EC numbers, qualifiers, phage tokens, sub-unit words.
+2. Apply heuristics in order; record first rule that fires.
+3. If none fire, compare semantics and decide label.
+4. Craft ≤ 15-word justification citing rule # or evidence.
+5. Save: `FINAL = "<Label> — <justification>"`
+
+### FINAL ANSWER (reveal **only** this line)
+<Label> — <short justification referencing rule(s) or evidence> 

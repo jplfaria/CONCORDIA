@@ -1,0 +1,122 @@
+2025-05-30 13:51:16,486 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Argo Gateway API reachable
+Processing:   0%|          | 0/165 [00:00<?, ?row/s]2025-05-30 13:51:25,598 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1' not found
+2025-05-30 13:51:25,599 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1' not found
+2025-05-30 13:51:25,599 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1' not found
+2025-05-30 13:51:25,599 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1' not found
+2025-05-30 13:51:25,599 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1' not found
+2025-05-30 13:51:25,599 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1' not found
+2025-05-30 13:51:25,599 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1' not found
+2025-05-30 13:51:25,599 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1' not found
+2025-05-30 13:51:25,599 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1' not found
+2025-05-30 13:51:25,599 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1' not found
+2025-05-30 13:51:25,599 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1' not found
+2025-05-30 13:51:25,599 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1' not found
+2025-05-30 13:51:25,599 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1' not found
+2025-05-30 13:51:25,599 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1' not found
+2025-05-30 13:51:25,599 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1' not found
+2025-05-30 13:51:25,599 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1' not found
+2025-05-30 13:51:25,599 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1' not found
+2025-05-30 13:51:25,599 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1' not found
+Processing: 100%|██████████| 165/165 [00:00<00:00, 32460.61row/s]
+2025-05-30 13:51:25,600 [INFO] concord.pipeline: Processed 165 rows in 0.04s
+2025-05-30 13:51:25,600 [WARNING] concord.pipeline: 9 chunks failed processing
+[Warning] 9 chunks failed during processing
+✓ wrote eval/results/benchmark_run_20250530_135048/gpto3mini/gpto3mini_v3.1_zero.csv
+2025-05-30 13:51:27,376 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Argo Gateway API reachable
+Processing:   0%|          | 0/165 [00:00<?, ?row/s]2025-05-30 13:51:34,285 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1-CoT' not found
+2025-05-30 13:51:34,285 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1-CoT' not found
+2025-05-30 13:51:34,285 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1-CoT' not found
+2025-05-30 13:51:34,285 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1-CoT' not found
+2025-05-30 13:51:34,285 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1-CoT' not found
+2025-05-30 13:51:34,285 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1-CoT' not found
+2025-05-30 13:51:34,285 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1-CoT' not found
+2025-05-30 13:51:34,285 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1-CoT' not found
+2025-05-30 13:51:34,285 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1-CoT' not found
+2025-05-30 13:51:34,285 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1-CoT' not found
+2025-05-30 13:51:34,285 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1-CoT' not found
+2025-05-30 13:51:34,286 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1-CoT' not found
+2025-05-30 13:51:34,286 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1-CoT' not found
+2025-05-30 13:51:34,286 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1-CoT' not found
+2025-05-30 13:51:34,286 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1-CoT' not found
+2025-05-30 13:51:34,286 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1-CoT' not found
+2025-05-30 13:51:34,286 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.1-CoT' not found
+2025-05-30 13:51:34,286 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.1-CoT' not found
+Processing: 100%|██████████| 165/165 [00:00<00:00, 28516.22row/s]
+2025-05-30 13:51:34,286 [INFO] concord.pipeline: Processed 165 rows in 0.04s
+2025-05-30 13:51:34,286 [WARNING] concord.pipeline: 9 chunks failed processing
+[Warning] 9 chunks failed during processing
+✓ wrote eval/results/benchmark_run_20250530_135048/gpto3mini/gpto3mini_v3.1-CoT_zero.csv
+2025-05-30 13:51:36,059 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Argo Gateway API reachable
+Processing:   0%|          | 0/165 [00:00<?, ?row/s]2025-05-30 13:51:39,255 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:39,256 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:39,256 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:39,256 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:39,256 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:39,256 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:39,256 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:39,256 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:39,256 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:39,256 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:39,256 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:39,256 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:39,256 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:39,256 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:39,256 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:39,256 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:39,256 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:39,256 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:39,256 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:39,256 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:39,256 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:39,256 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:39,256 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:39,256 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:39,256 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:39,256 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:39,256 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+Processing: 100%|██████████| 165/165 [00:00<00:00, 29333.28row/s]
+2025-05-30 13:51:39,257 [INFO] concord.pipeline: Processed 165 rows in 0.04s
+2025-05-30 13:51:39,257 [WARNING] concord.pipeline: 9 chunks failed processing
+[Warning] 9 chunks failed during processing
+✓ wrote eval/results/benchmark_run_20250530_135048/gpto3mini/gpto3mini_v3.2_zero.csv
+2025-05-30 13:51:41,029 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Argo Gateway API reachable
+Processing:   0%|          | 0/165 [00:00<?, ?row/s]2025-05-30 13:51:46,059 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:46,059 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:46,059 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:46,059 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:46,059 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:46,059 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:46,059 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:46,059 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:46,059 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:46,059 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:46,059 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:46,059 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:46,059 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:46,059 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:46,059 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:46,059 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:46,059 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:46,059 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:46,059 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:46,059 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:46,059 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:46,059 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:46,059 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:46,059 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:46,059 [ERROR] concord.utils: Template missing required placeholders: ...
+2025-05-30 13:51:46,059 [ERROR] concord.llm.prompts: Error getting prompt template: Template missing required {A} or {B} placeholders
+2025-05-30 13:51:46,059 [ERROR] concord.pipeline: Error processing chunk: Template missing required {A} or {B} placeholders
+Processing: 100%|██████████| 165/165 [00:00<00:00, 32063.57row/s]
+2025-05-30 13:51:46,060 [INFO] concord.pipeline: Processed 165 rows in 0.04s
+2025-05-30 13:51:46,060 [WARNING] concord.pipeline: 9 chunks failed processing
+[Warning] 9 chunks failed during processing
+✓ wrote eval/results/benchmark_run_20250530_135048/gpto3mini/gpto3mini_v3.2-CoT_zero.csv
+[1/4] Running MODE=zero-shot, PROMPT=v3.1, SIM_HINT=no -> eval/results/benchmark_run_20250530_135048/gpto3mini/gpto3mini_v3.1_zero.csv
+[2/4] Running MODE=zero-shot, PROMPT=v3.1-CoT, SIM_HINT=no -> eval/results/benchmark_run_20250530_135048/gpto3mini/gpto3mini_v3.1-CoT_zero.csv
+[3/4] Running MODE=zero-shot, PROMPT=v3.2, SIM_HINT=no -> eval/results/benchmark_run_20250530_135048/gpto3mini/gpto3mini_v3.2_zero.csv
+[4/4] Running MODE=zero-shot, PROMPT=v3.2-CoT, SIM_HINT=no -> eval/results/benchmark_run_20250530_135048/gpto3mini/gpto3mini_v3.2-CoT_zero.csv

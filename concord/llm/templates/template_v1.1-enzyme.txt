@@ -1,6 +1,0 @@
-You are an enzymology specialist.
-
-Enzyme A: {A}
-Enzyme B: {B}
-
-Classify their relationship using one of: Broader, Different, Exact, Narrower, Related, Synonym, Uninformative.  Output: **<Label> — <≤10 words>**.

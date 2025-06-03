@@ -1,0 +1,50 @@
+2025-06-02 11:35:30,337 [INFO] concord.llm.prompts: Loaded external template: v1.1-enzyme
+2025-06-02 11:35:30,337 [INFO] concord.llm.prompts: Loaded external template: v2
+2025-06-02 11:35:30,337 [INFO] concord.llm.prompts: Loaded external template: v2.1
+2025-06-02 11:35:30,337 [INFO] concord.llm.prompts: Loaded external template: v3.0-CoT
+2025-06-02 11:35:30,337 [INFO] concord.llm.prompts: Loaded external template: v3.1-CoT
+2025-06-02 11:35:30,337 [INFO] concord.llm.prompts: Loaded external template: v1.2-general
+2025-06-02 11:35:30,337 [INFO] concord.llm.prompts: Loaded external template: v1.3-test
+2025-06-02 11:35:30,337 [INFO] concord.llm.prompts: Loaded external template: v1.1-phage
+2025-06-02 11:35:30,337 [INFO] concord.llm.prompts: Loaded external template: v1.0
+2025-06-02 11:35:30,337 [INFO] concord.llm.prompts: Loaded external template: v3.0
+2025-06-02 11:35:30,337 [INFO] concord.llm.prompts: Loaded external template: v1.1-general
+2025-06-02 11:35:30,337 [INFO] concord.llm.prompts: Loaded external template: v3.1
+2025-06-02 11:35:30,337 [INFO] concord.llm.prompts: Loaded external template: v0.0_bug_test
+2025-06-02 11:35:30,341 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Argo Gateway API reachable
+Processing:   0%|          | 0/23 [00:00<?, ?row/s]2025-06-02 11:35:42,729 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.2' not found
+2025-06-02 11:35:42,729 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.2' not found
+2025-06-02 11:35:42,729 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.2' not found
+2025-06-02 11:35:42,729 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.2' not found
+Processing: 100%|██████████| 23/23 [00:00<00:00, 8179.50row/s]
+2025-06-02 11:35:42,729 [INFO] concord.pipeline: Processed 23 rows in 0.02s
+2025-06-02 11:35:42,729 [WARNING] concord.pipeline: 2 chunks failed processing
+[Warning] 2 chunks failed during processing
+✓ wrote eval/results/benchmark_run_20250602_113505/gpto3mini/gpto3mini_v3.2_zero.csv
+2025-06-02 11:35:44,737 [INFO] concord.llm.prompts: Loaded external template: v1.1-enzyme
+2025-06-02 11:35:44,737 [INFO] concord.llm.prompts: Loaded external template: v2
+2025-06-02 11:35:44,737 [INFO] concord.llm.prompts: Loaded external template: v2.1
+2025-06-02 11:35:44,737 [INFO] concord.llm.prompts: Loaded external template: v3.0-CoT
+2025-06-02 11:35:44,737 [INFO] concord.llm.prompts: Loaded external template: v3.1-CoT
+2025-06-02 11:35:44,737 [INFO] concord.llm.prompts: Loaded external template: v1.2-general
+2025-06-02 11:35:44,737 [INFO] concord.llm.prompts: Loaded external template: v1.3-test
+2025-06-02 11:35:44,737 [INFO] concord.llm.prompts: Loaded external template: v1.1-phage
+2025-06-02 11:35:44,737 [INFO] concord.llm.prompts: Loaded external template: v1.0
+2025-06-02 11:35:44,737 [INFO] concord.llm.prompts: Loaded external template: v3.0
+2025-06-02 11:35:44,737 [INFO] concord.llm.prompts: Loaded external template: v1.1-general
+2025-06-02 11:35:44,737 [INFO] concord.llm.prompts: Loaded external template: v3.1
+2025-06-02 11:35:44,737 [INFO] concord.llm.prompts: Loaded external template: v0.0_bug_test
+2025-06-02 11:35:44,742 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto3mini env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Argo Gateway API reachable
+Processing:   0%|          | 0/23 [00:00<?, ?row/s]2025-06-02 11:35:52,470 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.2-CoT' not found
+2025-06-02 11:35:52,470 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.2-CoT' not found
+2025-06-02 11:35:52,470 [ERROR] concord.llm.prompts: Error getting prompt template: Prompt version 'v3.2-CoT' not found
+2025-06-02 11:35:52,470 [ERROR] concord.pipeline: Error processing chunk: Prompt version 'v3.2-CoT' not found
+Processing: 100%|██████████| 23/23 [00:00<00:00, 6017.65row/s]
+2025-06-02 11:35:52,471 [INFO] concord.pipeline: Processed 23 rows in 0.03s
+2025-06-02 11:35:52,471 [WARNING] concord.pipeline: 2 chunks failed processing
+[Warning] 2 chunks failed during processing
+✓ wrote eval/results/benchmark_run_20250602_113505/gpto3mini/gpto3mini_v3.2-CoT_zero.csv
+[1/2] Running MODE=zero-shot, PROMPT=v3.2, SIM_HINT=no -> eval/results/benchmark_run_20250602_113505/gpto3mini/gpto3mini_v3.2_zero.csv
+[2/2] Running MODE=zero-shot, PROMPT=v3.2-CoT, SIM_HINT=no -> eval/results/benchmark_run_20250602_113505/gpto3mini/gpto3mini_v3.2-CoT_zero.csv

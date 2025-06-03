@@ -1,0 +1,173 @@
+2025-05-30 14:51:32,952 [INFO] concord.llm.prompts: Loaded external template: v1.1-enzyme
+2025-05-30 14:51:32,952 [INFO] concord.llm.prompts: Loaded external template: v2
+2025-05-30 14:51:32,952 [INFO] concord.llm.prompts: Loaded external template: v2.1
+2025-05-30 14:51:32,952 [INFO] concord.llm.prompts: Loaded external template: v3.0-CoT
+2025-05-30 14:51:32,952 [INFO] concord.llm.prompts: Loaded external template: v3.1-CoT
+2025-05-30 14:51:32,952 [INFO] concord.llm.prompts: Loaded external template: v1.2-general
+2025-05-30 14:51:32,952 [INFO] concord.llm.prompts: Loaded external template: v1.3-test
+2025-05-30 14:51:32,952 [INFO] concord.llm.prompts: Loaded external template: v1.1-phage
+2025-05-30 14:51:32,952 [INFO] concord.llm.prompts: Loaded external template: v3.2
+2025-05-30 14:51:32,952 [INFO] concord.llm.prompts: Loaded external template: v1.0
+2025-05-30 14:51:32,952 [INFO] concord.llm.prompts: Loaded external template: v3.0
+2025-05-30 14:51:32,952 [INFO] concord.llm.prompts: Loaded external template: v1.1-general
+2025-05-30 14:51:32,952 [INFO] concord.llm.prompts: Loaded external template: v3.1
+2025-05-30 14:51:32,952 [INFO] concord.llm.prompts: Loaded external template: v3.2-CoT
+2025-05-30 14:51:32,952 [INFO] concord.llm.prompts: Loaded external template: v0.0_bug_test
+2025-05-30 14:51:32,956 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Argo Gateway API reachable
+Processing:   0%|          | 0/165 [00:00<?, ?row/s]2025-05-30 14:51:34,249 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  12%|█▏        | 20/165 [00:39<04:44,  1.96s/row]2025-05-30 14:52:13,531 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  24%|██▍       | 40/165 [01:35<05:06,  2.45s/row]2025-05-30 14:53:09,305 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  36%|███▋      | 60/165 [02:47<05:13,  2.98s/row]2025-05-30 14:54:21,748 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  48%|████▊     | 80/165 [03:18<03:25,  2.42s/row]2025-05-30 14:54:52,951 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  61%|██████    | 100/165 [04:13<02:45,  2.54s/row]2025-05-30 14:55:48,061 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+WARNING:root:Unknown label: 'Related' (raw: 'Related') from response: Related — A is a fusion of two enzymatic functions, B is just one
+WARNING:root:Unknown label: 'Related' (raw: 'Related') from response: Related — A is a fusion (two enzymatic activities), B is just one
+Processing:  73%|███████▎  | 120/165 [05:03<01:53,  2.52s/row]2025-05-30 14:56:37,596 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+WARNING:root:Unknown label: 'Related' (raw: 'Related') from response: Related — Both type IV pilus ATPases but different system components
+Processing:  85%|████████▍ | 140/165 [06:02<01:06,  2.67s/row]2025-05-30 14:57:37,049 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+WARNING:root:Unknown label: 'Related' (raw: 'Related') from response: Related — Different subunits/components in the same T2SS pathway
+WARNING:root:Unknown label: 'Related' (raw: 'Related') from response: Related — Both in polysaccharide processes but different functional roles
+Processing:  97%|█████████▋| 160/165 [06:59<00:13,  2.72s/row]2025-05-30 14:58:33,403 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing: 100%|██████████| 165/165 [07:49<00:00,  3.46s/row]Processing: 100%|██████████| 165/165 [07:49<00:00,  2.84s/row]
+2025-05-30 14:59:23,644 [INFO] concord.pipeline: Processed 165 rows in 469.43s
+✓ wrote eval/results/benchmark_run_20250530_144619/gpto1/gpto1_v3.1_zero.csv
+2025-05-30 14:59:25,461 [INFO] concord.llm.prompts: Loaded external template: v1.1-enzyme
+2025-05-30 14:59:25,461 [INFO] concord.llm.prompts: Loaded external template: v2
+2025-05-30 14:59:25,461 [INFO] concord.llm.prompts: Loaded external template: v2.1
+2025-05-30 14:59:25,461 [INFO] concord.llm.prompts: Loaded external template: v3.0-CoT
+2025-05-30 14:59:25,461 [INFO] concord.llm.prompts: Loaded external template: v3.1-CoT
+2025-05-30 14:59:25,461 [INFO] concord.llm.prompts: Loaded external template: v1.2-general
+2025-05-30 14:59:25,461 [INFO] concord.llm.prompts: Loaded external template: v1.3-test
+2025-05-30 14:59:25,461 [INFO] concord.llm.prompts: Loaded external template: v1.1-phage
+2025-05-30 14:59:25,461 [INFO] concord.llm.prompts: Loaded external template: v3.2
+2025-05-30 14:59:25,461 [INFO] concord.llm.prompts: Loaded external template: v1.0
+2025-05-30 14:59:25,461 [INFO] concord.llm.prompts: Loaded external template: v3.0
+2025-05-30 14:59:25,462 [INFO] concord.llm.prompts: Loaded external template: v1.1-general
+2025-05-30 14:59:25,462 [INFO] concord.llm.prompts: Loaded external template: v3.1
+2025-05-30 14:59:25,462 [INFO] concord.llm.prompts: Loaded external template: v3.2-CoT
+2025-05-30 14:59:25,462 [INFO] concord.llm.prompts: Loaded external template: v0.0_bug_test
+2025-05-30 14:59:25,465 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Argo Gateway API reachable
+Processing:   0%|          | 0/165 [00:00<?, ?row/s]2025-05-30 14:59:27,197 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  12%|█▏        | 20/165 [00:34<04:09,  1.72s/row]2025-05-30 15:00:01,653 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  24%|██▍       | 40/165 [01:15<04:01,  1.93s/row]2025-05-30 15:00:43,185 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  36%|███▋      | 60/165 [02:27<04:40,  2.67s/row]2025-05-30 15:01:54,326 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  48%|████▊     | 80/165 [02:53<03:01,  2.13s/row]2025-05-30 15:02:20,437 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  61%|██████    | 100/165 [03:56<02:43,  2.51s/row]2025-05-30 15:03:23,954 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+WARNING:root:Unknown label: 'Related' (raw: 'Related') from response: Related — A has fused adenylyltransferase/kinase domains; B lists only adenylyltransferase
+WARNING:root:Unknown label: 'Related' (raw: 'Related') from response: Related — A has fused adenylyltransferase/kinase; B is only the kinase
+Processing:  73%|███████▎  | 120/165 [05:13<02:13,  2.96s/row]2025-05-30 15:04:40,453 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  85%|████████▍ | 140/165 [06:05<01:10,  2.84s/row]2025-05-30 15:05:32,293 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+WARNING:root:Unknown label: 'Related' (raw: 'Related') from response: Related — Both in type II secretion system, different subunits/components
+WARNING:root:Unknown label: 'Related' (raw: 'Related') from response: Related — Both involved in polysaccharide processes (biosynthesis vs flippase)
+Processing:  97%|█████████▋| 160/165 [07:04<00:14,  2.88s/row]2025-05-30 15:06:31,754 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing: 100%|██████████| 165/165 [07:41<00:00,  3.35s/row]Processing: 100%|██████████| 165/165 [07:41<00:00,  2.80s/row]
+2025-05-30 15:07:08,980 [INFO] concord.pipeline: Processed 165 rows in 461.82s
+✓ wrote eval/results/benchmark_run_20250530_144619/gpto1/gpto1_v3.1-CoT_zero.csv
+2025-05-30 15:07:10,797 [INFO] concord.llm.prompts: Loaded external template: v1.1-enzyme
+2025-05-30 15:07:10,797 [INFO] concord.llm.prompts: Loaded external template: v2
+2025-05-30 15:07:10,797 [INFO] concord.llm.prompts: Loaded external template: v2.1
+2025-05-30 15:07:10,797 [INFO] concord.llm.prompts: Loaded external template: v3.0-CoT
+2025-05-30 15:07:10,797 [INFO] concord.llm.prompts: Loaded external template: v3.1-CoT
+2025-05-30 15:07:10,797 [INFO] concord.llm.prompts: Loaded external template: v1.2-general
+2025-05-30 15:07:10,797 [INFO] concord.llm.prompts: Loaded external template: v1.3-test
+2025-05-30 15:07:10,797 [INFO] concord.llm.prompts: Loaded external template: v1.1-phage
+2025-05-30 15:07:10,798 [INFO] concord.llm.prompts: Loaded external template: v3.2
+2025-05-30 15:07:10,798 [INFO] concord.llm.prompts: Loaded external template: v1.0
+2025-05-30 15:07:10,798 [INFO] concord.llm.prompts: Loaded external template: v3.0
+2025-05-30 15:07:10,798 [INFO] concord.llm.prompts: Loaded external template: v1.1-general
+2025-05-30 15:07:10,798 [INFO] concord.llm.prompts: Loaded external template: v3.1
+2025-05-30 15:07:10,798 [INFO] concord.llm.prompts: Loaded external template: v3.2-CoT
+2025-05-30 15:07:10,798 [INFO] concord.llm.prompts: Loaded external template: v0.0_bug_test
+2025-05-30 15:07:10,802 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Argo Gateway API reachable
+Processing:   0%|          | 0/165 [00:00<?, ?row/s]2025-05-30 15:07:13,859 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  12%|█▏        | 20/165 [00:30<03:40,  1.52s/row]2025-05-30 15:07:44,275 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  24%|██▍       | 40/165 [01:27<04:47,  2.30s/row]2025-05-30 15:08:41,273 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  36%|███▋      | 60/165 [02:25<04:29,  2.57s/row]2025-05-30 15:09:39,044 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  48%|████▊     | 80/165 [03:07<03:23,  2.39s/row]2025-05-30 15:10:21,524 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  61%|██████    | 100/165 [04:19<03:03,  2.82s/row]2025-05-30 15:11:33,068 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  73%|███████▎  | 120/165 [05:14<02:05,  2.80s/row]2025-05-30 15:12:28,142 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  85%|████████▍ | 140/165 [06:26<01:16,  3.06s/row]2025-05-30 15:13:40,210 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  97%|█████████▋| 160/165 [07:08<00:13,  2.75s/row]2025-05-30 15:14:22,043 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing: 100%|██████████| 165/165 [07:28<00:00,  2.89s/row]Processing: 100%|██████████| 165/165 [07:28<00:00,  2.72s/row]
+2025-05-30 15:14:42,702 [INFO] concord.pipeline: Processed 165 rows in 448.88s
+✓ wrote eval/results/benchmark_run_20250530_144619/gpto1/gpto1_v3.2_zero.csv
+2025-05-30 15:14:44,557 [INFO] concord.llm.prompts: Loaded template: v1.1-enzyme
+2025-05-30 15:14:44,557 [INFO] concord.llm.prompts: Loaded template: v2
+2025-05-30 15:14:44,557 [INFO] concord.llm.prompts: Loaded template: v2.1
+2025-05-30 15:14:44,557 [INFO] concord.llm.prompts: Loaded template: v3.0-CoT
+2025-05-30 15:14:44,557 [INFO] concord.llm.prompts: Loaded template: v3.1-CoT
+2025-05-30 15:14:44,557 [INFO] concord.llm.prompts: Loaded template: v1.2-general
+2025-05-30 15:14:44,557 [INFO] concord.llm.prompts: Loaded template: v1.3-test
+2025-05-30 15:14:44,557 [INFO] concord.llm.prompts: Loaded template: v1.1-phage
+2025-05-30 15:14:44,557 [INFO] concord.llm.prompts: Loaded template: v3.2
+2025-05-30 15:14:44,558 [INFO] concord.llm.prompts: Loaded template: v1.0
+2025-05-30 15:14:44,558 [INFO] concord.llm.prompts: Loaded template: v3.0
+2025-05-30 15:14:44,558 [INFO] concord.llm.prompts: Loaded template: v1.1-general
+2025-05-30 15:14:44,558 [INFO] concord.llm.prompts: Loaded template: v3.1
+2025-05-30 15:14:44,558 [INFO] concord.llm.prompts: Loaded template: v3.2-CoT
+2025-05-30 15:14:44,558 [INFO] concord.llm.prompts: Loaded template: v0.0_bug_test
+2025-05-30 15:14:44,562 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+✓ Argo Gateway API reachable
+Processing:   0%|          | 0/165 [00:00<?, ?row/s]2025-05-30 15:14:46,195 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:14:49,905 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:15:23,642 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:15:28,407 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:15:33,805 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:15:38,727 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:15:42,233 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:15:46,226 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:15:50,723 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:15:59,746 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:16:03,244 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:16:17,985 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:16:21,236 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:16:24,839 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:16:30,221 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:16:34,969 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:16:39,974 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:16:47,721 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:17:48,903 [ERROR] concord.modes: Zero-shot annotation failed: Server disconnected without sending a response.
+2025-05-30 15:17:48,903 [ERROR] concord.modes: FALLBACK MODE: RemoteProtocolError: Server disconnected without sending a response.
+2025-05-30 15:17:48,904 [INFO] concord.embedding: Loading embedding model NeuML/pubmedbert-base-embeddings...
+2025-05-30 15:17:58,798 [INFO] concord.embedding: Model loaded in 9.89s on cpu
+2025-05-30 15:17:58,888 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:18:11,167 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  12%|█▏        | 20/165 [03:30<25:26, 10.53s/row]2025-05-30 15:18:16,799 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:18:29,408 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:18:41,512 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:18:47,724 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:19:15,227 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:19:20,120 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:19:27,274 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:19:35,270 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+2025-05-30 15:19:50,898 [INFO] concord.llm.argo_gateway: ArgoGatewayClient initialised | model=gpto1 env=dev timeout=120.0s url=https://apps-dev.inside.anl.gov/argoapi/api/v1/resource/chat/
+Processing:  24%|██▍       | 40/165 [05:23<15:56,  7.66s/row]
+Aborted.
+Processing:  24%|██▍       | 40/165 [05:23<16:50,  8.09s/row]
+[1/4] Running MODE=zero-shot, PROMPT=v3.1, SIM_HINT=no -> eval/results/benchmark_run_20250530_144619/gpto1/gpto1_v3.1_zero.csv
+[2/4] Running MODE=zero-shot, PROMPT=v3.1-CoT, SIM_HINT=no -> eval/results/benchmark_run_20250530_144619/gpto1/gpto1_v3.1-CoT_zero.csv
+[3/4] Running MODE=zero-shot, PROMPT=v3.2, SIM_HINT=no -> eval/results/benchmark_run_20250530_144619/gpto1/gpto1_v3.2_zero.csv
+[4/4] Running MODE=zero-shot, PROMPT=v3.2-CoT, SIM_HINT=no -> eval/results/benchmark_run_20250530_144619/gpto1/gpto1_v3.2-CoT_zero.csv
+Traceback (most recent call last):
+  File "/Users/jplfaria/repos/CONCORDIA/eval/scripts/benchmark_runner.py", line 87, in <module>
+    main()
+  File "/Users/jplfaria/repos/CONCORDIA/eval/scripts/benchmark_runner.py", line 83, in main
+    subprocess.run(cmd, check=True)
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 1201, in communicate
+    self.wait()
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 1264, in wait
+    return self._wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 2053, in _wait
+    (pid, sts) = self._try_wait(0)
+                 ^^^^^^^^^^^^^^^^^
+  File "/Users/jplfaria/miniconda3/lib/python3.11/subprocess.py", line 2011, in _try_wait
+    (pid, sts) = os.waitpid(self.pid, wait_flags)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

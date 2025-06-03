@@ -24,7 +24,7 @@ import pandas as pd
 import yaml
 from tqdm import tqdm
 
-from .embedding import cosine_sim, embed_sentence  # local model
+from .embedding import cosine_sim, embed_sentence
 from .llm.argo_gateway import SYSTEM_MSG, ArgoGatewayClient, _parse, llm_label
 from .llm.prompt_builder import build_annotation_prompt
 from .modes import (
@@ -102,9 +102,37 @@ _ENGINE_MAP: dict[str, Any] = {
 
 
 # ────────────────── core annotation logic ───────────────────────────
-def _call_llm(a: str, b: str, prompt: str, cfg: Config) -> tuple[str, str]:
-    """Call LLM with appropriate error handling."""
+def _call_llm(
+    a: str, b: str, prompt: str, cfg: Config, client: ArgoGatewayClient = None
+) -> tuple[str, str]:
+    """Call LLM with error handling and optional client reuse."""
     try:
+        # Create client only if not provided
+        if client is None:
+            llm_cfg = {
+                k: v
+                for k, v in cfg["llm"].items()
+                if k not in {"temperature", "top_p", "max_tokens"}
+            }
+            client = ArgoGatewayClient(**llm_cfg)
+
+        res = llm_label(a, b, client=client, cfg=cfg, template=prompt, with_note=True)
+        if isinstance(res, tuple) and len(res) == 2:
+            return res
+        return res, ""
+    except Exception as e:
+        logger.error(f"LLM call failed: {e}")
+        raise RuntimeError(f"LLM annotation failed: {e}") from e
+
+
+def _duo_vote(
+    a: str, b: str, template: str, cfg: Config, client: ArgoGatewayClient = None
+) -> tuple[str, str, bool]:
+    """Simplified duo vote with three temperature calls and client reuse."""
+    temps = cfg["engine"].get("vote_temps", [0.8, 0.2, 0.0])
+
+    # Create client once if not provided
+    if client is None:
         llm_cfg = {
             k: v
             for k, v in cfg["llm"].items()
@@ -112,89 +140,86 @@ def _call_llm(a: str, b: str, prompt: str, cfg: Config) -> tuple[str, str]:
         }
         client = ArgoGatewayClient(**llm_cfg)
 
-        start = time.time()
-        res = llm_label(a, b, client=client, cfg=cfg, template=prompt, with_note=True)
-        elapsed = time.time() - start
-        logger.debug(f"LLM call completed in {elapsed:.2f}s")
-
-        if isinstance(res, tuple) and len(res) == 2:
-            label, evidence = res
-        else:
-            label, evidence = res, ""
-        return label, evidence or ""
-    except Exception as e:
-        logger.error(f"LLM call failed: {e}")
-        logger.debug(traceback.format_exc())
-        raise RuntimeError(f"LLM annotation failed: {e}") from e
-
-
-def _duo_vote(a: str, b: str, template: str, cfg: Config) -> tuple[str, str, bool]:
-    """Legacy duo vote: three-temperature LLM voting."""
-    # Allow configurable vote temperatures (legacy duo vote)
-    temps = cfg["engine"].get("vote_temps", [0.8, 0.2, 0.0])
-    if "{A}" not in template or "{B}" not in template:
-        raise ValueError("Template missing required {A} or {B} placeholders")
-
-    def _one(temp: float) -> tuple[str, str]:
+    def _vote_call(temp: float) -> tuple[str, str]:
         tcfg = {**cfg, "llm": {**cfg["llm"], "temperature": temp}}
         prompt = build_annotation_prompt(a, b, template)
-        return _call_llm(a, b, prompt, tcfg)
+        return _call_llm(a, b, prompt, tcfg, client=client)
 
     try:
-        l1, e1 = _one(temps[0])
-        l2, e2 = _one(temps[1])
+        l1, e1 = _vote_call(temps[0])
+        l2, e2 = _vote_call(temps[1])
+
         if l1 == l2:
             return l1, e1 or e2, False
-        l3, e3 = _one(temps[2] if len(temps) > 2 else 0.0)
+
+        l3, e3 = _vote_call(temps[2] if len(temps) > 2 else 0.0)
         votes = [l1, l2, l3]
         winner = max(set(votes), key=votes.count)
-        evidence = {l1: e1, l2: e2, l3: e3}[winner]
+        evidence = next(
+            (e for label, e in [(l1, e1), (l2, e2), (l3, e3)] if label == winner), ""
+        )
         return winner, evidence, True
     except Exception as e:
         logger.error(f"Duo vote failed: {e}")
         raise RuntimeError(f"Duo annotation failed: {e}") from e
 
 
-def _annotate_pair(a: str, b: str, cfg: Config) -> AnnotationResult:
-    """Dispatch to the appropriate annotation mode runner."""
-    # Fix #10: Add validation for empty strings
+def _annotate_pair(
+    a: str, b: str, cfg: Config, client: ArgoGatewayClient = None
+) -> AnnotationResult:
+    """Dispatch to appropriate annotation mode with optional client reuse."""
     if not a or not b:
         return {
             "label": "Uninformative",
             "similarity": None,
-            "evidence": "One or both inputs were empty",
+            "evidence": "Empty input",
             "conflict": False,
         }
 
-    raw_mode = cfg["engine"]["mode"]
-    mode = _LEGACY_MODE_MAP.get(raw_mode, raw_mode)
-    # Inline local mode: use pipeline embed & cosim so tests can patch these
+    mode = cfg["engine"]["mode"]
+    mode = _LEGACY_MODE_MAP.get(mode, mode)
+
+    # Handle local mode inline
     if mode == "local":
         try:
             sim = cosine_sim(embed_sentence(a, cfg), embed_sentence(b, cfg))
+            threshold = cfg["engine"].get("sim_threshold", 0.98)
+            label = "Exact" if sim > threshold else "Different"
+            return {
+                "label": label,
+                "similarity": sim,
+                "evidence": "",
+                "conflict": False,
+            }
         except Exception as e:
             logger.error(f"Embedding failed: {e}")
             raise RuntimeError(f"Similarity calculation failed: {e}") from e
-        label = (
-            "Exact" if sim > cfg["engine"].get("sim_threshold", 0.98) else "Different"
-        )
-        return {"label": label, "similarity": sim, "evidence": "", "conflict": False}
+
+    # Use mode runners with client
     runner = _ENGINE_MAP.get(mode)
     if runner is None:
         raise ValueError(f"Unknown mode: {mode}")
+
     try:
-        return runner(a, b, cfg)
+        # Pass client to runners that support it
+        if mode in ("zero-shot", "vote", "rac"):
+            return runner(a, b, cfg, client=client)
+        else:
+            return runner(a, b, cfg)
     except Exception as e:
         logger.error(f"FALLBACK MODE ACTIVATED for mode '{mode}': {e}")
         return annotate_fallback(a, b, cfg, e)
 
 
-# Helper for batching LLM calls
 def _annotate_batch_chunk(
-    rows: list[dict[str, Any]], cfg: Config, col_a: str, col_b: str
+    rows: list[dict[str, Any]],
+    cfg: Config,
+    col_a: str,
+    col_b: str,
+    client: ArgoGatewayClient = None,
 ) -> list[AnnotationResult]:
     """
-    Annotate multiple pairs in a single LLM request.
+    Annotate multiple pairs in a single LLM request with client reuse.
 
     Uses the same template and prompt format as single-pair processing
     to ensure consistent results between batched and non-batched modes.
@@ -205,8 +230,6 @@ def _annotate_batch_chunk(
     base_template = get_prompt_template(cfg)
 
     # Calculate pairwise similarities if sim_hint enabled
-    from .embedding import cosine_sim, embed_sentence
-
     use_sim_hint = cfg["engine"].get("sim_hint", False)
     sims: list[float | None] = []
     if use_sim_hint:
@@ -244,13 +267,15 @@ def _annotate_batch_chunk(
 
     prompt = "\n".join(lines)
 
-    # Use the same LLM configuration as single-pair mode
-    llm_cfg = {
-        k: v
-        for k, v in cfg["llm"].items()
-        if k not in {"temperature", "top_p", "max_tokens"}
-    }
-    client = ArgoGatewayClient(**llm_cfg)
+    # Use provided client or create one if none provided
+    if client is None:
+        llm_cfg = {
+            k: v
+            for k, v in cfg["llm"].items()
+            if k not in {"temperature", "top_p", "max_tokens"}
+        }
+        client = ArgoGatewayClient(**llm_cfg)
+
     raw = client.chat(prompt, system=SYSTEM_MSG)
 
     # Parse results - first split by pair markers then extract label from each
@@ -309,7 +334,19 @@ def run_pair(a: str, b: str, cfg_path: P.Path) -> Tuple[str, float | None, str]:
     """
     try:
         cfg = _load_cfg(cfg_path)
-        result = _annotate_pair(a, b, cfg)
+
+        # Create client once for LLM modes
+        client = None
+        mode = cfg["engine"]["mode"]
+        if mode in ("zero-shot", "vote", "rac"):
+            llm_cfg = {
+                k: v
+                for k, v in cfg["llm"].items()
+                if k not in {"temperature", "top_p", "max_tokens"}
+            }
+            client = ArgoGatewayClient(**llm_cfg)
+
+        result = _annotate_pair(a, b, cfg, client=client)
         return result["label"], result["similarity"], result["evidence"]
     except Exception as e:
         logger.error(f"run_pair failed: {e}")
@@ -392,6 +429,17 @@ def run_file(
 
         rows = list(_iter_rows(df))
         mode_val = cfg["engine"]["mode"]
+
+        # Create client once for LLM modes to reuse throughout processing
+        client = None
+        if mode_val in ("zero-shot", "vote", "rac"):
+            llm_cfg = {
+                k: v
+                for k, v in cfg["llm"].items()
+                if k not in {"temperature", "top_p", "max_tokens"}
+            }
+            client = ArgoGatewayClient(**llm_cfg)
+
         # Fix #8: Mixed Mode Batch Processing - Check if mode supports batching
         supports_batch = mode_val in [
             "zero-shot"
@@ -401,9 +449,12 @@ def run_file(
             chunk = rows[i : i + chunk_size]
             try:
                 if mode_val == "zero-shot" and chunk_size > 1:
-                    results = _annotate_batch_chunk(chunk, cfg, col_a, col_b)
+                    results = _annotate_batch_chunk(chunk, cfg, col_a, col_b, client)
                 else:
-                    results = [_annotate_pair(r[col_a], r[col_b], cfg) for r in chunk]
+                    results = [
+                        _annotate_pair(r[col_a], r[col_b], cfg, client=client)
+                        for r in chunk
+                    ]
                 for row, result in zip(chunk, results):
                     if result["conflict"]:
                         conflicts += 1

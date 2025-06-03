@@ -1,0 +1,24 @@
+gene_id,annotation_a,annotation_b,relationship_label,relationship,evidence
+fig|273133.2.peg.39,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Exact,wording differences only (capitalisation)
+fig|273133.2.peg.40,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Exact,wording differences only (capitalisation)
+fig|273133.2.peg.157,Phage tail fiber,Phage tail fiber protein,Exact,Exact,"qualifier clean-up (adding ""protein"")"
+fig|273133.2.peg.54,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,Exact,wording differences only (punctuation)
+fig|273133.2.peg.156,Phage tail fiber,Phage tail fiber protein,Exact,Exact,"qualifier clean-up (adding ""protein"")"
+fig|273133.2.peg.166,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,Narrower,EC number adds specificity (Rule 1)
+fig|273133.2.peg.76,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,Narrower,EC number adds specificity (Rule 1)
+fig|273133.2.peg.183,Phage endolysin,Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,Narrower,EC number and substrate specificity added (Rule 1 and Rule 2)
+fig|273133.2.peg.188,"Phage lysin, N-acetylmuramoyl-L-alanine amidase",Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,Synonym,same biological entity with nomenclature change (endolysin vs lysin) and EC number added (Rule 1)
+fig|273133.2.peg.1,Phage repressor,Phage repressor protein,Exact,Exact,"qualifier clean-up (adding ""protein"")"
+fig|273133.2.peg.193,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,Exact,wording differences only (punctuation)
+fig|374463.4.peg.296,Glucose-6-phosphate 1-dehydrogenase (EC 1.1.1.49),Glucose-6-phosphate 1-dehydrogenase (NADP+) (EC 1.1.1.49),Narrower,Narrower,substrate specificity added (NADP+) (Rule 2)
+fig|374463.4.peg.298,Manganese transport protein MntH,"Mn(II) and Fe(II) import protein MntH, proton-dependent",Broader,Narrower,additional substrate specificity (Mn(II) and Fe(II)) and mechanism (proton-dependent) (Rule 2)
+fig|374463.4.peg.181,hypothetical protein,Outer-membrane β-barrel assembly protein BamD,Uninformative,Different,unrelated proteins or functions (hypothetical protein vs specific BamD function)
+fig|374463.4.peg.282,Enoyl-[acyl-carrier-protein] reductase [NADH] (EC 1.3.1.9),Enoyl-[acyl-carrier-protein] reductase (NADH) (EC 1.3.1.9),Exact,Exact,wording differences only (punctuation)
+fig|374463.4.peg.161,Sulfate-binding protein Sbp,"Sulfate/thiosulfate ABC transporter, sulfate-binding protein Spb",Broader,Narrower,additional substrate specificity (thiosulfate) and mechanism (ABC transporter) (Rule 2)
+fig|374463.4.peg.166,Glutaredoxin 3 (Grx3),Glutaredoxin 3,Exact,Exact,wording differences only (gene symbol inclusion)
+fig|374463.4.peg.288,Cys regulon transcriptional activator CysB,"Cys regulon transcriptional activator CysB, LysR family",Narrower,Narrower,additional family specificity (LysR family) (Rule 2)
+fig|374463.4.peg.289,DNA topoisomerase I (EC 5.99.1.2),DNA topoisomerase I (EC 5.6.2.1),Synonym,Synonym,EC renumbering without catalytic class change (Rule 1)
+fig|374463.4.peg.291,YciL protein,YciI protein,Different,Different,unrelated proteins or functions (YciL vs YciI)
+fig|374463.4.peg.170,Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23),Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23) (EC 4.2.99.18),Broader,Narrower,"Annotation B adds specificity with an additional EC number (EC 4.2.99.18), per Rule 1"
+fig|374463.4.peg.182,LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23),LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23) ## RluD,Exact,Exact,"The hash comment ""## RluD"" does not change biological function, per Rule 6"
+fig|374463.4.peg.185,tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228),tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228) ## TrmD,Exact,Exact,"The hash comment ""## TrmD"" does not change biological function, per Rule 6"

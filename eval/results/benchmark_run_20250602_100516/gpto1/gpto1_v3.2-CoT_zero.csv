@@ -1,0 +1,24 @@
+gene_id,annotation_a,annotation_b,relationship_label,relationship,evidence
+fig|273133.2.peg.39,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Exact,pure wording difference (rule #2)
+fig|273133.2.peg.40,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Exact,pure wording differences (capitalization only) per rule #2
+fig|273133.2.peg.157,Phage tail fiber,Phage tail fiber protein,Exact,Exact,purely wording differences (rule 2)
+fig|273133.2.peg.54,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,Broader,B omits the specific “T” gene detail found in A (phage rule #3)
+fig|273133.2.peg.156,Phage tail fiber,Phage tail fiber protein,Exact,Exact,Purely a wording difference (“fiber” vs. “fiber protein”)
+fig|273133.2.peg.166,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,Narrower,"B adds an EC number, giving more detail (rule #1)"
+fig|273133.2.peg.76,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,Narrower,B adds an EC number (rule #1) for more specific detail
+fig|273133.2.peg.183,Phage endolysin,Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,Narrower,"B includes EC number and specific amidase detail, per rule #1"
+fig|273133.2.peg.188,"Phage lysin, N-acetylmuramoyl-L-alanine amidase",Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,Narrower,"The second annotation adds an EC number (rule #1), making it more specific"
+fig|273133.2.peg.1,Phage repressor,Phage repressor protein,Exact,Exact,Pure wording difference (rule #2)
+fig|273133.2.peg.193,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,Broader,B is more generic and lacks “T” specificity present in A (phage rule #3)
+fig|374463.4.peg.296,Glucose-6-phosphate 1-dehydrogenase (EC 1.1.1.49),Glucose-6-phosphate 1-dehydrogenase (NADP+) (EC 1.1.1.49),Narrower,Exact,Both names refer to the same EC function; “(NADP+)” is only a wording detail
+fig|374463.4.peg.298,Manganese transport protein MntH,"Mn(II) and Fe(II) import protein MntH, proton-dependent",Broader,Narrower,B adds Fe(II) import and proton-dependent details (rule #2)
+fig|374463.4.peg.181,hypothetical protein,Outer-membrane β-barrel assembly protein BamD,Uninformative,Narrower,B adds specific function compared to A’s generic “hypothetical protein.”
+fig|374463.4.peg.282,Enoyl-[acyl-carrier-protein] reductase [NADH] (EC 1.3.1.9),Enoyl-[acyl-carrier-protein] reductase (NADH) (EC 1.3.1.9),Exact,Exact,purely bracket punctuation difference (rule #2)
+fig|374463.4.peg.161,Sulfate-binding protein Sbp,"Sulfate/thiosulfate ABC transporter, sulfate-binding protein Spb",Broader,Narrower,B adds new substrate detail (thiosulfate) per rule #2
+fig|374463.4.peg.166,Glutaredoxin 3 (Grx3),Glutaredoxin 3,Exact,Exact,purely wording difference (rule #2)
+fig|374463.4.peg.288,Cys regulon transcriptional activator CysB,"Cys regulon transcriptional activator CysB, LysR family",Narrower,Narrower,B adds LysR family detail (rule 2)
+fig|374463.4.peg.289,DNA topoisomerase I (EC 5.99.1.2),DNA topoisomerase I (EC 5.6.2.1),Synonym,Synonym,same enzyme under updated EC classification (rule 1 renumbering)
+fig|374463.4.peg.291,YciL protein,YciI protein,Different,Uninformative,Both are generic gene names lacking functional detail (rule 0)
+fig|374463.4.peg.170,Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23),Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23) (EC 4.2.99.18),Broader,Narrower,B adds an extra EC activity (rule #1)
+fig|374463.4.peg.182,LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23),LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23) ## RluD,Exact,Narrower,B includes the RluD name as extra specificity per rule #2
+fig|374463.4.peg.185,tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228),tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228) ## TrmD,Exact,Exact,“TrmD” is a recognized gene synonym; no functional difference

@@ -31,9 +31,10 @@ load_dotenv()
 #    "Your classification should reflect the standards used in curated databases for terminology reconciliation."
 # )
 SYSTEM_MSG = (
-    "You are an expert curator of gene functional annotations (SwissProt or RAST style)."
-    "When you compare two annotations, classify their relationship according to ontology practice "
-    "(EC, UniProt, KEGG, phage manuals). "
+    "You are an expert curator of gene functional annotations "
+    "(SwissProt or RAST style). "
+    "When you compare two annotations, classify their relationship "
+    "according to ontology practice (EC, UniProt, KEGG, phage manuals). "
     "Respond in the format: Label — short justification (evidence or rule number)."
 )
 
@@ -42,7 +43,8 @@ _ALIAS = {
     "Same": "Exact",
     "Equivalent": "Synonym",
     "Similar": "Synonym",
-    "Partial": "Related",
+    "Partial": "Different",  # "Partial" now collapses into Different
+    "Related": "Different",  # Map "Related" (from old prompts) to "Different"
 }
 _DASH = re.compile(r"\s*[—–-]\s*")
 
@@ -395,13 +397,21 @@ def _parse(raw: str) -> tuple[str, str]:
     # Normalize and apply alias
     label_norm = label_raw.capitalize()
     label_mapped = _ALIAS.get(label_norm, label_norm)
-    # Case-insensitive match against known labels
-    valid_map = {lbl.lower(): lbl for lbl in LABEL_SET}
+
+    # Use LABEL_SET from prompts module for validation
+    valid_map = {label.lower(): label for label in LABEL_SET}
     if label_mapped.lower() in valid_map:
         label = valid_map[label_mapped.lower()]
+    # No explicit handling for "Related" needed, it's not in LABEL_SET anymore
+    # If it's not in LABEL_SET (and wasn't aliased to something in LABEL_SET), it's Unknown
     else:
-        logging.warning(f"Unknown label: {label_mapped} from response: {raw}")
-        return "Unknown", raw
+        logging.warning(
+            f"Unknown label: '{label_mapped}' (raw: '{label_raw}') from response: {raw}"
+        )
+        return (
+            "Unknown",
+            raw,
+        )  # Return the full raw response as evidence for an unknown label
 
     # Extract evidence text if present
     note = parts[1].strip() if len(parts) > 1 else ""

@@ -1,0 +1,24 @@
+gene_id,annotation_a,annotation_b,relationship_label,relationship,evidence
+fig|273133.2.peg.39,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Exact,Identical wording except for capitalization; Rule 2 applies
+fig|273133.2.peg.40,"Phage terminase, large subunit @ intein-containing","Phage terminase, large subunit @ Intein-containing",Exact,Exact,Identical wording except for capitalization; Rule 2 qualifier clean-up applies
+fig|273133.2.peg.157,Phage tail fiber,Phage tail fiber protein,Exact,Exact,"Wording difference only; ""protein"" addition matches Rule 2 qualifier clean-up"
+fig|273133.2.peg.54,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,Exact,Wording differences only; both annotations describe the same phage tail tape-measure protein
+fig|273133.2.peg.156,Phage tail fiber,Phage tail fiber protein,Exact,Exact,"Wording difference only; ""protein"" addition matches Rule 2 qualifier clean-up"
+fig|273133.2.peg.166,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,Exact,Wording differences only; both annotations describe the same enzyme with identical EC number
+fig|273133.2.peg.76,Phage DNA helicase,Phage DNA helicase (EC 3.6.4.12),Narrower,Exact,Wording differences only; both annotations describe the same enzyme with identical EC number (Rule 1)
+fig|273133.2.peg.183,Phage endolysin,Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,Narrower,"EC 3.5.1.28 adds specificity to ""Phage endolysin"" per Rule 1"
+fig|273133.2.peg.188,"Phage lysin, N-acetylmuramoyl-L-alanine amidase",Phage endolysin N-acetylmuramoyl-L-alanine amidase (EC 3.5.1.28),Narrower,Exact,Wording differences only; both annotations describe the same enzyme (Rule 2: Qualifier clean-up)
+fig|273133.2.peg.1,Phage repressor,Phage repressor protein,Exact,Exact,"Qualifier ""protein"" added; per Rule 2, this does not change biological meaning"
+fig|273133.2.peg.193,Phage tail length tape-measure protein T,"Phage tail, tail length tape-measure protein",Exact,Exact,Wording differences only; both annotations describe the same phage structural protein
+fig|374463.4.peg.296,Glucose-6-phosphate 1-dehydrogenase (EC 1.1.1.49),Glucose-6-phosphate 1-dehydrogenase (NADP+) (EC 1.1.1.49),Narrower,Exact,"Wording difference only; EC number and function are identical (Rule 1, EC match)"
+fig|374463.4.peg.298,Manganese transport protein MntH,"Mn(II) and Fe(II) import protein MntH, proton-dependent",Broader,Exact,Wording differences only; both describe the same protein function (Rule 2: Qualifier clean-up)
+fig|374463.4.peg.181,hypothetical protein,Outer-membrane β-barrel assembly protein BamD,Uninformative,Different,Annotation A lacks functional specificity; Annotation B specifies a distinct assembly protein
+fig|374463.4.peg.282,Enoyl-[acyl-carrier-protein] reductase [NADH] (EC 1.3.1.9),Enoyl-[acyl-carrier-protein] reductase (NADH) (EC 1.3.1.9),Exact,Exact,"Wording differences only; EC number and function are identical (Rule 1, Qualifier clean-up)"
+fig|374463.4.peg.161,Sulfate-binding protein Sbp,"Sulfate/thiosulfate ABC transporter, sulfate-binding protein Spb",Broader,Exact,"Wording differences only; ""Sbp"" and ""Spb"" are database-accepted synonyms"
+fig|374463.4.peg.166,Glutaredoxin 3 (Grx3),Glutaredoxin 3,Exact,Exact,"Identical wording; no qualifiers, EC numbers, or phage-specific markers differ (Rule 2)"
+fig|374463.4.peg.288,Cys regulon transcriptional activator CysB,"Cys regulon transcriptional activator CysB, LysR family",Narrower,Exact,"Wording difference only; ""LysR family"" is a descriptive addition without changing function"
+fig|374463.4.peg.289,DNA topoisomerase I (EC 5.99.1.2),DNA topoisomerase I (EC 5.6.2.1),Synonym,Different,"EC numbers change catalytic class (5.99 → 5.6), per Rule 1"
+fig|374463.4.peg.291,YciL protein,YciI protein,Different,Uninformative,Both annotations lack functional specificity; no EC numbers or clear biological roles
+fig|374463.4.peg.170,Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23),Formamidopyrimidine-DNA glycosylase (EC 3.2.2.23) (EC 4.2.99.18),Broader,Narrower,"Annotation B adds EC 4.2.99.18, indicating additional specificity per Rule 1"
+fig|374463.4.peg.182,LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23),LSU rRNA pseudouridine(1911/1915/1917) synthase (EC 5.4.99.23) ## RluD,Exact,Exact,Qualifier “## RluD” does not change biology; Rule 6 applies
+fig|374463.4.peg.185,tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228),tRNA (guanine(37)-N(1))-methyltransferase (EC 2.1.1.228) ## TrmD,Exact,Exact,Wording differences only; identical EC number and function per Rule 1 and Rule 2

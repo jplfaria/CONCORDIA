@@ -1,7 +1,7 @@
 """
 concord.utils
 ============
-Shared utilities for the CONCORDIA engine.
+Shared utilities for the CONCORDIA engine with performance optimizations.
 
 This module contains helper functions used across the codebase.
 """
@@ -9,6 +9,7 @@ This module contains helper functions used across the codebase.
 from __future__ import annotations
 
 import functools
+import hashlib
 import logging
 import pathlib as P
 import time
@@ -23,6 +24,43 @@ logger = logging.getLogger(__name__)
 # Type variables for generic functions
 T = TypeVar("T")
 R = TypeVar("R")
+
+# Configuration cache to avoid repeated YAML parsing
+_config_cache: Dict[str, Dict[str, Any]] = {}
+_config_cache_enabled = True
+
+
+def enable_config_cache() -> None:
+    """Enable configuration caching."""
+    global _config_cache_enabled
+    _config_cache_enabled = True
+    logger.debug("Configuration caching enabled")
+
+
+def disable_config_cache() -> None:
+    """Disable configuration caching and clear cache."""
+    global _config_cache_enabled, _config_cache
+    _config_cache_enabled = False
+    _config_cache.clear()
+    logger.debug("Configuration caching disabled")
+
+
+def clear_config_cache() -> None:
+    """Clear the configuration cache."""
+    global _config_cache
+    _config_cache.clear()
+    logger.debug("Configuration cache cleared")
+
+
+def _get_file_hash(path: P.Path) -> str:
+    """Get a quick hash of file path and modification time for caching."""
+    try:
+        mtime = path.stat().st_mtime
+        content = f"{path}:{mtime}"
+        return hashlib.md5(content.encode()).hexdigest()
+    except (OSError, FileNotFoundError):
+        # If file doesn't exist or can't be accessed, use path only
+        return hashlib.md5(str(path).encode()).hexdigest()
 
 
 def with_retries(
@@ -65,12 +103,15 @@ def with_retries(
     return decorator
 
 
-def load_yaml_config(path: Union[str, P.Path]) -> Dict[str, Any]:
+def load_yaml_config(
+    path: Union[str, P.Path], use_cache: bool = True
+) -> Dict[str, Any]:
     """
-    Safely load and validate a YAML configuration file.
+    Load and validate a YAML configuration file with optional caching.
 
     Args:
         path: Path to the YAML file
+        use_cache: Whether to use caching (default: True)
 
     Returns:
         Parsed configuration dictionary
@@ -78,18 +119,32 @@ def load_yaml_config(path: Union[str, P.Path]) -> Dict[str, Any]:
     Raises:
         ValueError: If the file cannot be read or parsed
     """
+    path_obj = P.Path(path) if isinstance(path, str) else path
+
+    # Check cache if enabled
+    if _config_cache_enabled and use_cache:
+        file_hash = _get_file_hash(path_obj)
+        if file_hash in _config_cache:
+            logger.debug(f"Using cached config for {path_obj}")
+            return _config_cache[file_hash].copy()  # Return copy to prevent mutations
+
     try:
-        path_obj = P.Path(path) if isinstance(path, str) else path
         with open(path_obj, "r") as f:
             config = yaml.safe_load(f)
 
         if not isinstance(config, dict):
-            raise ValueError(f"Config file {path} did not parse to a dictionary")
+            raise ValueError(f"Config file {path_obj} did not parse to a dictionary")
+
+        # Cache the result if caching is enabled
+        if _config_cache_enabled and use_cache:
+            file_hash = _get_file_hash(path_obj)
+            _config_cache[file_hash] = config.copy()
+            logger.debug(f"Cached config for {path_obj}")
 
         return config
     except (IOError, yaml.YAMLError) as e:
-        logger.error(f"Failed to load config from {path}: {e}")
-        raise ValueError(f"Failed to load config from {path}: {e}")
+        logger.error(f"Failed to load config from {path_obj}: {e}")
+        raise ValueError(f"Failed to load config from {path_obj}: {e}")
 
 
 def timing_decorator(func: Callable[..., R]) -> Callable[..., R]:
@@ -164,6 +219,8 @@ def chunked(items: List[T], chunk_size: int) -> List[List[T]]:
     Returns:
         List of chunks
     """
+    if chunk_size <= 0:
+        raise ValueError("Chunk size must be positive")
     return [items[i : i + chunk_size] for i in range(0, len(items), chunk_size)]
 
 

@@ -21,6 +21,8 @@ __pycache__/
 *.swp                  # Vim swap files
 *.swo
 *.sublime-*
+.ruff_cache/
+.pytest_cache/
 
 # ------------------------------------------------------------------
 # Build / runtime artefacts
@@ -38,6 +40,9 @@ eval/results/*                 # Ignore all content within the main results dire
 # Hugging Face cache (weights are huge; re-downloaded on demand)
 .cache/
 Library/Caches/huggingface/
+
+# Project-specific data files (e.g., generated vector stores)
+data/vector_store.json
 
 # ------------------------------------------------------------------
 # KEEP these (do NOT ignore)

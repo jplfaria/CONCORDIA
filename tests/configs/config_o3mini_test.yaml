@@ -1,0 +1,8 @@
+# Minimal config for o3mini test with small completion tokens
+engine:
+  mode: llm            # let concord pipeline know we want Gateway calls
+
+llm:
+  model: gpto3mini     # o3-mini model
+  stream: false        # start with non-streaming /chat/ endpoint
+  user: ${ARGO_USER}   # uses ARGO_USER env var 

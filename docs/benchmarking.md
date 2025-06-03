@@ -19,6 +19,19 @@ Install development requirements:
 pip install -r requirements-dev.txt
 ```
 
+## Label System
+
+CONCORDIA uses a **6-class ontology** for relationship classification:
+
+- **Exact**: Wording differences only (capitalization, punctuation, accepted synonyms)
+- **Synonym**: Same biological entity but nomenclature or EC renumbering changes
+- **Broader**: B is more generic; loses specificity present in A
+- **Narrower**: B adds specificity (extra EC digits, substrate, sub-unit, phage part)
+- **Different**: Unrelated proteins or functions (includes pathway neighbors or fused variants)
+- **Uninformative**: Neither term provides enough functional information
+
+*Note: The "Related" label from the previous 7-class system is automatically mapped to "Different" for backward compatibility during evaluation.*
+
 ## Running Benchmarks
 
 While individual benchmark configurations can be run using `benchmark_runner.py` as shown below, the `eval/scripts/run_custom_benchmarks.sh` script is provided to automate running benchmarks across a suite of predefined models and prompt versions.
@@ -39,11 +52,44 @@ Consult the script for current default models, prompts, and modes. It currently 
 python eval/scripts/benchmark_runner.py \
   --data eval/datasets/Benchmark_subset__200_pairs_v1.csv \
   --modes zero-shot vote \
-  --prompts v1.0 v2.1 v3.0 v3.0-CoT v3.1 v3.1-CoT \
+  --prompts v1.0 v3.2 v3.2-CoT \
   --hint both \
   --llm-model gpt4o \
   --out-dir eval/results
 ```
+
+### Available Templates
+
+Current available templates for benchmarking:
+- `v1.0`: Basic template with all labels listed
+- `v1.1-general`: Microbial genome curator context
+- `v1.1-enzyme`: Enzymology specialist context
+- `v1.1-phage`: Bacteriophage protein expert context
+- `v3.2`: Latest comprehensive template with detailed heuristics (default)
+- `v3.2-CoT`: Chain-of-thought version of v3.2
+
+### Performance Optimizations
+
+For faster benchmarking, consider enabling performance features:
+
+```bash
+# Enable metrics to track performance
+export CONCORDIA_METRICS=true
+
+# Use larger batch sizes for faster processing with client reuse
+python eval/scripts/benchmark_runner.py \
+  --data eval/datasets/Benchmark_subset__200_pairs_v1.csv \
+  --modes zero-shot \
+  --prompts v3.2 \
+  --batch-size 64 \
+  --llm-batch-size 20 \
+  --llm-model gpt4o
+```
+
+**Performance Notes:**
+- **Client Reuse**: LLM clients are automatically reused throughout processing, reducing connection overhead by ~50%
+- **Batch Processing**: `--llm-batch-size` values of 8-20 typically provide optimal performance for zero-shot mode
+- **Template Caching**: v3.2 and v3.2-CoT templates are loaded once and cached for the entire run
 
 ## Evaluating Results
 
@@ -55,6 +101,7 @@ Key points for `evaluate_suite.py`:
 - If `--pred-dir` is not specified, the script will attempt to automatically use the latest `benchmark_run_*` directory found in `eval/results/`.
 - The default pattern for finding prediction files (if `--pattern` is not specified) is `"*_predictions.csv"`. The example below uses a more general pattern.
 - For advanced use cases with custom CSV formats, arguments like `--gold-s1-col`, `--pred-rel-col`, etc., are available to specify column names. Run `python eval/evaluate_suite.py --help` for details.
+- **Important**: The evaluation automatically handles the "Related" → "Different" mapping for backward compatibility.
 
 #### CSV Column Name Conventions for Evaluation
 
@@ -111,3 +158,14 @@ python eval/evaluate_suite.py \
   --plot  # Ensures generation of .png plots
 ```
 Note: When using auto-detection for `--pred-dir`, the `--out` path will also be relative to the auto-detected directory (e.g., `evaluation_output` inside it). If you specify `--pred-dir`, ensure your `--out` path is also appropriate, typically pointing to an `evaluation_output` subdirectory within your chosen `pred-dir`.
+
+## Evaluation Metrics
+
+The evaluation suite automatically handles the 6-class label system and provides comprehensive metrics:
+
+- **Accuracy**: Overall classification accuracy
+- **Precision/Recall/F1**: Per-class and macro-averaged metrics
+- **Matthews Correlation Coefficient (MCC)**: Balanced performance measure
+- **Confusion Matrix**: Visual representation of classification performance
+
+All metrics are automatically adjusted for the "Related" → "Different" mapping to ensure consistent evaluation across different dataset versions.
