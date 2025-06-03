@@ -199,8 +199,7 @@ class ArgoGatewayClient:
         if self.model.startswith("gpto") or self.model.startswith(
             "o"
         ):  # o-series models
-            # Allow caller override; else default to a small number (32) to avoid
-            # massive completions that sometimes trigger gateway bugs.
+            # Reasoning models don't support temperature - ignore it
             payload = {
                 "user": self.user,
                 "model": self.model,
@@ -216,15 +215,19 @@ class ArgoGatewayClient:
             if system:
                 payload["system"] = system
             return payload
-        return {  # GPT-style
-            "user": self.user,
-            "model": self.model,
-            "messages": [
-                {"role": "system", "content": system},
-                {"role": "user", "content": prompt},
-            ],
-            "temperature": 0.0,
-        }
+        else:  # GPT-style models
+            payload = {
+                "user": self.user,
+                "model": self.model,
+                "messages": [
+                    {"role": "system", "content": system},
+                    {"role": "user", "content": prompt},
+                ],
+            }
+            # Use the temperature passed to the constructor, default to 0.0
+            temperature = self.temperature if self.temperature is not None else 0.0
+            payload["temperature"] = temperature
+            return payload
 
     # ------------------------------------------------------------------
     def chat(self, prompt: str, *, system: str = "") -> str:

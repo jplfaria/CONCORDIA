@@ -27,6 +27,7 @@ from tqdm import tqdm
 from .embedding import cosine_sim, embed_sentence
 from .llm.argo_gateway import SYSTEM_MSG, ArgoGatewayClient, _parse, llm_label
 from .llm.prompt_builder import build_annotation_prompt
+from .llm.prompts import get_prompt_template
 from .modes import (
     annotate_fallback,
     annotate_local,
@@ -319,6 +320,331 @@ def _annotate_batch_chunk(
     return results
 
 
+# ──────────────────────── model detection helpers ───────────────────────────
+def _is_reasoning_model(model: str) -> bool:
+    """Check if the model is a reasoning model (o-series) that doesn't support temperature."""
+    return model.startswith("gpto") or model.startswith("o")
+
+
+def _supports_vote_batching(cfg: Config) -> bool:
+    """Check if the model configuration supports vote mode batching."""
+    # For now, both GPT and reasoning models support vote batching
+    # but they use different strategies (temperature vs prompt variation)
+    return True
+
+
+def _annotate_vote_batch(
+    rows: list[dict[str, Any]],
+    cfg: Config,
+    col_a: str,
+    col_b: str,
+    client: ArgoGatewayClient = None,
+) -> list[AnnotationResult]:
+    """
+    Annotate multiple pairs using vote mode with efficient batching.
+
+    Strategy:
+    - GPT models: Use temperature variation (0.8, 0.2, 0.0)
+    - Reasoning models: Use prompt variation instead of temperature
+
+    Flow:
+    1. Batch call 1 → process ALL pairs
+    2. Batch call 2 → process ALL pairs
+    3. Individual calls → ONLY pairs where Call1 ≠ Call2
+    """
+
+    model = cfg["llm"]["model"]
+    is_reasoning = _is_reasoning_model(model)
+
+    if is_reasoning:
+        return _annotate_vote_batch_reasoning(rows, cfg, col_a, col_b, client)
+    else:
+        return _annotate_vote_batch_gpt(rows, cfg, col_a, col_b, client)
+
+
+def _annotate_vote_batch_reasoning(
+    rows: list[dict[str, Any]],
+    cfg: Config,
+    col_a: str,
+    col_b: str,
+    client: ArgoGatewayClient = None,
+) -> list[AnnotationResult]:
+    """Vote batching for reasoning models using prompt variation."""
+
+    use_sim_hint = cfg["engine"].get("sim_hint", False)
+
+    # Calculate similarities if needed
+    sims: list[float | None] = []
+    if use_sim_hint:
+        for row in rows:
+            a_val, b_val = row[col_a], row[col_b]
+            sims.append(
+                cosine_sim(embed_sentence(a_val, cfg), embed_sentence(b_val, cfg))
+            )
+    else:
+        sims = [None] * len(rows)
+
+    # Get base template
+    base_template = get_prompt_template(cfg)
+
+    # Use provided client or create one
+    if client is None:
+        llm_cfg = {
+            k: v
+            for k, v in cfg["llm"].items()
+            if k not in {"temperature", "top_p", "max_tokens"}
+        }
+        client = ArgoGatewayClient(**llm_cfg)
+
+    def _create_reasoning_batch_prompt(style: str) -> str:
+        """Create batch prompts with different styles for reasoning models."""
+        if style == "detailed":
+            prefix = "Analyze each pair carefully, considering all biological and functional relationships:"
+        elif style == "concise":
+            prefix = "Classify each pair quickly and decisively:"
+        else:  # standard
+            prefix = "Classify the relationship between each pair of annotations:"
+
+        lines = [
+            prefix,
+            "For EACH pair, respond with: <Number>. <Label> — <explanation>",
+            "",
+        ]
+
+        for idx, row in enumerate(rows, start=1):
+            a, b = row[col_a], row[col_b]
+            pair_template = base_template.replace("{A}", a).replace("{B}", b)
+
+            if use_sim_hint and sims[idx - 1] is not None:
+                sim_hint = f"Similarity: {sims[idx-1]:.3f}"
+                lines.append(f"{idx}. {sim_hint}\n{pair_template}")
+            else:
+                lines.append(f"{idx}. {pair_template}")
+
+        return "\n\n".join(lines)
+
+    try:
+        # Two batch calls with different prompt styles
+        raw1 = client.chat(
+            _create_reasoning_batch_prompt("standard"), system=SYSTEM_MSG
+        )
+        raw2 = client.chat(
+            _create_reasoning_batch_prompt("detailed"), system=SYSTEM_MSG
+        )
+
+        results1 = _parse_batch_response(raw1, len(rows))
+        results2 = _parse_batch_response(raw2, len(rows))
+
+        return _process_vote_results(
+            results1, results2, rows, cfg, col_a, col_b, sims, client
+        )
+
+    except Exception as e:
+        logger.error(f"Reasoning vote batch processing failed: {e}")
+        return [_annotate_pair(r[col_a], r[col_b], cfg, client=client) for r in rows]
+
+
+def _annotate_vote_batch_gpt(
+    rows: list[dict[str, Any]],
+    cfg: Config,
+    col_a: str,
+    col_b: str,
+    client: ArgoGatewayClient = None,
+) -> list[AnnotationResult]:
+    """Vote batching for GPT models using temperature variation."""
+
+    temps = cfg["engine"].get("vote_temps", [0.8, 0.2, 0.0])
+    use_sim_hint = cfg["engine"].get("sim_hint", False)
+
+    # Calculate similarities if needed
+    sims: list[float | None] = []
+    if use_sim_hint:
+        for row in rows:
+            a_val, b_val = row[col_a], row[col_b]
+            sims.append(
+                cosine_sim(embed_sentence(a_val, cfg), embed_sentence(b_val, cfg))
+            )
+    else:
+        sims = [None] * len(rows)
+
+    # Get base template
+    base_template = get_prompt_template(cfg)
+
+    def _create_gpt_batch_prompt() -> str:
+        """Create batch prompt for GPT models."""
+        lines = [
+            "Classify the relationship between each pair of annotations.",
+            "For EACH pair, respond with: <Number>. <Label> — <explanation>",
+            "",
+        ]
+
+        for idx, row in enumerate(rows, start=1):
+            a, b = row[col_a], row[col_b]
+            pair_template = base_template.replace("{A}", a).replace("{B}", b)
+
+            if use_sim_hint and sims[idx - 1] is not None:
+                sim_hint = f"Similarity: {sims[idx-1]:.3f}"
+                lines.append(f"{idx}. {sim_hint}\n{pair_template}")
+            else:
+                lines.append(f"{idx}. {pair_template}")
+
+        return "\n\n".join(lines)
+
+    try:
+        # Create clients with different temperatures (reuse base config)
+        llm_cfg = {
+            k: v for k, v in cfg["llm"].items() if k not in {"top_p", "max_tokens"}
+        }
+
+        # Create only the specific temperature clients we need
+        temp1_client = ArgoGatewayClient(**llm_cfg, temperature=temps[0])
+        temp2_client = ArgoGatewayClient(**llm_cfg, temperature=temps[1])
+
+        # Two batch calls with different temperatures
+        prompt = _create_gpt_batch_prompt()
+        raw1 = temp1_client.chat(prompt, system=SYSTEM_MSG)
+        raw2 = temp2_client.chat(prompt, system=SYSTEM_MSG)
+
+        results1 = _parse_batch_response(raw1, len(rows))
+        results2 = _parse_batch_response(raw2, len(rows))
+
+        # Reuse the provided client for tiebreakers, or create one with tiebreaker temp
+        tiebreaker_client = client or ArgoGatewayClient(**llm_cfg, temperature=temps[2])
+
+        return _process_vote_results(
+            results1,
+            results2,
+            rows,
+            cfg,
+            col_a,
+            col_b,
+            sims,
+            tiebreaker_client,
+            temps[2],
+        )
+
+    except Exception as e:
+        logger.error(f"GPT vote batch processing failed: {e}")
+        return [_annotate_pair(r[col_a], r[col_b], cfg, client=client) for r in rows]
+
+
+def _parse_batch_response(raw: str, expected_count: int) -> list[tuple[str, str]]:
+    """Parse batch response into list of (label, evidence) tuples."""
+    import re
+
+    results = []
+
+    # Split by numbered pairs
+    pair_responses = re.split(r"^\s*\d+\.", raw, flags=re.MULTILINE)
+    pair_responses = [pr.strip() for pr in pair_responses if pr.strip()]
+
+    for pr in pair_responses[:expected_count]:
+        if pr:
+            label, note = _parse(pr)
+            results.append((label, note))
+        else:
+            results.append(("Unknown", "Failed to parse response"))
+
+    # Ensure we have enough results
+    while len(results) < expected_count:
+        results.append(("Unknown", "Missing response"))
+
+    return results
+
+
+def _process_vote_results(
+    results1: list[tuple[str, str]],
+    results2: list[tuple[str, str]],
+    rows: list[dict[str, Any]],
+    cfg: Config,
+    col_a: str,
+    col_b: str,
+    sims: list[float | None],
+    client: ArgoGatewayClient = None,
+    tiebreaker_temp: float = 0.0,
+) -> list[AnnotationResult]:
+    """Process vote results and handle conflicts with individual tiebreakers."""
+
+    final_results: list[AnnotationResult] = []
+    conflicts_count = 0
+
+    for i, ((l1, e1), (l2, e2)) in enumerate(zip(results1, results2)):
+        sim = sims[i] if i < len(sims) else None
+
+        if l1 == l2:
+            # Agreement - no tiebreaker needed
+            final_results.append(
+                {
+                    "label": l1,
+                    "similarity": sim,
+                    "evidence": e1 or e2,
+                    "conflict": False,
+                    "votes": [l1, l2],
+                }
+            )
+        else:
+            # Conflict - individual tiebreaker call
+            conflicts_count += 1
+            row = rows[i]
+            a, b = row[col_a], row[col_b]
+
+            try:
+                # Create tiebreaker config
+                if _is_reasoning_model(cfg["llm"]["model"]):
+                    # For reasoning models, use the same client
+                    tiebreaker_cfg = cfg
+                    tiebreaker_client = client
+                else:
+                    # For GPT models, use specific temperature
+                    tiebreaker_cfg = {**cfg, "llm": {**cfg["llm"]}}
+                    tiebreaker_client = ArgoGatewayClient(
+                        **cfg["llm"], temperature=tiebreaker_temp
+                    )
+
+                result3 = annotate_zero_shot(
+                    a, b, tiebreaker_cfg, client=tiebreaker_client
+                )
+                l3, e3 = result3["label"], result3["evidence"]
+
+                votes = [l1, l2, l3]
+                winner = max(set(votes), key=votes.count)
+                evidence = next(
+                    (
+                        e
+                        for label, e in [(l1, e1), (l2, e2), (l3, e3)]
+                        if label == winner
+                    ),
+                    "",
+                )
+
+                final_results.append(
+                    {
+                        "label": winner,
+                        "similarity": sim,
+                        "evidence": evidence,
+                        "conflict": True,
+                        "votes": votes,
+                    }
+                )
+            except Exception as e:
+                logger.error(f"Tiebreaker failed for pair {i}: {e}")
+                # Fallback to first result
+                final_results.append(
+                    {
+                        "label": l1,
+                        "similarity": sim,
+                        "evidence": f"{e1} [TIEBREAKER_FAILED]",
+                        "conflict": True,
+                        "votes": [l1, l2],
+                    }
+                )
+
+    logger.info(
+        f"Vote batch: {len(rows)} pairs, {conflicts_count} conflicts requiring tiebreakers"
+    )
+    return final_results
+
+
 # ───────────────────────── public API ─────────────────────────────
 def run_pair(a: str, b: str, cfg_path: P.Path) -> Tuple[str, float | None, str]:
     """
@@ -442,7 +768,8 @@ def run_file(
 
         # Fix #8: Mixed Mode Batch Processing - Check if mode supports batching
         supports_batch = mode_val in [
-            "zero-shot"
+            "zero-shot",
+            "vote",  # Add vote mode support
         ]  # Add other supported modes here as needed
         chunk_size = llm_batch_size if supports_batch and llm_batch_size > 1 else 1
         for i in range(0, len(rows), chunk_size):
@@ -450,6 +777,8 @@ def run_file(
             try:
                 if mode_val == "zero-shot" and chunk_size > 1:
                     results = _annotate_batch_chunk(chunk, cfg, col_a, col_b, client)
+                elif mode_val == "vote" and chunk_size > 1:
+                    results = _annotate_vote_batch(chunk, cfg, col_a, col_b, client)
                 else:
                     results = [
                         _annotate_pair(r[col_a], r[col_b], cfg, client=client)
